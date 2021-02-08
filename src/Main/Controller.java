@@ -34,7 +34,7 @@ public class Controller {
 
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("dashboard.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/Dashboard/dashboard.fxml"));
         Scene scene = new Scene(fxmlLoader.load());
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
