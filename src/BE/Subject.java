@@ -1,11 +1,15 @@
 package BE;
 
-public class Class {
+import java.util.Random;
+
+public class Subject {
     private int id;
     private String name;
+    private int absence;
 
-    public Class(String name) {
+    public Subject(String name) {
         setName(name);
+        setAbsence(absence);
     }
 
     public int getId() {
@@ -22,5 +26,14 @@ public class Class {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAbsence() {
+        return absence;
+    }
+
+    public void setAbsence(int absence) {
+        Random rand = new Random();
+        this.absence = 100 - rand.nextInt(20);
     }
 }

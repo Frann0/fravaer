@@ -3,12 +3,12 @@ package BE;
 public class Attendance {
     private int id;
     private boolean isPresent;
-    private Class attendanceClass;
+    private Subject attendanceSubject;
     private User attendanceStudent;
 
-    public Attendance(boolean isPresent, Class attendanceClass, User attendanceStudent) {
+    public Attendance(boolean isPresent, Subject attendanceSubject, User attendanceStudent) {
         setPresent(isPresent);
-        setAttendanceClass(attendanceClass);
+        setAttendanceClass(attendanceSubject);
         setAttendanceStudent(attendanceStudent);
     }
 
@@ -28,12 +28,12 @@ public class Attendance {
         isPresent = present;
     }
 
-    public Class getAttendanceClass() {
-        return attendanceClass;
+    public Subject getAttendanceClass() {
+        return attendanceSubject;
     }
 
-    public void setAttendanceClass(Class attendanceClass) {
-        this.attendanceClass = attendanceClass;
+    public void setAttendanceClass(Subject attendanceSubject) {
+        this.attendanceSubject = attendanceSubject;
     }
 
     public User getAttendanceStudent() {
