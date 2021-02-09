@@ -9,7 +9,9 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+    int totalAttendance;
     private ArrayList<Class> classes;
+
 
     public User(int role, String username, String password, String firstName, String lastName) {
         setRole(role);
@@ -17,6 +19,14 @@ public class User {
         setPassword(password);
         setFirstName(firstName);
         setLastName(lastName);
+    }
+    public User(int role, String username, String password, String firstName, String lastName, int totalAttendance) {
+        setRole(role);
+        setUsername(username);
+        setPassword(password);
+        setFirstName(firstName);
+        setLastName(lastName);
+        setTotalAttendance(totalAttendance);
     }
 
     public int getId() {
@@ -85,5 +95,13 @@ public class User {
 
     public void removeClasses(ArrayList<Class> c) {
         classes.removeAll(c);
+    }
+
+    public void setTotalAttendance(int totalAttendance) {
+        this.totalAttendance = totalAttendance;
+    }
+
+    public int getTotalAttendance() {
+        return totalAttendance;
     }
 }

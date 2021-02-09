@@ -12,23 +12,47 @@ public class UserDAL {
     private final String dbUser = "root";
     private final String dbPass = "root";
 
+    ObservableList<User> allUsers;
+
     public UserDAL() {
         //DO DB CONNECTION
+        allUsers = loadUsers();
+    }
+
+
+    public ObservableList<User> getStudents(){
+        ObservableList<User> allStudents = FXCollections.observableArrayList();
+        for(User user : allUsers){
+            if(user.getRole() == 1){
+                allStudents.add(user);
+            }
+        }
+        return allStudents;
+    }
+
+    public ObservableList<User> getTeachers(){
+        ObservableList<User> allTeachers = FXCollections.observableArrayList();
+        for(User user : allUsers){
+            if(user.getRole() == 2){
+                allTeachers.add(user);
+            }
+        }
+        return allTeachers;
     }
 
     public ObservableList<User> loadUsers() {
         ObservableList<User> allUsers = FXCollections.observableArrayList();
         //Users 1,2,3,4 - student
-        User s1 = new User(1,"madsq","test","Mads","Qvistgaard");
+        User s1 = new User(1,"madsq","test","Mads","Qvistgaard", 80);
         s1.setId(1);
         allUsers.add(s1);
-        User s2 = new User(1,"svendh","test","Svend","Halding");
+        User s2 = new User(1,"svendh","test","Svend","Halding", 78);
         s2.setId(2);
         allUsers.add(s2);
-        User s3 = new User(1,"jonasb","test","Jonas","Buus");
+        User s3 = new User(1,"jonasb","test","Jonas","Buus", 45);
         s3.setId(3);
         allUsers.add(s3);
-        User s4 = new User(1,"mikeh","test","Mike","Hovedskov");
+        User s4 = new User(1,"mikeh","test","Mike","Hovedskov", 79);
         s4.setId(4);
         allUsers.add(s4);
 
