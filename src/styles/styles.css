@@ -41,25 +41,13 @@
     -fx-fill: white;
 }
 
-.sidebutton{
-    -fx-text-fill: white;
-    -fx-border-color: #acc1cf;
-    -fx-border-radius: 1;
+.menu-item{
+    -fx-fill: #b7c4d0;
 }
 
-.sidebutton:hover{
-    -fx-background-color: #acc1cf;
+.menu-item:hover {
+    -fx-fill: #a9bdca;
 }
 
-.sidebutton:selected{
-    -fx-background-color: #acc1cf;
-}
 
-.logout{
-    -fx-text-fill: white;
-    -fx-background-color: #b7c4d0;
-}
 
-.logout:hover{
-    -fx-background-color: #d5e1ec;
-}
