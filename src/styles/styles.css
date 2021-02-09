@@ -41,3 +41,13 @@
     -fx-fill: white;
 }
 
+.menu-item{
+    -fx-fill: #b7c4d0;
+}
+
+.menu-item:hover {
+    -fx-fill: #a9bdca;
+}
+
+
+
