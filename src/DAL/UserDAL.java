@@ -1,5 +1,6 @@
 package DAL;
 
+import BE.Subject;
 import BE.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,6 +18,7 @@ public class UserDAL {
     public UserDAL() {
         //DO DB CONNECTION
         allUsers = loadUsers();
+        loadSubjects();
     }
 
 
@@ -65,5 +67,24 @@ public class UserDAL {
         allUsers.add(t2);
 
         return allUsers;
+    }
+
+    public void loadSubjects(){
+        for(User student : this.allUsers){
+            if(student.getRole() == 1){
+                assignSubjectsToStudent(student);
+            }
+        }
+    }
+
+    public void assignSubjectsToStudent(User student){
+        Subject SCO = new Subject("SCO");
+        Subject SDE = new Subject("SDE");
+        Subject DBO = new Subject("DBO");
+        Subject ITO = new Subject("ITO");
+        student.addSubject(SCO);
+        student.addSubject(SDE);
+        student.addSubject(DBO);
+        student.addSubject(ITO);
     }
 }

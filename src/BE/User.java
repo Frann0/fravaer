@@ -9,9 +9,7 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    int totalAttendance;
-    private ArrayList<Class> classes;
-
+    private ArrayList<Subject> subjects;
 
     public User(int role, String username, String password, String firstName, String lastName) {
         setRole(role);
@@ -19,14 +17,6 @@ public class User {
         setPassword(password);
         setFirstName(firstName);
         setLastName(lastName);
-    }
-    public User(int role, String username, String password, String firstName, String lastName, int totalAttendance) {
-        setRole(role);
-        setUsername(username);
-        setPassword(password);
-        setFirstName(firstName);
-        setLastName(lastName);
-        setTotalAttendance(totalAttendance);
     }
 
     public int getId() {
@@ -77,31 +67,23 @@ public class User {
         this.lastName = lastName;
     }
 
-    public ArrayList<Class> getClasses() {
-        return classes;
+    public ArrayList<Subject> getSubjects() {
+        return subjects;
     }
 
-    public void addClass(Class c) {
-        classes.add(c);
+    public void addSubject(Subject c) {
+        subjects.add(c);
     }
 
-    public void addClasses(ArrayList<Class> c) {
-        classes.addAll(c);
+    public void addSubjects(ArrayList<Subject> c) {
+        subjects.addAll(c);
     }
 
-    public void removeClass(Class c) {
-        classes.remove(c);
+    public void removeSubject(Subject c) {
+        subjects.remove(c);
     }
 
-    public void removeClasses(ArrayList<Class> c) {
-        classes.removeAll(c);
-    }
-
-    public void setTotalAttendance(int totalAttendance) {
-        this.totalAttendance = totalAttendance;
-    }
-
-    public int getTotalAttendance() {
-        return totalAttendance;
+    public void removeSubjects(ArrayList<Subject> c) {
+        subjects.removeAll(c);
     }
 }
