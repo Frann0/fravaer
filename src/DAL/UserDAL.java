@@ -45,16 +45,16 @@ public class UserDAL {
     public ObservableList<User> loadUsers() {
         ObservableList<User> allUsers = FXCollections.observableArrayList();
         //Users 1,2,3,4 - student
-        User s1 = new User(1,"madsq","test","Mads","Qvistgaard", 80);
+        User s1 = new User(1,"madsq","test","Mads","Qvistgaard");
         s1.setId(1);
         allUsers.add(s1);
-        User s2 = new User(1,"svendh","test","Svend","Halding", 78);
+        User s2 = new User(1,"svendh","test","Svend","Halding");
         s2.setId(2);
         allUsers.add(s2);
-        User s3 = new User(1,"jonasb","test","Jonas","Buus", 45);
+        User s3 = new User(1,"jonasb","test","Jonas","Buus");
         s3.setId(3);
         allUsers.add(s3);
-        User s4 = new User(1,"mikeh","test","Mike","Hovedskov", 79);
+        User s4 = new User(1,"mikeh","test","Mike","Hovedskov");
         s4.setId(4);
         allUsers.add(s4);
 
