@@ -19,6 +19,15 @@ public class User {
         setLastName(lastName);
         this.subjects = new ArrayList<>();
     }
+    public User(int id, int role, String username, String password, String firstName, String lastName) {
+        setId(id);
+        setRole(role);
+        setUsername(username);
+        setPassword(password);
+        setFirstName(firstName);
+        setLastName(lastName);
+        this.subjects = new ArrayList<>();
+    }
 
     public int getId() {
         return id;

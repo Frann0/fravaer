@@ -30,7 +30,7 @@ public class AbsenceManager {
     // TODO getAllStudentsAbsence
     // Uses getStudentAbsence
 
-    // TODO getSubjectAttendancex   
+    // TODO getSubjectAttendance
     // Uses getAllStudentsAbsence
 
 
