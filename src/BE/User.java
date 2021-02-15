@@ -17,6 +17,7 @@ public class User {
         setPassword(password);
         setFirstName(firstName);
         setLastName(lastName);
+        this.subjects = new ArrayList<>();
     }
 
     public int getId() {

@@ -1,5 +1,6 @@
 package Main;
 
+import BLL.AbsenceManager;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +10,13 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.sql.SQLOutput;
+
 public class Main extends Application {
     private double xOffset = 0;
     private double yOffset = 0;
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("chart.fxml"));
@@ -19,6 +24,7 @@ public class Main extends Application {
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.initStyle(StageStyle.UNDECORATED);
         primaryStage.show();
+
 
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override

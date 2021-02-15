@@ -1,5 +1,7 @@
 package Main;
 
+import BE.Subject;
+import BLL.AbsenceManager;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,16 +13,42 @@ import javafx.scene.layout.BorderPane;
 import jdk.jfr.Category;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
+
+
 public class ChartController implements Initializable {
+
+    AbsenceManager ab =  new AbsenceManager();
 
     @FXML
     private BorderPane borderPane;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        CategoryAxis xA = new CategoryAxis();
+        xA.setLabel("Fag");
 
+        NumberAxis yA = new NumberAxis();
+        yA.setLabel("Procent fravær");
+
+        BarChart barChart = new BarChart(xA,yA);
+
+        XYChart.Series data = new XYChart.Series();
+        data.setName("Fravær");
+
+        //provided data 
+
+        {
+            AbsenceManager ab =  new AbsenceManager();
+            ArrayList<Subject> absence = ab.getStudentAbsence("madsq");
+
+            for(Subject sub : absence)
+                data.getData().add(new XYChart.Data(sub.getName(),sub.getAbsence()));
+        }
+        barChart.getData().add(data);
+        borderPane.setCenter(barChart);
     }
 
     @FXML
@@ -37,6 +65,7 @@ public class ChartController implements Initializable {
         data.setName("Fravær");
 
         //provided data
+
         data.getData().add(new XYChart.Data("SCO2",10));
         data.getData().add(new XYChart.Data("SDE2",15));
         data.getData().add(new XYChart.Data("DBO2",20));
