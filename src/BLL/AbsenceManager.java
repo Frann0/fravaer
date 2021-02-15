@@ -4,6 +4,7 @@ import BE.Subject;
 import BE.User;
 import DAL.UserDAL;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AbsenceManager {
@@ -25,6 +26,16 @@ public class AbsenceManager {
     // TODO getSubjectAttendance
     public List<Subject> getSubjectAttendance(){
         return myUserDAL.getSubjectAbsence();
+    }
+
+    public ArrayList<Subject> getStudentAbsence(String username){
+        ArrayList<Subject> subjects = null;
+        for(User student : allStudents){
+            if(student.getUsername().equals(username)){
+                subjects = student.getSubjects();
+            }
+        }
+        return subjects;
     }
 
 

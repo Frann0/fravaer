@@ -23,6 +23,7 @@ public class AbsenceModel {
             AbsentDay day = new AbsentDay();
             day.setDate((LocalDate.of(2021, 3, i)));
             day.setSubject(randomSubject());
+            absentDays.add(day);
         }
         return absentDays;
     }
