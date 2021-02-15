@@ -36,6 +36,10 @@ public class UserDAL {
         }
     }
 
+    public List<User> getAllUsers() {
+        return allUsers;
+    }
+
     public List<Subject> getSubjectAbsence() {
         return subjectAbsence;
     }
