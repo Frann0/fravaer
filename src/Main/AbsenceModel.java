@@ -52,7 +52,9 @@ public class AbsenceModel {
 
         List<AbsentDay> list = myabs.getAbsentDaysList();
 
-        
+        for ( AbsentDay day : list){
+            System.out.println("AbsentDay: " + day.getDate() + " subject: " + day.getSubject());
+        }
 
     }
 
