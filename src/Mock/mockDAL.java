@@ -1,14 +1,13 @@
-package DAL;
+package Mock;
 
 import BE.DbCon;
 import BE.User;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Random;
+import java.util.List;
 
 public class mockDAL {
     private DbCon dbCon = new DbCon();
@@ -23,7 +22,47 @@ public class mockDAL {
         dbUsers = getUsers();
     }
 
+    public List<User> getStudentAttendance() {
+        List<User> allStudents = getStudents();
 
+        try(Connection con = dbCon.getConnection()) {
+
+            PreparedStatement pSql = con.prepareStatement("SELECT Attendance.SubjectName, Attendance.LectureDate, Attendance.Absent, " +
+                    "[User].* FROM Attendance INNER JOIN [User] ON [User].Id = Attendance.UserId");
+            pSql.execute();
+            ResultSet resultSet = pSql.getResultSet();
+
+            while(resultSet.next()){
+                // Create absence
+                String subjectName = resultSet.getString("SubjectName");
+                LocalDate lectureDate = resultSet.getDate("LectureDate").toLocalDate();
+                boolean absent = resultSet.getBoolean("Absent");
+
+                Absence lectureAbsence = new Absence(subjectName, lectureDate, absent);
+
+                // Add attendance to student
+                for(User student : allStudents){
+                    if(student.getUsername().equals(resultSet.getString("UserName"))){
+                        student.addAttendance(lectureAbsence);
+                    }
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return allStudents;
+    }
+
+    private List<User> getStudents() {
+        List<User> allStudents = new ArrayList<>();
+        List<User> allUsers = getUsers();
+        for(User user : allUsers){
+            if(user.getRole() == 1){
+                allStudents.add(user);
+            }
+        }
+        return allStudents;
+    }
 
     public void addUsers() {
 
@@ -80,6 +119,8 @@ public class mockDAL {
         }
     }
 
+
+
     public ArrayList<User> getUsers(){
         ArrayList<User> users = new ArrayList<>();
 
@@ -126,7 +167,7 @@ public class mockDAL {
                             pSql.setString(1, subject);
                             pSql.setDate(2, Date.valueOf(date));
                             pSql.setInt(3, user.getId());
-                            int i = c == 1 ? 1 : 2;
+                            int i = c == 1 ? 1 : 0;
                             pSql.setInt(4, i);
                             pSql.addBatch();
                             if(c < 5){
@@ -203,12 +244,27 @@ public class mockDAL {
         // myMockDAL.createClasses();
         // myMockDAL.initializeLectures();
 
+        List<User> allStudents = myMockDAL.getStudentAttendance();
 
-
-        ArrayList<LocalDate> absentDays = myMockDAL.getAbsentDaysList(2);
-        for(LocalDate date : absentDays){
-            System.out.println(date);
+        /*
+        for(User student : allStudents){
+            System.out.println("User " + student.getFirstName() + " was absent on following days:");
+            for(Absence abs : student.getAttendance()){
+                if(abs.getAbsent())
+                System.out.println(abs.getLectureDate());
+            }
+            System.out.println("______________________________________");
+            System.out.println();
         }
+         */
+        int studentCount = 0;
+        float totalAbsence = 0;
+        for (User student : allStudents){
+            studentCount++;
+            totalAbsence += student.getAbsenceBySubject("ITO");
+        }
+
+        System.out.println(totalAbsence/studentCount);
 
 
     }
