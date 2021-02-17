@@ -54,6 +54,42 @@ public class ChartController implements Initializable {
     @FXML
     private void handleShowBarChart(ActionEvent actionEvent) {
         CategoryAxis xA = new CategoryAxis();
+        xA.setLabel("Dage");
+
+        NumberAxis yA = new NumberAxis();
+        yA.setLabel("Procent fravær");
+
+        BarChart barChart = new BarChart(xA,yA);
+
+        XYChart.Series data = new XYChart.Series();
+        data.setName("Fravær");
+
+        //provided data
+        yA.setAutoRanging(false);
+        yA.setLayoutY(100);
+
+        data.getData().add(new XYChart.Data("Mandag",(int)(Math.random() * 50 + 1)));
+        data.getData().add(new XYChart.Data("Tirsdag",(int)(Math.random() * 50 + 1)));
+        data.getData().add(new XYChart.Data("Onsdag",(int)(Math.random() * 50 + 1)));
+        data.getData().add(new XYChart.Data("Torsdag",(int)(Math.random() * 50 + 1)));
+        data.getData().add(new XYChart.Data("Fredag",(int)(Math.random() * 50 + 1)));
+
+
+
+
+
+
+        barChart.getData().add(data);
+
+        // add barChar to borderPane
+        borderPane.setCenter(barChart);
+
+
+    }
+
+    @FXML
+    private void handleShowToTalBarChart(ActionEvent actionEvent) {
+        CategoryAxis xA = new CategoryAxis();
         xA.setLabel("Fag");
 
         NumberAxis yA = new NumberAxis();
@@ -66,15 +102,15 @@ public class ChartController implements Initializable {
 
         //provided data
 
-        data.getData().add(new XYChart.Data("SCO2",10));
-        data.getData().add(new XYChart.Data("SDE2",15));
-        data.getData().add(new XYChart.Data("DBO2",20));
+        {
+            AbsenceManager ab =  new AbsenceManager();
+            ArrayList<Subject> absence = ab.getStudentAbsence("madsq");
 
+            for(Subject sub : absence)
+                data.getData().add(new XYChart.Data(sub.getName(),sub.getAbsence()));
+        }
         barChart.getData().add(data);
-
-        // add barChar to borderPane
         borderPane.setCenter(barChart);
-
 
     }
 
