@@ -49,5 +49,15 @@
     -fx-fill: #a9bdca;
 }
 
+.sidebutton{
+    -fx-background-color: #91a6b3;
+    -fx-border-radius: 1;
+    -fx-border-color: #d7e3ee;
+    -fx-text-fill: white;
+}
+
+.sidebutton:hover{
+    -fx-background-color: #b7c4d0;
+}
 
 

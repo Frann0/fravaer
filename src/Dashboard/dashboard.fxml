@@ -22,37 +22,32 @@
                 <FontAwesomeIconView fill="#5eb623" glyphName="CIRCLE" layoutX="741.0" layoutY="17.0" onMouseClicked="#maximize" styleClass="maximize" />
             </children>
         </Pane>
-      <BorderPane layoutY="25.0" prefHeight="576.0" prefWidth="800.0">
+      <BorderPane fx:id="borderPane" layoutY="25.0" prefHeight="576.0" prefWidth="800.0">
          <left>
             <Pane prefHeight="576.0" prefWidth="238.0" styleClass="side" BorderPane.alignment="CENTER">
                <children>
                   <Label layoutX="66.0" layoutY="72.0" text="BILLEDE AF PERSON" textFill="WHITE" />
-                  <Label fx:id="lblName" layoutX="33.0" layoutY="144.0" text="Velkommen Laura Hansen" textFill="WHITE">
+                  <Label fx:id="lblName" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="143.0" prefHeight="21.0" prefWidth="206.0" text="Velkommen Laura Hansen" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </Label>
-                  <JFXButton layoutX="60.0" layoutY="228.0" prefHeight="32.0" prefWidth="105.0" styleClass="sidebutton" text="Fravær">
+                  <JFXButton fx:id="btnDashboard" layoutX="41.0" layoutY="225.0" onAction="#handleDashboard" prefHeight="32.0" prefWidth="150.0" styleClass="sidebutton" text="Dashboard">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="60.0" layoutY="268.0" prefHeight="32.0" prefWidth="105.0" styleClass="sidebutton" text="Statestik">
+                  <JFXButton fx:id="btnStatestik" layoutX="41.0" layoutY="265.0" onAction="#handleStatestik" prefHeight="32.0" prefWidth="150.0" styleClass="sidebutton" text="Statestik">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="60.0" layoutY="308.0" prefHeight="32.0" prefWidth="105.0" styleClass="sidebutton" text="Lorem">
+                  <JFXButton fx:id="btnRegistreringer" layoutX="41.0" layoutY="305.0" onAction="#handleRegistreringer" prefHeight="32.0" prefWidth="150.0" styleClass="sidebutton" text="Tidl. Registreringer">
                      <font>
                         <Font size="15.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton layoutX="60.0" layoutY="348.0" prefHeight="32.0" prefWidth="105.0" styleClass="sidebutton" text="Ipsum">
-                     <font>
-                        <Font size="15.0" />
-                     </font>
-                  </JFXButton>
-                  <JFXButton layoutX="66.0" layoutY="515.0" onAction="#logout" prefHeight="32.0" prefWidth="105.0" styleClass="sidebutton" text="Log ud">
+                  <JFXButton layoutX="47.0" layoutY="512.0" onAction="#logout" prefHeight="32.0" prefWidth="150.0" styleClass="sidebutton" text="Log ud">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -61,50 +56,7 @@
             </Pane>
          </left>
          <center>
-            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="background" stylesheets="@../styles/styles.css" BorderPane.alignment="CENTER">
-               <children>
-                  <JFXButton layoutX="178.0" layoutY="442.0" styleClass="buttons" text="Registrer Fravær">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </JFXButton>
-                  <Label layoutX="163.0" layoutY="118.0" text="Skema for 02/02/2021" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="258.0" layoutY="183.0" text="SDE" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="258.0" layoutY="218.0" text="SDE" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="258.0" layoutY="253.0" text="SDE" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="258.0" layoutY="288.0" text="SCO" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="258.0" layoutY="323.0" text="SCO" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-                  <Label layoutX="258.0" layoutY="358.0" text="SCO" textAlignment="CENTER">
-                     <font>
-                        <Font size="24.0" />
-                     </font>
-                  </Label>
-               </children>
-            </Pane>
+            <Pane prefHeight="200.0" prefWidth="200.0" styleClass="background" stylesheets="@../styles/styles.css" BorderPane.alignment="CENTER" />
          </center>
       </BorderPane>
     </children>

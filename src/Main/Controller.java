@@ -11,10 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import javax.swing.border.Border;
 import java.io.IOException;
 import java.util.List;
 
@@ -31,7 +33,7 @@ public class Controller {
 
     private UserDAL userDAL = new UserDAL();
 
-    public void exit(){
+    public void exit() {
         System.exit(0);
     }
 
@@ -47,8 +49,8 @@ public class Controller {
     public void login(MouseEvent mouseEvent) throws IOException {
         List<User> users = userDAL.loadUsers();
         User n = null;
-        for (User u : users){
-            if (txtUsername.getText().contains(u.getUsername()) && txtPassword.getText().contains(u.getPassword())){
+        for (User u : users) {
+            if (txtUsername.getText().contains(u.getUsername()) && txtPassword.getText().contains(u.getPassword())) {
                 n = u;
                 break;
             }
@@ -60,15 +62,21 @@ public class Controller {
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/Dashboard/dashboard.fxml"));
+
             Scene scene = new Scene(fxmlLoader.load());
+
             stage.initStyle(StageStyle.UNDECORATED);
             stage.setScene(scene);
             stage.show();
 
             DashboardController controller = fxmlLoader.getController();
+            controller.setUser(n);
             controller.setName(n.getFirstName());
-
+            if (n.getRole() == 2){
+                controller.setIsTeacher();
+            }
             root1.close();
+
         } else {
             lblError.setText("The username or password is incorrect");
             lblError.setTextFill(Color.RED);
