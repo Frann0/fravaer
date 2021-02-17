@@ -88,6 +88,33 @@ public class ChartController implements Initializable {
     }
 
     @FXML
+    private void handleShowToTalBarChart(ActionEvent actionEvent) {
+        CategoryAxis xA = new CategoryAxis();
+        xA.setLabel("Fag");
+
+        NumberAxis yA = new NumberAxis();
+        yA.setLabel("Procent fravær");
+
+        BarChart barChart = new BarChart(xA,yA);
+
+        XYChart.Series data = new XYChart.Series();
+        data.setName("Fravær");
+
+        //provided data
+
+        {
+            AbsenceManager ab =  new AbsenceManager();
+            ArrayList<Subject> absence = ab.getStudentAbsence("madsq");
+
+            for(Subject sub : absence)
+                data.getData().add(new XYChart.Data(sub.getName(),sub.getAbsence()));
+        }
+        barChart.getData().add(data);
+        borderPane.setCenter(barChart);
+
+    }
+
+    @FXML
     private void handleShowPieChart(ActionEvent actionEvent) {
 
         // create data

@@ -16,6 +16,7 @@
                   <items>
                         <MenuItem mnemonicParsing="false" onAction="#handleShowBarChart" text="Show Bar Chart" />
                         <MenuItem mnemonicParsing="false" onAction="#handleShowPieChart" text="Show Pie Chart" />
+                        <MenuItem mnemonicParsing="false" onAction="#handleShowToTalBarChart" text="Show Total Bar Chart" />
                     <MenuItem mnemonicParsing="false" onAction="#handleClose" text="Close" />
                   </items>
                 </Menu>
