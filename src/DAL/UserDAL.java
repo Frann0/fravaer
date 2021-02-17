@@ -5,7 +5,9 @@ import BE.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserDAL {
     private final String dbHost = "127.0.0.1";
@@ -13,17 +15,38 @@ public class UserDAL {
     private final String dbUser = "root";
     private final String dbPass = "root";
 
-    ObservableList<User> allUsers;
+    List<User> allUsers;
+    List<Subject> subjectAbsence;
 
     public UserDAL() {
         //DO DB CONNECTION
+        subjectAbsence = new ArrayList<>();
         allUsers = loadUsers();
         loadSubjects();
+        setMostAbsentDay();
+        setAbsentDays();
+        setSubjectAbsence();
     }
 
+    private void setSubjectAbsence() {
+        for( Subject sub : subjectAbsence){
+            for (int i = 60; i < 100; i += 10){
+                sub.setAbsence(i);
+            }
+        }
+    }
 
-    public ObservableList<User> getStudents(){
-        ObservableList<User> allStudents = FXCollections.observableArrayList();
+    public List<User> getAllUsers() {
+        return allUsers;
+    }
+
+    public List<Subject> getSubjectAbsence() {
+        return subjectAbsence;
+    }
+
+    public List<User> getStudents(){
+
+        List<User> allStudents = new ArrayList<>();
         for(User user : allUsers){
             if(user.getRole() == 1){
                 allStudents.add(user);
@@ -32,7 +55,7 @@ public class UserDAL {
         return allStudents;
     }
 
-    public ObservableList<User> getTeachers(){
+    public List<User> getTeachers(){
         ObservableList<User> allTeachers = FXCollections.observableArrayList();
         for(User user : allUsers){
             if(user.getRole() == 2){
@@ -42,8 +65,8 @@ public class UserDAL {
         return allTeachers;
     }
 
-    public ObservableList<User> loadUsers() {
-        ObservableList<User> allUsers = FXCollections.observableArrayList();
+    public List<User> loadUsers() {
+        List<User> allUsers = new ArrayList<>();
         //Users 1,2,3,4 - student
         User s1 = new User(1,"madsq","test","Mads","Qvistgaard");
         s1.setId(1);
@@ -86,5 +109,30 @@ public class UserDAL {
         student.addSubject(SDE);
         student.addSubject(DBO);
         student.addSubject(ITO);
+    }
+
+    public void setMostAbsentDay(){
+        for(User student : this.allUsers){
+            if(student.getRole() == 1){
+                student.setMostAbsentDay("Thursday");
+            }
+        }
+    }
+
+    public void setAbsentDays(){
+        for(User student : this.allUsers){
+            if(student.getRole() == 1){
+                assignAbsentDays(student);
+            }
+        }
+    }
+
+    private void assignAbsentDays(User student) {
+        List<LocalDate> absentDays = new ArrayList<>();
+
+        for (int i = 1; i < 28; i += 3){
+            absentDays.add(LocalDate.of(2021, 3, i));
+        }
+        student.setAbsentDays(absentDays);
     }
 }
