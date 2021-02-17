@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <BarChart layoutX="31.0" layoutY="14.0" prefHeight="200.0" prefWidth="500.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <BarChart layoutX="31.0" layoutY="434.0" prefHeight="150.0" prefWidth="250.0">
+         <xAxis>
+            <CategoryAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </BarChart>
+      <BarChart layoutX="271.0" layoutY="434.0" prefHeight="150.0" prefWidth="250.0">
+         <xAxis>
+            <CategoryAxis side="BOTTOM" />
+         </xAxis>
+         <yAxis>
+            <NumberAxis side="LEFT" />
+         </yAxis>
+      </BarChart>
+      <TableView layoutX="72.0" layoutY="234.0" prefHeight="200.0" prefWidth="449.0">
+        <columns>
+          <TableColumn prefWidth="114.00000762939453" text="First name" />
+          <TableColumn prefWidth="143.3332977294922" text="Last name" />
+            <TableColumn prefWidth="111.33331298828125" text="Abcence %" />
+            <TableColumn prefWidth="79.33340454101562" />
+        </columns>
+      </TableView>
+      <Label layoutX="72.0" layoutY="199.0" text="Students">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <ChoiceBox layoutX="371.0" layoutY="202.0" prefWidth="150.0" />
+   </children>
+</Pane>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="26.0" layoutY="76.0" prefHeight="484.0" prefWidth="519.0">
+        <columns>
+          <TableColumn prefWidth="186.00003623962402" text="Dato" />
+          <TableColumn prefWidth="189.3332977294922" text="Fag" />
+            <TableColumn prefWidth="142.66677856445312" text="Present" />
+        </columns>
+      </TableView>
+      <Label layoutX="26.0" layoutY="40.0" text="Alle registreringer">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

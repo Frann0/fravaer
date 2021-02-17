@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <TableView layoutX="53.0" layoutY="331.0" prefHeight="183.0" prefWidth="467.0">
+        <columns>
+          <TableColumn prefWidth="236.00001907348633" text="C1" />
+          <TableColumn minWidth="0.0" prefWidth="229.00003051757812" text="C2" />
+        </columns>
+      </TableView>
+      <Label layoutX="53.0" layoutY="291.0" text="Absence">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <BarChart layoutX="10.0" layoutY="83.0" prefHeight="183.0" prefWidth="522.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </BarChart>
+      <Label layoutX="53.0" layoutY="41.0" text="Total abcence in each class">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

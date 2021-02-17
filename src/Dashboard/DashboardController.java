@@ -17,11 +17,9 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
-import java.security.PublicKey;
 import java.util.ResourceBundle;
-import java.util.concurrent.ThreadPoolExecutor;
 
-public class DashboardController {
+public class DashboardController implements Initializable {
     @FXML
     private AnchorPane dRoot;
     @FXML
@@ -38,9 +36,6 @@ public class DashboardController {
     private User currentUser;
     private boolean isTeacher;
 
-    public DashboardController(){
-
-    }
 
     public void setUser(User u){
         currentUser = u;
@@ -64,7 +59,7 @@ public class DashboardController {
 
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/Main/sample.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/Main/Login.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -77,20 +72,20 @@ public class DashboardController {
 
     public void handleDashboard(){
         FxmlLoader loader = new FxmlLoader();
-        Pane view = loader.getPage("fravaer");
+        Pane view = loader.getPage("studentdb");
 
         borderPane.setCenter(view);
     }
 
-    public void handleStatestik(){
-        FxmlLoader loader = new FxmlLoader();
-        Pane view = loader.getPage("statestik");
+    public void handleRegistrer(){
 
-        borderPane.setCenter(view);
     }
 
     public void handleRegistreringer(){
-        System.out.println("Tidl. registeringer");
+        FxmlLoader loader = new FxmlLoader();
+        Pane view = loader.getPage("tidlRegistreringer");
+
+        borderPane.setCenter(view);
     }
 
     public void setIsTeacher(){
@@ -102,6 +97,11 @@ public class DashboardController {
 
         btnRegistreringer.setVisible(false);
         btnRegistreringer.setDisable(true);
+
+        FxmlLoader loader = new FxmlLoader();
+        Pane view = loader.getPage("teacherdb");
+
+        borderPane.setCenter(view);
     }
 
     public void setName(String name){
@@ -109,4 +109,11 @@ public class DashboardController {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        FxmlLoader loader = new FxmlLoader();
+        Pane view = loader.getPage("studentdb");
+
+        borderPane.setCenter(view);
+    }
 }
