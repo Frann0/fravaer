@@ -1,10 +1,9 @@
 package Main;
 
-import Dashboard.TestController;
+import Dashboard.StudentdbController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.URL;
 
@@ -29,7 +28,7 @@ public class FxmlLoader {
         return view;
     }
 
-    public TestController getController(String filename) {
+    public StudentdbController getController(String filename) {
 
         try {
             URL fileURL = Main.class.getResource("/Dashboard/" + filename + ".fxml");

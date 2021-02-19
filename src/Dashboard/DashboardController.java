@@ -46,6 +46,8 @@ public class DashboardController implements Initializable {
     @FXML
     private TableView test;
 
+    private final FxmlLoader loader = new FxmlLoader();
+
 
     private User currentUser;
     private boolean isTeacher;
@@ -87,7 +89,6 @@ public class DashboardController implements Initializable {
     }
 
     public void handleDashboard(){
-        FxmlLoader loader = new FxmlLoader();
         Pane view = loader.getPage("studentdb");
 
         borderPane.setCenter(view);
@@ -131,7 +132,6 @@ public class DashboardController implements Initializable {
     }
 
     public void handleRegistreringer(){
-        FxmlLoader loader = new FxmlLoader();
         Pane view = loader.getPage("tidlRegistreringer");
 
         borderPane.setCenter(view);
@@ -150,6 +150,7 @@ public class DashboardController implements Initializable {
         FxmlLoader loader = new FxmlLoader();
         Pane view = loader.getPage("teacherdb");
 
+
         borderPane.setCenter(view);
     }
 
@@ -160,7 +161,7 @@ public class DashboardController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        FxmlLoader loader = new FxmlLoader();
+
         Pane view = loader.getPage("studentdb");
         borderPane.setCenter(view);
     }

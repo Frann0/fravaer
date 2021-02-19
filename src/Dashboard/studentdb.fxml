@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="562.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Dashboard.TestController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="562.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Dashboard.StudentdbController">
    <children>
       <TableView fx:id="test" layoutX="53.0" layoutY="331.0" prefHeight="183.0" prefWidth="467.0">
         <columns>
@@ -35,7 +35,7 @@
             </BarChart>
          </children>
       </AnchorPane>
-      <Label layoutX="53.0" layoutY="41.0" text="Total abcence in each class">
+      <Label layoutX="53.0" layoutY="41.0" text="Total absence in each class">
          <font>
             <Font size="20.0" />
          </font>

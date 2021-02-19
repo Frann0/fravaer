@@ -3,6 +3,7 @@ package Main;
 import BE.User;
 import DAL.UserDAL;
 import Dashboard.DashboardController;
+import Dashboard.TeacherdbController;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.EventHandler;
@@ -66,6 +67,8 @@ public class Controller {
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader();
             fxmlLoader.setLocation(getClass().getResource("/Dashboard/dashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/Dashboard/teacherdb.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
 
@@ -99,10 +102,13 @@ public class Controller {
             });
 
             DashboardController controller = fxmlLoader.getController();
+
+            TeacherdbController teacherdbController = loader.getController();
             controller.setUser(n);
             controller.setName(n.getFirstName());
             if (n.getRole() == 2){
                 controller.setIsTeacher();
+                teacherdbController.setUser(n);
             }
             root1.close();
 

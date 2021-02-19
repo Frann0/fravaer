@@ -179,4 +179,8 @@ public class User {
         return (float) (absentLectures / lectureCount) * 100;
     }
 
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
+    }
 }

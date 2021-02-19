@@ -6,17 +6,16 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Dashboard.TidlRegController">
    <children>
-      <TableView layoutX="26.0" layoutY="76.0" prefHeight="484.0" prefWidth="519.0">
+      <TableView fx:id="tblView" layoutX="26.0" layoutY="76.0" prefHeight="484.0" prefWidth="519.0">
         <columns>
-          <TableColumn prefWidth="186.00003623962402" text="Dato" />
-          <TableColumn prefWidth="189.3332977294922" text="Fag" />
+          <TableColumn fx:id="tblDato" prefWidth="186.00003623962402" text="Date" />
+          <TableColumn fx:id="tblFag" prefWidth="189.3332977294922" text="Subject" />
             <TableColumn prefWidth="142.66677856445312" text="Present" />
         </columns>
       </TableView>
-      <Label layoutX="26.0" layoutY="40.0" text="Alle registreringer">
+      <Label layoutX="26.0" layoutY="40.0" text="Attendance registrations">
          <font>
             <Font size="20.0" />
          </font>

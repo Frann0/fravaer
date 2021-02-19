@@ -23,7 +23,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class TestController implements Initializable {
+public class StudentdbController implements Initializable {
     @FXML
     private TableView<User> test;
     @FXML
@@ -42,41 +42,37 @@ public class TestController implements Initializable {
     private ObservableList<Absence> absence = FXCollections.observableArrayList();
 
     private User user = null;
+    XYChart.Series data = new XYChart.Series();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        chartAbcence.setPrefSize(522,183);
+        chartAbcence.setPrefSize(522, 183);
+        numAxis.setAutoRanging(false);
+
         catAxis.setLabel("Fag");
 
         numAxis.setLabel("Procent fravær");
 
         //BarChart barChart = new BarChart(xA,yA);
-
-        XYChart.Series data = new XYChart.Series();
         data.setName("Fravær");
 
         //provided data
+        AbsenceManager ab = new AbsenceManager();
+        ArrayList<Subject> absence = ab.getStudentAbsence("madsq");
 
-        {
-            AbsenceManager ab =  new AbsenceManager();
-            ArrayList<Subject> absence = ab.getStudentAbsence("madsq");
-
-            for(Subject sub : absence)
-                data.getData().add(new XYChart.Data(sub.getName(),sub.getAbsence()));
+        for (Subject sub : absence) {
+            data.getData().add(new XYChart.Data(sub.getName(), sub.getAbsence()));
         }
-        chartAbcence.getData().add(data);
 
+        chartAbcence.getData().add(data);
     }
 
     public void setUser(User user) {
         this.user = user;
     }
 
-    public void initValues(){
-        if (user != null){
-            absence.addAll(user.getAttendance());
-            System.out.println(absence);
-
+    public void initValues() {
+        if (user != null) {
             tblDate.setCellValueFactory(new PropertyValueFactory<>("username"));
             tblSubject.setCellValueFactory(new PropertyValueFactory<>("password"));
         }
