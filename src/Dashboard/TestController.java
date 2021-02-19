@@ -46,7 +46,6 @@ public class TestController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         chartAbcence.setPrefSize(522,183);
-        chartAbcence.set
         catAxis.setLabel("Fag");
 
         numAxis.setLabel("Procent fravær");
