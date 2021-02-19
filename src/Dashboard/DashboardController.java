@@ -3,6 +3,7 @@ package Dashboard;
 import BE.User;
 import Main.FxmlLoader;
 import com.jfoenix.controls.JFXButton;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -41,6 +42,8 @@ public class DashboardController implements Initializable {
     private User currentUser;
     private boolean isTeacher;
 
+    private double xOffset = 0;
+    private double yOffset = 0;
 
     public void setUser(User u){
         currentUser = u;
@@ -86,8 +89,36 @@ public class DashboardController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/Dashboard/popup.fxml"));
-
+        
         Scene scene = new Scene(fxmlLoader.load());
+
+        scene.setOnMousePressed(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                xOffset = event.getSceneX();
+                yOffset = event.getSceneY();
+            }
+        });
+
+        scene.setOnMouseDragged(new EventHandler<MouseEvent>() {
+            @Override
+            public void handle(MouseEvent event) {
+                stage.setX(event.getScreenX() - xOffset);
+                stage.setY(event.getScreenY() - yOffset);
+                stage.setOpacity(0.8f);
+            }
+        });
+
+        scene.setOnMouseDragExited((event) -> {
+            stage.setOpacity(1.0f);
+        });
+
+        scene.setOnMouseReleased((event) -> {
+            stage.setOpacity(1.0f);
+        });
+
+
+
 
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
@@ -127,6 +158,5 @@ public class DashboardController implements Initializable {
         FxmlLoader loader = new FxmlLoader();
         Pane view = loader.getPage("studentdb");
         borderPane.setCenter(view);
-
     }
 }
