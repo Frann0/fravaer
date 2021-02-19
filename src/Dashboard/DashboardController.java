@@ -48,6 +48,8 @@ public class DashboardController implements Initializable {
 
     private final FxmlLoader loader = new FxmlLoader();
 
+    private User user;
+
 
     private User currentUser;
     private boolean isTeacher;
@@ -147,11 +149,23 @@ public class DashboardController implements Initializable {
         btnRegistreringer.setVisible(false);
         btnRegistreringer.setDisable(true);
 
+        /*
         FxmlLoader loader = new FxmlLoader();
         Pane view = loader.getPage("teacherdb");
+         */
+        FXMLLoader load = new FXMLLoader();
+        load.setLocation(getClass().getResource("/Dashboard/teacherdb.fxml"));
+
+        try {
+            borderPane.setCenter(load.load());
+            TeacherdbController conn = load.getController();
+            conn.setUser(currentUser);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
 
 
-        borderPane.setCenter(view);
+        //borderPane.setCenter(view);
     }
 
     public void setName(String name){

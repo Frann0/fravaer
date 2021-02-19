@@ -102,13 +102,10 @@ public class Controller {
             });
 
             DashboardController controller = fxmlLoader.getController();
-
-            TeacherdbController teacherdbController = loader.getController();
             controller.setUser(n);
             controller.setName(n.getFirstName());
             if (n.getRole() == 2){
                 controller.setIsTeacher();
-                teacherdbController.setUser(n);
             }
             root1.close();
 
