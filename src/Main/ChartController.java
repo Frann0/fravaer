@@ -90,27 +90,33 @@ public class ChartController implements Initializable {
     @FXML
     private void handleShowToTalBarChart(ActionEvent actionEvent) {
         CategoryAxis xA = new CategoryAxis();
-        xA.setLabel("Fag");
+        xA.setLabel("FAG");
 
         NumberAxis yA = new NumberAxis();
-        yA.setLabel("Procent fravær");
+        yA.setLabel("Total Procent Fravær");
 
         BarChart barChart = new BarChart(xA,yA);
 
         XYChart.Series data = new XYChart.Series();
-        data.setName("Fravær");
+        data.setName("Total Fravær");
 
         //provided data
+        yA.setAutoRanging(false);
+        yA.setLayoutY(100);
 
-        {
-            AbsenceManager ab =  new AbsenceManager();
-            ArrayList<Subject> absence = ab.getStudentAbsence("madsq");
+        data.getData().add(new XYChart.Data("SCO",(int)(Math.random() * 50 + 1)));
+        data.getData().add(new XYChart.Data("ITO",(int)(Math.random() * 50 + 1)));
+        data.getData().add(new XYChart.Data("DBO",(int)(Math.random() * 50 + 1)));
+        data.getData().add(new XYChart.Data("SDE",(int)(Math.random() * 50 + 1)));
 
-            for(Subject sub : absence)
-                data.getData().add(new XYChart.Data(sub.getName(),sub.getAbsence()));
-        }
+
+
+
         barChart.getData().add(data);
+
+        // add barChar to borderPane
         borderPane.setCenter(barChart);
+
 
     }
 
