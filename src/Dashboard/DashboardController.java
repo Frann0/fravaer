@@ -1,6 +1,8 @@
 package Dashboard;
 
+import BE.Subject;
 import BE.User;
+import BLL.AbsenceManager;
 import Main.FxmlLoader;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.EventHandler;
@@ -8,6 +10,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -21,6 +27,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -38,6 +45,7 @@ public class DashboardController implements Initializable {
     private JFXButton btnRegistreringer;
     @FXML
     private TableView test;
+
 
     private User currentUser;
     private boolean isTeacher;
@@ -89,7 +97,7 @@ public class DashboardController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/Dashboard/popup.fxml"));
-        
+
         Scene scene = new Scene(fxmlLoader.load());
 
         scene.setOnMousePressed(new EventHandler<MouseEvent>() {
@@ -116,9 +124,6 @@ public class DashboardController implements Initializable {
         scene.setOnMouseReleased((event) -> {
             stage.setOpacity(1.0f);
         });
-
-
-
 
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);

@@ -25,12 +25,12 @@
       </Label>
       <AnchorPane layoutX="10.0" layoutY="83.0">
          <children>
-            <BarChart fx:id="chartAbcence" prefHeight="183.0" prefWidth="522.0">
+            <BarChart fx:id="chartAbcence" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="183.0" prefWidth="522.0">
               <xAxis>
-                <CategoryAxis side="BOTTOM" stylesheets="@../styles/styles.css" />
+                <CategoryAxis fx:id="catAxis" side="BOTTOM" stylesheets="@../styles/styles.css" />
               </xAxis>
               <yAxis>
-                <NumberAxis side="LEFT" />
+                <NumberAxis fx:id="numAxis" side="LEFT" />
               </yAxis>
             </BarChart>
          </children>
