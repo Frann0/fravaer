@@ -3,6 +3,8 @@
 <?import com.jfoenix.controls.JFXButton?>
 <?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.Pane?>
@@ -26,8 +28,7 @@
          <left>
             <Pane prefHeight="576.0" prefWidth="238.0" styleClass="side" BorderPane.alignment="CENTER">
                <children>
-                  <Label layoutX="66.0" layoutY="72.0" text="BILLEDE AF PERSON" textFill="WHITE" />
-                  <Label fx:id="lblName" alignment="CENTER" contentDisplay="CENTER" layoutX="16.0" layoutY="143.0" prefHeight="21.0" prefWidth="206.0" text="Velkommen Laura Hansen" textAlignment="CENTER" textFill="WHITE">
+                  <Label fx:id="lblName" alignment="CENTER" contentDisplay="CENTER" layoutX="13.0" layoutY="176.0" prefHeight="21.0" prefWidth="206.0" text="Velkommen Laura Hansen" textAlignment="CENTER" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -52,6 +53,11 @@
                         <Font size="15.0" />
                      </font>
                   </JFXButton>
+                  <ImageView fitHeight="150.0" fitWidth="150.0" layoutX="41.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@../Resources/Default.jpg" />
+                     </image>
+                  </ImageView>
                </children>
             </Pane>
          </left>

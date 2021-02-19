@@ -8,6 +8,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
@@ -15,6 +16,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -29,9 +32,11 @@ public class DashboardController implements Initializable {
     @FXML
     private JFXButton btnDashboard;
     @FXML
-    private JFXButton btnStatestik;
+    private JFXButton btnRegistrer;
     @FXML
     private JFXButton btnRegistreringer;
+    @FXML
+    private TableView test;
 
     private User currentUser;
     private boolean isTeacher;
@@ -77,8 +82,16 @@ public class DashboardController implements Initializable {
         borderPane.setCenter(view);
     }
 
-    public void handleRegistrer(){
+    public void handleRegistrer() throws IOException {
+        Stage stage = new Stage();
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/Dashboard/popup.fxml"));
 
+        Scene scene = new Scene(fxmlLoader.load());
+
+        stage.initStyle(StageStyle.UNDECORATED);
+        stage.setScene(scene);
+        stage.show();
     }
 
     public void handleRegistreringer(){
@@ -92,8 +105,8 @@ public class DashboardController implements Initializable {
         btnDashboard.setVisible(false);
         btnDashboard.setDisable(true);
 
-        btnStatestik.setVisible(false);
-        btnStatestik.setDisable(true);
+        btnRegistrer.setVisible(false);
+        btnRegistrer.setDisable(true);
 
         btnRegistreringer.setVisible(false);
         btnRegistreringer.setDisable(true);
@@ -113,7 +126,7 @@ public class DashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         FxmlLoader loader = new FxmlLoader();
         Pane view = loader.getPage("studentdb");
-
         borderPane.setCenter(view);
+
     }
 }

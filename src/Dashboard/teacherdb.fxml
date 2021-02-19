@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import com.jfoenix.controls.JFXComboBox?>
 <?import javafx.scene.chart.BarChart?>
 <?import javafx.scene.chart.CategoryAxis?>
 <?import javafx.scene.chart.NumberAxis?>
-<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -50,6 +50,6 @@
             <Font size="20.0" />
          </font>
       </Label>
-      <ChoiceBox layoutX="371.0" layoutY="202.0" prefWidth="150.0" />
+      <JFXComboBox focusColor="#7fa7ca" layoutX="371.0" layoutY="202.0" prefHeight="25.0" prefWidth="150.0" unFocusColor="#b7c4d0" />
    </children>
 </Pane>

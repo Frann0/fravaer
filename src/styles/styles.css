@@ -61,3 +61,77 @@
 }
 
 
+.table-view{
+    -fx-background-color: #b2c0cd;
+}
+
+.table-view .column-header {
+    -fx-background-color: #91a6b3;
+    -fx-text-background-color: white;
+}
+
+.table-view .column-header .label{
+    -fx-alignment: CENTER_LEFT;
+    -fx-padding: 2 0 2 10px;
+}
+
+.table-view .table-cell{
+    -fx-border-color: transparent;
+    -fx-padding: 2 0 2 10px;
+
+}
+.table-row-cell:filled:hover {
+    -fx-background-color: #cedbe7;
+    -fx-text-background-color: #2ec3e9;
+}
+.table-row-cell:odd{
+    -fx-background-color: #b2c0cd;
+    -fx-text-background-color: white;
+}
+.table-row-cell:even{
+    -fx-background-color: #a1b2c1;
+    -fx-text-background-color: white;
+}
+.table-row-cell:filled:focused:selected, .table-row-cell:filled:selected {
+    -fx-background-color: #2ec3e9;
+    -fx-text-background-color: white;
+}
+
+.chart-plot-background{
+    -fx-background-color: #b2c0cd;
+}
+
+.chart-horizontal-grid-lines{
+    -fx-stroke: #d0dce7;
+}
+
+.popupJa{
+    -fx-background-color: #b7c4d0;
+    -fx-border-radius: 1;
+    -fx-border-color: #d7e3ee;
+    -fx-text-fill: white;
+}
+
+.popupNej{
+    -fx-background-color: #b7c4d0;
+    -fx-border-radius: 1;
+    -fx-border-color: #d7e3ee;
+    -fx-text-fill: white;
+}
+
+.popupJa:hover{
+    -fx-background-color: #5eb623;
+}
+
+.popupNej:hover{
+    -fx-background-color: #da3333;
+}
+
+.popupBackground{
+    -fx-background-color: #c6d2de;
+    -fx-border-color: #91a6b3;
+    -fx-border-radius: 2;
+}
+
+
+
