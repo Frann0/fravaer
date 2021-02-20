@@ -47,9 +47,7 @@ public class DashboardController implements Initializable {
     private TableView test;
 
     private final FxmlLoader loader = new FxmlLoader();
-
-    private User user;
-
+    private final FXMLLoader loader2 = new FXMLLoader();
 
     private User currentUser;
     private boolean isTeacher;
@@ -59,6 +57,17 @@ public class DashboardController implements Initializable {
 
     public void setUser(User u){
         currentUser = u;
+
+        FXMLLoader load = new FXMLLoader();
+        load.setLocation(getClass().getResource("/Dashboard/studentdb.fxml"));
+
+        try {
+            borderPane.setCenter(load.load());
+            StudentdbController conn = load.getController();
+            conn.setUser(currentUser);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void exit(){

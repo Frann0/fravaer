@@ -25,11 +25,11 @@ import java.util.ResourceBundle;
 
 public class StudentdbController implements Initializable {
     @FXML
-    private TableView<User> test;
+    private TableView<Absence> tblAbsence;
     @FXML
-    private TableColumn<AbsentDay, LocalDate> tblDate;
+    private TableColumn<Absence, LocalDate> tblDate;
     @FXML
-    private TableColumn<AbsentDay, String> tblSubject;
+    private TableColumn<Absence, String> tblSubject;
     @FXML
     private CategoryAxis catAxis;
     @FXML
@@ -65,16 +65,21 @@ public class StudentdbController implements Initializable {
         }
 
         chartAbcence.getData().add(data);
+
     }
 
     public void setUser(User user) {
+        System.out.println(user.getAttendance());
         this.user = user;
+
+        absence.addAll(user.getAttendance());
+        tblAbsence.setItems(absence);
+        tblDate.setCellValueFactory(new PropertyValueFactory<>("lectureDate"));
+        tblSubject.setCellValueFactory(new PropertyValueFactory<>("subjectName"));
     }
 
     public void initValues() {
         if (user != null) {
-            tblDate.setCellValueFactory(new PropertyValueFactory<>("username"));
-            tblSubject.setCellValueFactory(new PropertyValueFactory<>("password"));
         }
     }
 }
