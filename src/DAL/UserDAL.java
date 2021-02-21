@@ -87,6 +87,8 @@ public class UserDAL {
         allUsers.add(t1);
         User t2 = new User(2,"jeppe","test","Jeppe","Deromkring");
         t2.setId(6);
+        t2.addSubject(new Subject("SDE"));
+        t2.addSubject(new Subject("SCO"));
         allUsers.add(t2);
 
         return allUsers;
@@ -94,9 +96,9 @@ public class UserDAL {
 
     public void loadSubjects(){
         for(User student : this.allUsers){
-            if(student.getRole() == 1){
+            //if(student.getRole() == 1){
                 assignSubjectsToStudent(student);
-            }
+            //}
         }
     }
 

@@ -36,4 +36,9 @@ public class Subject {
         Random rand = new Random();
         this.absence = 100 - rand.nextInt(20);
     }
+
+    @Override
+    public String toString() {
+        return getName();
+    }
 }

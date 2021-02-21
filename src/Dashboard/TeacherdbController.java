@@ -128,6 +128,7 @@ public class TeacherdbController implements Initializable {
 
     public void setUser(User user) {
         this.user = user;
+        System.out.println(user.getSubjects());
         dropSelector.getItems().addAll(user.getSubjects());
     }
 }
