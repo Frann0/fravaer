@@ -1,6 +1,7 @@
-package Main;
+package GUI;
 
-import Dashboard.StudentdbController;
+import GUI.CONTROLLER.StudentdbController;
+import Main.Main;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
@@ -16,11 +17,11 @@ public class FxmlLoader {
     public Pane getPage(String filename){
 
         try{
-            URL fileURL = Main.class.getResource("/Dashboard/" + filename + ".fxml");
+            URL fileURL = Main.class.getResource("/GUI/FXML/" + filename + ".fxml");
             if (fileURL == null){
                 throw new java.io.FileNotFoundException("Couldn't find the fxml file");
             }
-
+            else
             view = new FXMLLoader().load(fileURL);
         } catch (IOException e) {
             e.printStackTrace();
@@ -31,11 +32,11 @@ public class FxmlLoader {
     public StudentdbController getController(String filename) {
 
         try {
-            URL fileURL = Main.class.getResource("/Dashboard/" + filename + ".fxml");
+            URL fileURL = Main.class.getResource("/GUI/" + filename + ".fxml");
             if (fileURL == null){
                 throw new java.io.FileNotFoundException("Couldn't find the fxml file");
             }
-            fxmlLoader.setLocation(getClass().getResource("/Dashboard/" + filename + ".fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/GUI/" + filename + ".fxml"));
 
         }catch (IOException e){
             e.printStackTrace();

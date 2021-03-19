@@ -1,10 +1,8 @@
-package Dashboard;
+package GUI.CONTROLLER;
 
-import BE.AbsentDay;
 import BE.Subject;
 import BE.User;
 import BLL.AbsenceManager;
-import BLL.LoginManager;
 import Mock.Absence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

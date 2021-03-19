@@ -1,7 +1,5 @@
-package Main;
+package BE;
 
-import BE.AbsentDay;
-import BE.Subject;
 import BLL.AbsenceManager;
 
 import java.time.LocalDate;
@@ -16,7 +14,7 @@ public class AbsenceModel {
     // creates a list with absentDays fra student + mock subject
 
 
-    // todo weekDayAbscence
+    // todo weekDayAbsence
     public List<AbsentDay> getAbsentDaysList(){
         List<AbsentDay> absentDays = new ArrayList<>();
         for (int i = 1; i < 28; i += 3){

@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="562.0" stylesheets="@../styles/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Dashboard.StudentdbController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="562.0" stylesheets="@../../styles/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CONTROLLER.StudentdbController">
    <children>
       <TableView fx:id="tblAbsence" layoutX="53.0" layoutY="331.0" prefHeight="183.0" prefWidth="467.0">
         <columns>
@@ -27,7 +27,7 @@
          <children>
             <BarChart fx:id="chartAbcence" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="183.0" prefWidth="522.0">
               <xAxis>
-                <CategoryAxis fx:id="catAxis" side="BOTTOM" stylesheets="@../styles/styles.css" />
+                <CategoryAxis fx:id="catAxis" side="BOTTOM" stylesheets="@../../styles/styles.css" />
               </xAxis>
               <yAxis>
                 <NumberAxis fx:id="numAxis" side="LEFT" />

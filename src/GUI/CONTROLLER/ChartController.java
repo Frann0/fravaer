@@ -1,8 +1,7 @@
-package Main;
+package GUI.CONTROLLER;
 
 import BE.Subject;
 import BLL.AbsenceManager;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -10,7 +9,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.layout.BorderPane;
-import jdk.jfr.Category;
 
 import java.net.URL;
 import java.util.ArrayList;

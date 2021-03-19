@@ -1,4 +1,4 @@
-package Main;
+package BE;
 
 import BE.User;
 import BLL.LoginManager;

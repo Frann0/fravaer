@@ -1,7 +1,6 @@
-package Dashboard;
+package GUI.CONTROLLER;
 
 import BE.User;
-import BLL.AbsenceManager;
 import DAL.UserDAL;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
@@ -9,7 +8,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;

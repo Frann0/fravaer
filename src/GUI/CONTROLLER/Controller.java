@@ -1,9 +1,7 @@
-package Main;
+package GUI.CONTROLLER;
 
 import BE.User;
 import DAL.UserDAL;
-import Dashboard.DashboardController;
-import Dashboard.TeacherdbController;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.EventHandler;
@@ -13,12 +11,10 @@ import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import javax.swing.border.Border;
 import java.io.IOException;
 import java.util.List;
 
@@ -66,9 +62,9 @@ public class Controller {
 
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/Dashboard/dashboard.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/GUI/FXML/dashboard.fxml"));
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/Dashboard/teacherdb.fxml"));
+            loader.setLocation(getClass().getResource("/GUI/FXML/teacherdb.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
 

@@ -1,4 +1,4 @@
-package Dashboard;
+package GUI.CONTROLLER;
 
 public class TidlRegController {
 
