@@ -16,7 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class TeacherdbController implements Initializable {
+public class TeacherDashboardController implements Initializable {
     @FXML
     private BarChart chartOverallAbsence;
     @FXML

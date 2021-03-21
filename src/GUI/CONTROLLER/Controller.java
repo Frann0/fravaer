@@ -61,9 +61,9 @@ public class Controller {
 
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/dashboard.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/DashboardView.fxml"));
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/GUI/VIEW/teacherdb.fxml"));
+            loader.setLocation(getClass().getResource("/GUI/VIEW/TeacherDashboardView.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
 

@@ -20,7 +20,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
-public class StudentdbController implements Initializable {
+public class StudentDashboardController implements Initializable {
     @FXML
     private TableView<Absence> tblAbsence;
     @FXML

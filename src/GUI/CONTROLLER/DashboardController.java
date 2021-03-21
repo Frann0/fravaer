@@ -50,11 +50,11 @@ public class DashboardController implements Initializable {
         currentUser = u;
 
         FXMLLoader load = new FXMLLoader();
-        load.setLocation(getClass().getResource("/GUI/VIEW/studentdb.fxml"));
+        load.setLocation(getClass().getResource("/GUI/VIEW/StudentDashboardView.fxml"));
 
         try {
             borderPane.setCenter(load.load());
-            StudentdbController conn = load.getController();
+            StudentDashboardController conn = load.getController();
             conn.setUser(currentUser);
         } catch(IOException e) {
             e.printStackTrace();
@@ -79,7 +79,7 @@ public class DashboardController implements Initializable {
 
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/Login.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/LoginView.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -99,7 +99,7 @@ public class DashboardController implements Initializable {
     public void handleRegistrer() throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/popup.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/PopUpView.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -154,11 +154,11 @@ public class DashboardController implements Initializable {
         Pane view = loader.getPage("teacherdb");
          */
         FXMLLoader load = new FXMLLoader();
-        load.setLocation(getClass().getResource("/GUI/VIEW/teacherdb.fxml"));
+        load.setLocation(getClass().getResource("/GUI/VIEW/TeacherDashboardView.fxml"));
 
         try {
             borderPane.setCenter(load.load());
-            TeacherdbController conn = load.getController();
+            TeacherDashboardController conn = load.getController();
             conn.setUser(currentUser);
         } catch(IOException e) {
             e.printStackTrace();

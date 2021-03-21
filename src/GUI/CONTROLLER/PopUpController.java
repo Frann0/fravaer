@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-public class popupcontroller {
+public class PopUpController {
     @FXML
     private AnchorPane root;
 

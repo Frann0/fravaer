@@ -1,6 +1,6 @@
 package Main;
 
-import GUI.CONTROLLER.StudentdbController;
+import GUI.CONTROLLER.StudentDashboardController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
@@ -28,7 +28,7 @@ public class FxmlLoader {
         return view;
     }
 
-    public StudentdbController getController(String filename) {
+    public StudentDashboardController getController(String filename) {
 
         try {
             URL fileURL = Main.class.getResource("/Dashboard/" + filename + ".fxml");
