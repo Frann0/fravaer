@@ -1,4 +1,4 @@
-package Dashboard;
+package GUI.CONTROLLER;
 
 import javafx.fxml.FXML;
 import javafx.scene.layout.AnchorPane;

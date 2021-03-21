@@ -1,7 +1,6 @@
 package BLL;
 
 import BE.User;
-import DAL.UserDAL;
 
 import java.util.List;
 

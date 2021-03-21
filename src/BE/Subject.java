@@ -1,44 +1,31 @@
 package BE;
 
-import java.util.Random;
+import java.util.List;
 
 public class Subject {
-    private int id;
     private String name;
-    private int absence;
+    private List<User> teachers;
 
-    public Subject(String name) {
-        setName(name);
-        setAbsence(absence);
-    }
+    public Subject(){};
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
+    public Subject(String name, List<User> teachers){
+        this.name = name;
+        this.teachers = teachers;
     }
 
     public void setName(String name) {
         this.name = name;
     }
 
-    public int getAbsence() {
-        return absence;
+    public String getName() {
+        return name;
     }
 
-    public void setAbsence(int absence) {
-        Random rand = new Random();
-        this.absence = 100 - rand.nextInt(20);
+    public void addTeachers(User teacher) {
+        this.teachers.add(teacher);
     }
 
-    @Override
-    public String toString() {
-        return getName();
+    public void removeTeacher(User teacher){
+        this.teachers.remove(teacher);
     }
 }

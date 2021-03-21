@@ -1,8 +1,6 @@
-package Dashboard;
+package GUI.CONTROLLER;
 
-import BE.Subject;
 import BE.User;
-import BLL.AbsenceManager;
 import Main.FxmlLoader;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.EventHandler;
@@ -10,10 +8,6 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
-import javafx.scene.chart.NumberAxis;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
 import javafx.scene.input.MouseEvent;
@@ -23,11 +17,8 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -59,7 +50,7 @@ public class DashboardController implements Initializable {
         currentUser = u;
 
         FXMLLoader load = new FXMLLoader();
-        load.setLocation(getClass().getResource("/Dashboard/studentdb.fxml"));
+        load.setLocation(getClass().getResource("/GUI/VIEW/studentdb.fxml"));
 
         try {
             borderPane.setCenter(load.load());
@@ -88,7 +79,7 @@ public class DashboardController implements Initializable {
 
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/Main/Login.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/Login.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -108,7 +99,7 @@ public class DashboardController implements Initializable {
     public void handleRegistrer() throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/Dashboard/popup.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/popup.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -163,7 +154,7 @@ public class DashboardController implements Initializable {
         Pane view = loader.getPage("teacherdb");
          */
         FXMLLoader load = new FXMLLoader();
-        load.setLocation(getClass().getResource("/Dashboard/teacherdb.fxml"));
+        load.setLocation(getClass().getResource("/GUI/VIEW/teacherdb.fxml"));
 
         try {
             borderPane.setCenter(load.load());

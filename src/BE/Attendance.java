@@ -1,46 +1,20 @@
 package BE;
 
-public class Attendance {
-    private int id;
-    private boolean isPresent;
-    private Subject attendanceSubject;
-    private User attendanceStudent;
+public class Attendance{
+    private Lecture lecture;
+    private boolean attendance;
 
-    public Attendance(boolean isPresent, Subject attendanceSubject, User attendanceStudent) {
-        setPresent(isPresent);
-        setAttendanceClass(attendanceSubject);
-        setAttendanceStudent(attendanceStudent);
+    public Attendance( Lecture lecture, boolean attended) {
+        this.lecture = lecture;
+        setPresent(attended);
     }
 
-    public int getId() {
-        return id;
+    public boolean getAttendance() {
+        return attendance;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setPresent(boolean attendance) {
+        this.attendance = attendance;
     }
 
-    public boolean isPresent() {
-        return isPresent;
-    }
-
-    public void setPresent(boolean present) {
-        isPresent = present;
-    }
-
-    public Subject getAttendanceClass() {
-        return attendanceSubject;
-    }
-
-    public void setAttendanceClass(Subject attendanceSubject) {
-        this.attendanceSubject = attendanceSubject;
-    }
-
-    public User getAttendanceStudent() {
-        return attendanceStudent;
-    }
-
-    public void setAttendanceStudent(User attendanceStudent) {
-        this.attendanceStudent = attendanceStudent;
-    }
 }

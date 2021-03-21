@@ -1,6 +1,6 @@
 package Main;
 
-import Dashboard.StudentdbController;
+import GUI.CONTROLLER.StudentdbController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 

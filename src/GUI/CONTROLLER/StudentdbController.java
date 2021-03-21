@@ -1,10 +1,7 @@
-package Dashboard;
+package GUI.CONTROLLER;
 
-import BE.AbsentDay;
-import BE.Subject;
+import BE.Class;
 import BE.User;
-import BLL.AbsenceManager;
-import BLL.LoginManager;
 import Mock.Absence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -58,9 +55,9 @@ public class StudentdbController implements Initializable {
 
         //provided data
         AbsenceManager ab = new AbsenceManager();
-        ArrayList<Subject> absence = ab.getStudentAbsence("madsq");
+        ArrayList<Class> absence = ab.getStudentAbsence("madsq");
 
-        for (Subject sub : absence) {
+        for (Class sub : absence) {
             data.getData().add(new XYChart.Data(sub.getName(), sub.getAbsence()));
         }
 
