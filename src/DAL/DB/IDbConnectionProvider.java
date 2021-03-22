@@ -3,6 +3,10 @@ package DAL.DB;
 import java.sql.Connection;
 import java.util.Properties;
 
+/**
+ * Author: Carlo De Leon
+ * Version: 1.1.1
+ */
 public interface IDbConnectionProvider {
 
     /**
