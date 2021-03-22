@@ -1,10 +1,7 @@
 package GUI.CONTROLLER;
 
 import BE.User;
-<<<<<<< HEAD:src/GUI/CONTROLLER/TeacherDashboardController.java
-=======
 import DAL.UserDAL;
->>>>>>> pr/1:src/GUI/CONTROLLER/TeacherdbController.java
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

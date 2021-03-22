@@ -1,5 +1,4 @@
 package GUI.MODEL;
-package BE;
 
 import BE.User;
 import BLL.LoginManager;
