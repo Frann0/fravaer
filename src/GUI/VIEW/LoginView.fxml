@@ -10,8 +10,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@../../styles/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CONTROLLER.Controller">
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@../../styles/styles.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CONTROLLER.Controller">
    <children>
+      <JFXPasswordField fx:id="txtPassword" focusColor="#7fa7ca" layoutX="293.0" layoutY="343.0" prefHeight="25.0" prefWidth="221.0" promptText="Password" unFocusColor="#b7c4d0" />
       <Pane prefHeight="25.0" prefWidth="800.0" styleClass="topbar">
          <children>
             <Label layoutX="354.0" layoutY="4.0" text="Registrer fravær" textAlignment="CENTER" textFill="WHITE">
@@ -24,8 +25,7 @@
             <FontAwesomeIconView fx:id="Maximize" fill="#5eb623" glyphName="CIRCLE" layoutX="741.0" layoutY="17.0" onMouseClicked="#maximize" styleClass="maximize" />
          </children>
       </Pane>
-      <JFXTextField fx:id="txtUsername" text="madsq" focusColor="#7fa7ca" layoutX="289.0" layoutY="287.0" prefHeight="25.0" prefWidth="221.0" promptText="Brugernavn" unFocusColor="#b7c4d0" />
-      <JFXPasswordField fx:id="txtPassword" text="test" focusColor="#7fa7ca" layoutX="293.0" layoutY="343.0" prefHeight="25.0" prefWidth="221.0" promptText="Password" unFocusColor="#b7c4d0" />
+      <JFXTextField fx:id="txtUsername" focusColor="#7fa7ca" layoutX="289.0" layoutY="287.0" prefHeight="25.0" prefWidth="221.0" promptText="Brugernavn" unFocusColor="#b7c4d0" />
       <JFXButton defaultButton="true" layoutX="293.0" layoutY="401.0" onMouseClicked="#login" prefHeight="25.0" prefWidth="221.0" styleClass="buttons" text="Login" />
       <JFXButton layoutX="293.0" layoutY="444.0" onMouseClicked="#exit" prefHeight="25.0" prefWidth="221.0" styleClass="buttons" text="Cancel" />
       <Text layoutX="315.0" layoutY="201.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LOGO" wrappingWidth="177.97457885742188">
