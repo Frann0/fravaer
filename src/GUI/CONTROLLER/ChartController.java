@@ -1,6 +1,11 @@
 package GUI.CONTROLLER;
 
+<<<<<<< HEAD:src/GUI/CONTROLLER/ChartController.java
 import BE.Class;
+=======
+import BE.Subject;
+import BLL.AbsenceManager;
+>>>>>>> pr/1:src/Main/ChartController.java
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

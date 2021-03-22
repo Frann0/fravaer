@@ -16,7 +16,11 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
+<<<<<<< HEAD
         Parent root = FXMLLoader.load(getClass().getResource("../GUI/VIEW/LoginView.fxml"));
+=======
+        Parent root = FXMLLoader.load(getClass().getResource("../GUI/FXML/Login.fxml"));
+>>>>>>> pr/1
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.initStyle(StageStyle.TRANSPARENT);

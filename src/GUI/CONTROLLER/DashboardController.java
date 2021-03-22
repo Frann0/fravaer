@@ -1,7 +1,11 @@
 package GUI.CONTROLLER;
 
 import BE.User;
+<<<<<<< HEAD:src/GUI/CONTROLLER/DashboardController.java
 import Main.FxmlLoader;
+=======
+import GUI.FxmlLoader;
+>>>>>>> pr/1:src/Dashboard/DashboardController.java
 import com.jfoenix.controls.JFXButton;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -50,7 +54,11 @@ public class DashboardController implements Initializable {
         currentUser = u;
 
         FXMLLoader load = new FXMLLoader();
+<<<<<<< HEAD:src/GUI/CONTROLLER/DashboardController.java
         load.setLocation(getClass().getResource("/GUI/VIEW/StudentDashboardView.fxml"));
+=======
+        load.setLocation(getClass().getResource("/GUI/FXML/studentdb.fxml"));
+>>>>>>> pr/1:src/Dashboard/DashboardController.java
 
         try {
             borderPane.setCenter(load.load());
@@ -79,7 +87,11 @@ public class DashboardController implements Initializable {
 
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
+<<<<<<< HEAD:src/GUI/CONTROLLER/DashboardController.java
         fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/LoginView.fxml"));
+=======
+        fxmlLoader.setLocation(getClass().getResource("/GUI/FXML/Login.fxml"));
+>>>>>>> pr/1:src/Dashboard/DashboardController.java
 
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -99,7 +111,11 @@ public class DashboardController implements Initializable {
     public void handleRegistrer() throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
+<<<<<<< HEAD:src/GUI/CONTROLLER/DashboardController.java
         fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/PopUpView.fxml"));
+=======
+        fxmlLoader.setLocation(getClass().getResource("/GUI/FXML/popup.fxml"));
+>>>>>>> pr/1:src/Dashboard/DashboardController.java
 
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -154,7 +170,11 @@ public class DashboardController implements Initializable {
         Pane view = loader.getPage("teacherdb");
          */
         FXMLLoader load = new FXMLLoader();
+<<<<<<< HEAD:src/GUI/CONTROLLER/DashboardController.java
         load.setLocation(getClass().getResource("/GUI/VIEW/TeacherDashboardView.fxml"));
+=======
+        load.setLocation(getClass().getResource("/GUI/FXML/teacherdb.fxml"));
+>>>>>>> pr/1:src/Dashboard/DashboardController.java
 
         try {
             borderPane.setCenter(load.load());

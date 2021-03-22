@@ -1,6 +1,10 @@
 package GUI.CONTROLLER;
 
 import BE.User;
+<<<<<<< HEAD:src/GUI/CONTROLLER/Controller.java
+=======
+import DAL.UserDAL;
+>>>>>>> pr/1:src/Main/Controller.java
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.EventHandler;
@@ -61,9 +65,15 @@ public class Controller {
 
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader();
+<<<<<<< HEAD:src/GUI/CONTROLLER/Controller.java
             fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/DashboardView.fxml"));
             FXMLLoader loader = new FXMLLoader();
             loader.setLocation(getClass().getResource("/GUI/VIEW/TeacherDashboardView.fxml"));
+=======
+            fxmlLoader.setLocation(getClass().getResource("/GUI/FXML/dashboard.fxml"));
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource("/GUI/FXML/teacherdb.fxml"));
+>>>>>>> pr/1:src/Main/Controller.java
 
             Scene scene = new Scene(fxmlLoader.load());
 
