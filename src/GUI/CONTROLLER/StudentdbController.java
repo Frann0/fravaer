@@ -1,8 +1,6 @@
 package GUI.CONTROLLER;
-
-import BE.Subject;
+import BE.BarChartUtil;
 import BE.User;
-import BLL.AbsenceManager;
 import Mock.Absence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -18,7 +16,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class StudentdbController implements Initializable {
@@ -35,7 +32,6 @@ public class StudentdbController implements Initializable {
     @FXML
     private BarChart chartAbcence;
 
-    private AbsenceManager absenceManager = new AbsenceManager();
 
     private ObservableList<Absence> absence = FXCollections.observableArrayList();
 
@@ -54,13 +50,7 @@ public class StudentdbController implements Initializable {
         //BarChart barChart = new BarChart(xA,yA);
         data.setName("Fravær");
 
-        //provided data
-        AbsenceManager ab = new AbsenceManager();
-        ArrayList<Subject> absence = ab.getStudentAbsence("madsq");
 
-        for (Subject sub : absence) {
-            data.getData().add(new XYChart.Data(sub.getName(), sub.getAbsence()));
-        }
 
         chartAbcence.getData().add(data);
 
@@ -70,14 +60,17 @@ public class StudentdbController implements Initializable {
         System.out.println(user.getAttendance());
         this.user = user;
 
-        absence.addAll(user.getAttendance());
         tblAbsence.setItems(absence);
         tblDate.setCellValueFactory(new PropertyValueFactory<>("lectureDate"));
         tblSubject.setCellValueFactory(new PropertyValueFactory<>("subjectName"));
+        if (user != null) {
+            chartAbcence= BarChartUtil.getUserAbsence(user);
+        }
     }
 
     public void initValues() {
         if (user != null) {
+            chartAbcence= BarChartUtil.getUserAbsence(user);
         }
     }
 }

@@ -1,11 +1,13 @@
 package DAL;
 
+import BE.Attendance;
 import BE.Subject;
 import BE.User;
+import BE.UserRole;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,11 +31,6 @@ public class UserDAL {
     }
 
     private void setSubjectAbsence() {
-        for( Subject sub : subjectAbsence){
-            for (int i = 60; i < 100; i += 10){
-                sub.setAbsence(i);
-            }
-        }
     }
 
     public List<User> getAllUsers() {
@@ -48,7 +45,7 @@ public class UserDAL {
 
         List<User> allStudents = new ArrayList<>();
         for(User user : allUsers){
-            if(user.getRole() == 1){
+            if(user.getRole() == UserRole.Student){
                 allStudents.add(user);
             }
         }
@@ -58,7 +55,7 @@ public class UserDAL {
     public List<User> getTeachers(){
         ObservableList<User> allTeachers = FXCollections.observableArrayList();
         for(User user : allUsers){
-            if(user.getRole() == 2){
+            if(user.getRole() == UserRole.Admin){
                 allTeachers.add(user);
             }
         }
@@ -66,29 +63,55 @@ public class UserDAL {
     }
 
     public List<User> loadUsers() {
+
         List<User> allUsers = new ArrayList<>();
+        Subject s1 = new Subject("ITO");
+        Subject s2 = new Subject("SCO");
+        Subject s3 = new Subject("DBOS");
+        List<Subject> userSubjects = new ArrayList<>();
+        userSubjects.add(s1);
+        userSubjects.add(s2);
+        userSubjects.add(s3);
+
+
+        s3.getSubjectTimes().put(LocalDateTime.now().minusHours(2),LocalDateTime.now().plusHours(2));
+        s2.getSubjectTimes().put(LocalDateTime.now().minusHours(2).plusDays(1),LocalDateTime.now().plusHours(2).plusDays(1));
+
+        s1.getSubjectTimes().put(LocalDateTime.now().minusHours(2).plusDays(2),LocalDateTime.now().plusHours(2).plusDays(2));
+        s2.getSubjectTimes().put(LocalDateTime.now().minusHours(2).plusDays(3),LocalDateTime.now().plusHours(2).plusDays(3));
+
+        User testUser1= new User(0, UserRole.Student,"Dennis","test","D","P", new ArrayList<>(), userSubjects);
+        User testUser2= new User(1, UserRole.Student,"Carlo","test","C","De Leon", new ArrayList<>(), userSubjects);
+
+
+        testUser1.getAttendance().add(new Attendance(testUser1));
+        testUser2.getAttendance().add(new Attendance(testUser2,LocalDateTime.now().minusHours(1).plusDays(1)));
+        testUser2.getAttendance().add(new Attendance(testUser2,LocalDateTime.now().minusHours(1).plusDays(3)));
+        testUser1.getAttendance().add(new Attendance(testUser1,LocalDateTime.now().minusHours(1).plusDays(2)));
+
+
         //Users 1,2,3,4 - student
-        User s1 = new User(1,"madsq","test","Mads","Qvistgaard");
-        s1.setId(1);
-        allUsers.add(s1);
-        User s2 = new User(1,"svendh","test","Svend","Halding");
-        s2.setId(2);
-        allUsers.add(s2);
-        User s3 = new User(1,"jonasb","test","Jonas","Buus");
-        s3.setId(3);
-        allUsers.add(s3);
-        User s4 = new User(1,"mikeh","test","Mike","Hovedskov");
-        s4.setId(4);
-        allUsers.add(s4);
+        User s5 = new User(3,UserRole.Student,"madsq","test","Mads","Qvistgaard", new ArrayList<>(), userSubjects);
+
+        User s6 = new User(4,UserRole.Student,"svendh","test","Svend","Halding", new ArrayList<>(), userSubjects);
+
+        User s7 = new User(5,UserRole.Student,"jonasb","test","Jonas","Buus", new ArrayList<>(), userSubjects);
+
+        User s8 = new User(6,UserRole.Student,"mikeh","test","Mike","Hovedskov", new ArrayList<>(), userSubjects);
+
+        allUsers.add(testUser1);
+        allUsers.add(testUser2);
+        allUsers.add(s5);
+        allUsers.add(s6);
+        allUsers.add(s7);
+        allUsers.add(s8);
 
         //Teachers
-        User t1 = new User(2,"peters","test","Peter","Stegger");
+        User t1 = new User(UserRole.Admin,"peters","test","Peter","Stegger");
         t1.setId(5);
         allUsers.add(t1);
-        User t2 = new User(2,"jeppe","test","Jeppe","Deromkring");
+        User t2 = new User(UserRole.Admin,"jeppe","test","Jeppe","Deromkring");
         t2.setId(6);
-        t2.addSubject(new Subject("SDE"));
-        t2.addSubject(new Subject("SCO"));
         allUsers.add(t2);
 
         return allUsers;
@@ -103,38 +126,19 @@ public class UserDAL {
     }
 
     public void assignSubjectsToStudent(User student){
-        Subject SCO = new Subject("SCO");
-        Subject SDE = new Subject("SDE");
-        Subject DBO = new Subject("DBO");
-        Subject ITO = new Subject("ITO");
-        student.addSubject(SCO);
-        student.addSubject(SDE);
-        student.addSubject(DBO);
-        student.addSubject(ITO);
     }
 
     public void setMostAbsentDay(){
-        for(User student : this.allUsers){
-            if(student.getRole() == 1){
-                student.setMostAbsentDay("Thursday");
-            }
-        }
     }
 
     public void setAbsentDays(){
         for(User student : this.allUsers){
-            if(student.getRole() == 1){
+            if(student.getRole() == UserRole.Student){
                 assignAbsentDays(student);
             }
         }
     }
 
     private void assignAbsentDays(User student) {
-        List<LocalDate> absentDays = new ArrayList<>();
-
-        for (int i = 1; i < 28; i += 3){
-            absentDays.add(LocalDate.of(2021, 3, i));
-        }
-        student.setAbsentDays(absentDays);
     }
 }

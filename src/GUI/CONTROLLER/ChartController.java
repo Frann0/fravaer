@@ -1,7 +1,5 @@
 package GUI.CONTROLLER;
 
-import BE.Subject;
-import BLL.AbsenceManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,16 +7,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.*;
 import javafx.scene.layout.BorderPane;
-
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 
 
 public class ChartController implements Initializable {
-
-    AbsenceManager ab =  new AbsenceManager();
 
     @FXML
     private BorderPane borderPane;
@@ -38,13 +32,6 @@ public class ChartController implements Initializable {
 
         //provided data 
 
-        {
-            AbsenceManager ab =  new AbsenceManager();
-            ArrayList<Subject> absence = ab.getStudentAbsence("madsq");
-
-            for(Subject sub : absence)
-                data.getData().add(new XYChart.Data(sub.getName(),sub.getAbsence()));
-        }
         barChart.getData().add(data);
         borderPane.setCenter(barChart);
     }
