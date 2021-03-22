@@ -1,10 +1,7 @@
 package GUI.CONTROLLER;
 
 import BE.User;
-<<<<<<< HEAD:src/GUI/CONTROLLER/Controller.java
-=======
 import DAL.UserDAL;
->>>>>>> pr/1:src/Main/Controller.java
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.EventHandler;

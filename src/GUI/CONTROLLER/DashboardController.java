@@ -1,11 +1,7 @@
 package GUI.CONTROLLER;
 
 import BE.User;
-<<<<<<< HEAD:src/GUI/CONTROLLER/DashboardController.java
 import Main.FxmlLoader;
-=======
-import GUI.FxmlLoader;
->>>>>>> pr/1:src/Dashboard/DashboardController.java
 import com.jfoenix.controls.JFXButton;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;

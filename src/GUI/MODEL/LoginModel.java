@@ -1,8 +1,5 @@
-<<<<<<< HEAD:src/GUI/MODEL/LoginModel.java
 package GUI.MODEL;
-=======
 package BE;
->>>>>>> pr/1:src/BE/LoginModel.java
 
 import BE.User;
 import BLL.LoginManager;

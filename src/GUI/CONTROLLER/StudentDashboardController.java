@@ -1,13 +1,10 @@
 package GUI.CONTROLLER;
 
-<<<<<<< HEAD:src/GUI/CONTROLLER/StudentDashboardController.java
 import BE.Class;
 import BE.User;
-=======
 import BE.Subject;
 import BE.User;
 import BLL.AbsenceManager;
->>>>>>> pr/1:src/GUI/CONTROLLER/StudentdbController.java
 import Mock.Absence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

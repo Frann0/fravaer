@@ -1,11 +1,7 @@
 package GUI;
 
-<<<<<<< HEAD:src/Main/FxmlLoader.java
-import GUI.CONTROLLER.StudentDashboardController;
-=======
 import GUI.CONTROLLER.StudentdbController;
 import Main.Main;
->>>>>>> pr/1:src/GUI/FxmlLoader.java
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 
