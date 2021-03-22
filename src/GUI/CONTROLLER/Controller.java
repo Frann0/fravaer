@@ -1,7 +1,6 @@
 package GUI.CONTROLLER;
 
 import BE.User;
-import DAL.UserDAL;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.EventHandler;
@@ -16,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
@@ -29,7 +29,7 @@ public class Controller {
     @FXML
     private Label lblError;
 
-    private UserDAL userDAL = new UserDAL();
+    //private UserDAL userDAL = new UserDAL();
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -48,7 +48,9 @@ public class Controller {
     }
 
     public void login(MouseEvent mouseEvent) throws IOException {
-        List<User> users = userDAL.loadUsers();
+        List<User> users = new ArrayList<>();
+        users.add(new User(1, "mikeh", "test", "Mike", "Hovedskov"));
+        users.add(new User(2,"Jeppe","test","Jeppe","Led"));
         User n = null;
         for (User u : users) {
             if (txtUsername.getText().contains(u.getUsername()) && txtPassword.getText().contains(u.getPassword())) {

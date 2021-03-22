@@ -1,7 +1,7 @@
 package GUI.CONTROLLER;
 
 import BE.User;
-import Main.FxmlLoader;
+import GUI.FxmlLoader;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -91,7 +91,7 @@ public class DashboardController implements Initializable {
     }
 
     public void handleDashboard(){
-        Pane view = loader.getPage("studentdb");
+        Pane view = loader.getPage("StudentDashboardView");
 
         borderPane.setCenter(view);
     }
@@ -100,8 +100,6 @@ public class DashboardController implements Initializable {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/PopUpView.fxml"));
-
-        fxmlLoader.setLocation(getClass().getResource("/GUI/FXML/popup.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -136,7 +134,7 @@ public class DashboardController implements Initializable {
     }
 
     public void handleRegistreringer(){
-        Pane view = loader.getPage("tidlRegistreringer");
+        Pane view = loader.getPage("RegistrationsView");
 
         borderPane.setCenter(view);
     }
@@ -178,7 +176,7 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Pane view = loader.getPage("studentdb");
+        Pane view = loader.getPage("StudentDashboardView");
         borderPane.setCenter(view);
     }
 }
