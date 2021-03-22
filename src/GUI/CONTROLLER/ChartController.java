@@ -1,6 +1,8 @@
 package GUI.CONTROLLER;
 
 import BE.Class;
+import BE.Subject;
+import BLL.AbsenceManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;

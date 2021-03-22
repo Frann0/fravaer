@@ -2,6 +2,9 @@ package GUI.CONTROLLER;
 
 import BE.Class;
 import BE.User;
+import BE.Subject;
+import BE.User;
+import BLL.AbsenceManager;
 import Mock.Absence;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

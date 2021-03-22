@@ -101,6 +101,8 @@ public class DashboardController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/PopUpView.fxml"));
 
+        fxmlLoader.setLocation(getClass().getResource("/GUI/FXML/popup.fxml"));
+
         Scene scene = new Scene(fxmlLoader.load());
 
         scene.setOnMousePressed(new EventHandler<MouseEvent>() {

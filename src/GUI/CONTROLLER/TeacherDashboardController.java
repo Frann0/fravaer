@@ -1,6 +1,7 @@
 package GUI.CONTROLLER;
 
 import BE.User;
+import DAL.UserDAL;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
