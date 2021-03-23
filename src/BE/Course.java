@@ -49,7 +49,7 @@ public class Course {
         return subjects;
     }
 
-    public void printCourseTimes() {
+    public void printCourseLectures() {
         subjects.forEach(s -> {
             s.getLectures().keySet().forEach(l -> lectures.put(l, s.getLectures().get(l)));
         });

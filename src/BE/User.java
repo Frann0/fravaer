@@ -178,7 +178,7 @@ public class User {
     /**
      * Prints the users subjects by day
      */
-    public void printSubjects() {
+    public void printStudentLectures() {
         Map<LocalDateTime,LocalDateTime> lectures = new HashMap<>();
         getSubjects().forEach(s -> {
             s.getLectures().keySet().forEach(l -> lectures.put(l, s.getLectures().get(l)));

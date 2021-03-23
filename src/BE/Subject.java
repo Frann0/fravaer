@@ -73,7 +73,7 @@ public class Subject {
         return attendances;
     }
 
-    public void printSubjectTimes() {
+    public void printSubjectLectures() {
         List<LocalDateTime> dateTimes = new ArrayList<LocalDateTime>(lectures.keySet());
         dateTimes.sort(Comparator.comparingInt((LocalDateTime localDateTime) -> localDateTime.getDayOfWeek().getValue()));
             dateTimes.forEach((s) -> {
