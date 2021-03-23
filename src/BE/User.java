@@ -11,8 +11,8 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private List<Course> courses = new ArrayList<>();
-    private List<Subject> subjects = new ArrayList<>();
+    private Set<Course> courses = new HashSet<>();
+    private Set<Subject> subjects = new HashSet<>();
 
     public User(UserRole role, String username, String password, String firstName, String lastName) {
         setRole(role);
@@ -153,7 +153,7 @@ public class User {
      *
      * @return the subjects
      */
-    public List<Subject> getSubjects() {
+    public Set<Subject> getSubjects() {
         courses.forEach(course -> course.getSubjects().forEach(s -> {
             if (!subjects.contains(s))
                 subjects.add(s);
@@ -161,7 +161,7 @@ public class User {
         return subjects;
     }
 
-    public List<Course> getCourses() {
+    public Set<Course> getCourses() {
         return courses;
     }
 
