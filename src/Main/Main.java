@@ -1,5 +1,6 @@
 package Main;
 
+import BE.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -9,9 +10,14 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.*;
+
 public class Main extends Application {
     private double xOffset = 0;
     private double yOffset = 0;
+
 
 
     @Override
@@ -20,6 +26,7 @@ public class Main extends Application {
         primaryStage.setTitle("Hello World");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.initStyle(StageStyle.TRANSPARENT);
+
         primaryStage.show();
 
 
