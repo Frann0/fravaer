@@ -6,7 +6,6 @@
 package DAL.DB;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
-import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -31,7 +30,6 @@ public class DbMSSQLConnectionProvider implements DAL.DB.IDbConnectionProvider {
 
     protected String databasePath;
     protected Properties databaseFileProperties;
-    protected Connection connection;
 
     public DbMSSQLConnectionProvider() {
     }
@@ -45,17 +43,12 @@ public class DbMSSQLConnectionProvider implements DAL.DB.IDbConnectionProvider {
      * Connect to the database.
      */
     public void connect() {
-        try {
-            ds = new SQLServerDataSource();
-            ds.setServerName(getHost());
-            ds.setDatabaseName(getDatabase());
-            ds.setUser(getUser());
-            ds.setPassword(getPassword());
-            ds.setPortNumber(getPort());
-            connection = ds.getConnection();
-        } catch (SQLServerException throwables) {
-            throwables.printStackTrace();
-        }
+        ds = new SQLServerDataSource();
+        ds.setServerName(getHost());
+        ds.setDatabaseName(getDatabase());
+        ds.setUser(getUser());
+        ds.setPassword(getPassword());
+        ds.setPortNumber(getPort());
     }
 
     /**

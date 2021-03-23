@@ -1,7 +1,6 @@
 package GUI.CONTROLLER;
 
 import BE.User;
-import DAL.UserDAL;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -44,7 +43,7 @@ public class TeacherDashboardController implements Initializable {
     private User user;
 
     private XYChart.Series data = new XYChart.Series();
-    private UserDAL userDAL = new UserDAL();
+    //private UserDAL userDAL = new UserDAL();
 
     private ObservableList<User> students = FXCollections.observableArrayList();
 
@@ -115,7 +114,7 @@ public class TeacherDashboardController implements Initializable {
 
         //END OF CHARTS
 
-        students.addAll(userDAL.getStudents());
+        //students.addAll(userDAL.getStudents());
         tblStudents.setItems(students);
 
         tblFirstname.setCellValueFactory(new PropertyValueFactory<>("firstName"));
@@ -126,7 +125,7 @@ public class TeacherDashboardController implements Initializable {
 
     public void setUser(User user) {
         this.user = user;
-        System.out.println(user.getClasses());
-        dropSelector.getItems().addAll(user.getClasses());
+        //System.out.println(user.getClasses());
+        //dropSelector.getItems().addAll(user.getClasses());
     }
 }
