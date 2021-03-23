@@ -8,7 +8,7 @@ import java.util.Map;
 public class Attendance {
     private int id;
     private LocalDateTime attendDate;
-    Map<LocalDate, Boolean> attendance = new HashMap<>();
+    private Map<LocalDate, Boolean> attendance = new HashMap<>();
     private Student student;
 
     public Attendance(Student student){

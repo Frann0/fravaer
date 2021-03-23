@@ -27,13 +27,13 @@ public class Main extends Application {
         primaryStage.initStyle(StageStyle.TRANSPARENT);
 
         /*
-        List<User> allUsers = new ArrayList<User>(Arrays.asList(
-                new User(3, UserRole.Student, "madsq", "test", "Mads", "Qvistgaard"),
-                new User(4, UserRole.Student, "svendh", "test", "Svend", "Halding"),
-                new User(5, UserRole.Student, "jonasb", "test", "Jonas", "Buus"),
-                new User(6, UserRole.Student, "mikeh", "test", "Mike", "Hovedskov"),
-                new User(0, UserRole.Student, "Dennis", "test", "D", "P"),
-                new User(1, UserRole.Student, "Carlo", "test", "C", "De Leon")
+        List<Student> studentList = new ArrayList<Student>(Arrays.asList(
+                new Student(3, UserRole.Student, "madsq", "test", "Mads", "Qvistgaard"),
+                new Student(4, UserRole.Student, "svendh", "test", "Svend", "Halding"),
+                new Student(5, UserRole.Student, "jonasb", "test", "Jonas", "Buus"),
+                new Student(6, UserRole.Student, "mikeh", "test", "Mike", "Hovedskov"),
+                new Student(0, UserRole.Student, "Dennis", "test", "D", "P"),
+                new Student(1, UserRole.Student, "Carlo", "test", "C", "De Leon")
         ));
         List<Subject> userSubjects = new ArrayList<>(Arrays.asList(
                 new Subject("ITO"),
@@ -56,27 +56,28 @@ public class Main extends Application {
 
 
         //Teachers
-        User t1 = new User(UserRole.Admin, "peters", "test", "Peter", "Stegger");
-        t1.setId(5);
-        allUsers.add(t1);
-        User t2 = new User(UserRole.Admin, "jeppe", "test", "Jeppe", "Deromkring");
-        t2.setId(6);
-        allUsers.add(t2);
+        List<User> teachers = new ArrayList<>(
+                Arrays.asList(
+                        new User(UserRole.Admin, "peters", "test", "Peter", "Stegger"),
+                        new User(UserRole.Admin, "jeppe", "test", "Jeppe", "Deromkring")
+                )
+        );
 
-        AClass aClass = new AClass("CSE2020", allUsers, userSubjects);
+        Course course = new Course("CSE2020", studentList, userSubjects);
 
-        allUsers.forEach(u -> {
+        studentList.forEach(u -> {
             if (u.getRole() != UserRole.Admin)
-                u.getaClasses().add(aClass);
+                u.getCourses().add(course);
         });
 
         for (int i = 0; i < 7; i++)
-            allUsers.get(allUsers.size() - 3).getAttendance().attendDate(LocalDateTime.of(2021, 3, 23, 8, 50).minusDays(i * 7));
-        allUsers.get(allUsers.size() - 4).getAttendance().attendDate(LocalDateTime.now().minusHours(1).plusDays(1));
-        allUsers.get(allUsers.size() - 3).getAttendance().attendDate(LocalDateTime.now().minusHours(1).plusDays(3));
-        allUsers.get(allUsers.size() - 4).getAttendance().attendDate(LocalDateTime.now().minusHours(1).plusDays(2));
+            studentList.get(studentList.size() - 3).getAttendance().attendDate(LocalDateTime.of(2021, 3, 23, 8, 50).minusDays(i * 7));
+        studentList.get(studentList.size() - 4).getAttendance().attendDate(LocalDateTime.now().minusHours(1).plusDays(1));
+        studentList.get(studentList.size() - 3).getAttendance().attendDate(LocalDateTime.now().minusHours(1).plusDays(3));
+        studentList.get(studentList.size() - 4).getAttendance().attendDate(LocalDateTime.now().minusHours(1).plusDays(2));
 
-        allUsers.get(0).printSubjects();
+        studentList.get(0).printSubjects();
+
          */
 
         primaryStage.show();

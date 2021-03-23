@@ -37,7 +37,7 @@ public class BarChartUtil {
         return getBarchartFromCollection(student.getAbsence(), "Absence",student.toString() + "'s absence", "Total Absence");
     }
 
-    public static BarChart getBarchartFromCollection(Collection<LocalDate> source, String label,String title, String seriesName) {
+    private static BarChart getBarchartFromCollection(Collection<LocalDate> source, String label,String title, String seriesName) {
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setCategories(FXCollections.<String>observableList(days));
         NumberAxis yAxis = new NumberAxis();

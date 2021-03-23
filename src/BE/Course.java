@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 public class Course {
     private String name;
-    private List<User> students;
+    private List<Student> students;
     private List<User> teachers = new ArrayList<>();
     private Map<LocalDateTime, LocalDateTime> lectures = new HashMap<>();
     private List<Subject> subjects;
@@ -19,7 +19,7 @@ public class Course {
      * @param students The students enrolled
      * @param subjects the subjects of the course
      */
-    public Course(String name, List<User> students, List<Subject> subjects) {
+    public Course(String name, List<Student> students, List<Subject> subjects) {
         setName(name);
         this.students = students;
         this.subjects = subjects;
@@ -37,7 +37,7 @@ public class Course {
         return name;
     }
 
-    public List<User> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
