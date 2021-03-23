@@ -2,38 +2,39 @@ package BE;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Attendance {
     private int id;
-    private Subject subject;
     private LocalDateTime attendDate;
-    private boolean isPresent;
+    Map<LocalDate, Boolean> attendance = new HashMap<>();
     private User user;
 
-    /**
-     * Makes a new attendance
-     * @param user the student you want to attend
-     */
-    public Attendance(User user) {
+    public Attendance(User user){
         this.user=user;
+    }
+
+    /**
+     * Attempts to attend at the current date
+     * @throws Exception if the date is invalid
+     */
+    public void attendDate(){
         user.getSubjects().forEach(s ->
-                s.getSubjectTimes().forEach((t, t2) ->
+                s.getLectures().forEach((t, t2) ->
                         dateCheck(LocalDateTime.now(), s, t, t2)
                 ));
     }
 
     /**
-     * Makes a new attendance at the given date
-     * @param user the student you want to attend
-     * @param localDateTime the date the student attends
+     * Attends the given subject at the given date
      */
-    public Attendance(User user, LocalDateTime localDateTime) {
-        this.user=user;
-        user.getSubjects().forEach(s ->
-                s.getSubjectTimes().forEach((t, t2) ->
-                        dateCheck(localDateTime, s, t, t2)
-                ));
-    }
+    public void attendDate(LocalDateTime localDateTime) {
+            user.getSubjects().forEach(s ->
+                    s.getLectures().forEach((t, t2) ->
+                            dateCheck(localDateTime, s, t, t2)
+                    ));
+        }
 
     /**
      * Checks the date is within the subject
@@ -72,10 +73,9 @@ public class Attendance {
      * @param d the date you attend
      */
     private void attend(Subject subject, LocalDate d) {
-        this.subject = subject;
-        this.subject.getDates().add(d);
+        subject.getDates().add(d);
         user.getAttendedDates().add(d);
-        this.isPresent = true;
+        attendance.put(d,true);
     }
 
     /**
@@ -98,36 +98,16 @@ public class Attendance {
      * Confirmation on whether or not the user has attended
      * @return true if has attended false otherwise
      */
-    public boolean isPresent() {
-        return isPresent;
+    public boolean isPresent(LocalDate localDate) {
+        return attendance.get(localDate);
     }
 
     /**
      * Changes the is preset variable
      * @param present the new value
      */
-    public void setPresent(boolean present) {
-        isPresent = present;
-    }
-
-    /**
-     * Gets the subject
-     * @return the subject that has been attended to
-     */
-    public Subject getAttendanceClass() {
-        return subject;
-    }
-
-    public Subject getSubject() {
-        return subject;
-    }
-
-    /**
-     * Sets the subject
-     * @param newSubject the subject
-     */
-    public void setSubject(Subject newSubject) {
-        this.subject = newSubject;
+    public void setPresent(LocalDate localDate,boolean present) {
+        attendance.put(localDate,present);
     }
 
     /**

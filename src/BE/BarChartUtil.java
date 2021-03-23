@@ -5,7 +5,6 @@ import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
@@ -52,6 +51,7 @@ public class BarChartUtil {
         for (int i = 0; i <= 4; i++) {
             series.getData().add(new XYChart.Data<>(days.get(i), dayFreq[i]));
         }
+        barChart.getData().add(series);
 
         return barChart;
     }
