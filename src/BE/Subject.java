@@ -5,7 +5,6 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class Subject {
-    private int id;
     private String name;
     private List<User> enrolledStudents = new ArrayList<>();
     private Map<LocalDateTime, LocalDateTime> subjectTimes = new HashMap<>();
@@ -60,10 +59,12 @@ public class Subject {
         return subjectTimes;
     }
 
+    public void addTeachers(User teacher) {
+        this.teachers.add(teacher);
+    }
 
-    @Override
-    public String toString() {
-        return getName();
+    public void removeTeacher(User teacher){
+        this.teachers.remove(teacher);
     }
 
     public Set<LocalDate> getDates(){

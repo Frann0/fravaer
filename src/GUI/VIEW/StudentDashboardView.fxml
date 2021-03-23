@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.BarChart?>
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="562.0" stylesheets="@../../styles/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CONTROLLER.StudentDashboardController">
+   <children>
+      <TableView fx:id="tblAbsence" layoutX="53.0" layoutY="331.0" prefHeight="183.0" prefWidth="467.0">
+        <columns>
+          <TableColumn fx:id="tblDate" prefWidth="236.00001907348633" text="Date" />
+          <TableColumn fx:id="tblSubject" minWidth="0.0" prefWidth="229.00003051757812" text="Subject" />
+        </columns>
+      </TableView>
+      <Label layoutX="53.0" layoutY="291.0" text="Absence">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="10.0" layoutY="83.0">
+         <children>
+            <BarChart fx:id="chartAbcence" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="183.0" prefWidth="522.0">
+              <xAxis>
+                <CategoryAxis fx:id="catAxis" side="BOTTOM" stylesheets="@../../styles/styles.css" />
+              </xAxis>
+              <yAxis>
+                <NumberAxis fx:id="numAxis" side="LEFT" />
+              </yAxis>
+            </BarChart>
+         </children>
+      </AnchorPane>
+      <Label layoutX="53.0" layoutY="41.0" text="Total absence in each class">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+   </children>
+</Pane>

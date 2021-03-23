@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane fx:id="root" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="150.0" prefWidth="300.0" styleClass="popupBackground" stylesheets="@../../styles/styles.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CONTROLLER.PopUpController">
+   <children>
+      <Pane layoutX="2.0" layoutY="2.0" prefHeight="146.0" prefWidth="296.0">
+         <children>
+            <Label layoutX="28.0" layoutY="20.0" text="Er du sikker på at du vil registere fravær" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="92.0" layoutY="40.0" text="for denne lektion ?" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <JFXButton layoutX="34.0" layoutY="109.0" onMouseClicked="#handleYes" prefHeight="25.0" prefWidth="88.0" styleClass="popupJa" text="Ja" />
+            <JFXButton layoutX="173.0" layoutY="109.0" onMouseClicked="#handleNo" prefHeight="25.0" prefWidth="88.0" styleClass="popupNej" text="Nej" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

@@ -1,8 +1,6 @@
 package GUI.CONTROLLER;
 
 import BE.User;
-import BE.UserRole;
-import DAL.UserDAL;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.EventHandler;
@@ -17,6 +15,7 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Controller {
@@ -30,7 +29,7 @@ public class Controller {
     @FXML
     private Label lblError;
 
-    private UserDAL userDAL = new UserDAL();
+    //private UserDAL userDAL = new UserDAL();
     private double xOffset = 0;
     private double yOffset = 0;
 
@@ -49,8 +48,10 @@ public class Controller {
     }
 
     public void login(MouseEvent mouseEvent) throws IOException {
-        List<User> users = userDAL.loadUsers();
-        User user = null;
+        List<User> users = new ArrayList<>();
+        users.add(new User(1, "mikeh", "test", "Mike", "Hovedskov"));
+        users.add(new User(2,"Jeppe","test","Jeppe","Led"));
+        User n = null;
         for (User u : users) {
             if (txtUsername.getText().contains(u.getUsername()) && txtPassword.getText().contains(u.getPassword())) {
                 user = u;
@@ -63,9 +64,9 @@ public class Controller {
 
             Stage stage = new Stage();
             FXMLLoader fxmlLoader = new FXMLLoader();
-            fxmlLoader.setLocation(getClass().getResource("/GUI/FXML/dashboard.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/DashboardView.fxml"));
             FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(getClass().getResource("/GUI/FXML/teacherdb.fxml"));
+            loader.setLocation(getClass().getResource("/GUI/VIEW/TeacherDashboardView.fxml"));
 
             Scene scene = new Scene(fxmlLoader.load());
 

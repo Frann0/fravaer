@@ -50,11 +50,11 @@ public class DashboardController implements Initializable {
         currentUser = u;
 
         FXMLLoader load = new FXMLLoader();
-        load.setLocation(getClass().getResource("/GUI/FXML/studentdb.fxml"));
+        load.setLocation(getClass().getResource("/GUI/VIEW/StudentDashboardView.fxml"));
 
         try {
             borderPane.setCenter(load.load());
-            StudentdbController conn = load.getController();
+            StudentDashboardController conn = load.getController();
             conn.setUser(currentUser);
         } catch(IOException e) {
             e.printStackTrace();
@@ -79,7 +79,7 @@ public class DashboardController implements Initializable {
 
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/GUI/FXML/Login.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/LoginView.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -91,7 +91,7 @@ public class DashboardController implements Initializable {
     }
 
     public void handleDashboard(){
-        Pane view = loader.getPage("studentdb");
+        Pane view = loader.getPage("StudentDashboardView");
 
         borderPane.setCenter(view);
     }
@@ -99,7 +99,7 @@ public class DashboardController implements Initializable {
     public void handleRegistrer() throws IOException {
         Stage stage = new Stage();
         FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/GUI/FXML/popup.fxml"));
+        fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/PopUpView.fxml"));
 
         Scene scene = new Scene(fxmlLoader.load());
 
@@ -134,7 +134,7 @@ public class DashboardController implements Initializable {
     }
 
     public void handleRegistreringer(){
-        Pane view = loader.getPage("tidlRegistreringer");
+        Pane view = loader.getPage("RegistrationsView");
 
         borderPane.setCenter(view);
     }
@@ -154,11 +154,11 @@ public class DashboardController implements Initializable {
         Pane view = loader.getPage("teacherdb");
          */
         FXMLLoader load = new FXMLLoader();
-        load.setLocation(getClass().getResource("/GUI/FXML/teacherdb.fxml"));
+        load.setLocation(getClass().getResource("/GUI/VIEW/TeacherDashboardView.fxml"));
 
         try {
             borderPane.setCenter(load.load());
-            TeacherdbController conn = load.getController();
+            TeacherDashboardController conn = load.getController();
             conn.setUser(currentUser);
         } catch(IOException e) {
             e.printStackTrace();
@@ -176,7 +176,7 @@ public class DashboardController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
-        Pane view = loader.getPage("studentdb");
+        Pane view = loader.getPage("StudentDashboardView");
         borderPane.setCenter(view);
     }
 }
