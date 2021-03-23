@@ -1,6 +1,7 @@
 package GUI.CONTROLLER;
 
 import BE.User;
+import BE.UserRole;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.EventHandler;
@@ -48,9 +49,10 @@ public class Controller {
     }
 
     public void login(MouseEvent mouseEvent) throws IOException {
+        User user=null;
         List<User> users = new ArrayList<>();
-        users.add(new User(1, "mikeh", "test", "Mike", "Hovedskov"));
-        users.add(new User(2,"Jeppe","test","Jeppe","Led"));
+        users.add(new User(UserRole.Student, "mikeh", "test", "Mike", "Hovedskov"));
+        users.add(new User(UserRole.Student,"Jeppe","test","Jeppe","Led"));
         User n = null;
         for (User u : users) {
             if (txtUsername.getText().contains(u.getUsername()) && txtPassword.getText().contains(u.getPassword())) {

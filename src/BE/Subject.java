@@ -6,9 +6,13 @@ import java.util.*;
 
 public class Subject {
     private String name;
+    private int id;
+    private List<User> teachers = new ArrayList<>();
     private List<User> enrolledStudents = new ArrayList<>();
     private Map<LocalDateTime, LocalDateTime> subjectTimes = new HashMap<>();
     private Set<LocalDate> attendances = new HashSet<>();
+
+    public Subject(){}
 
     /**
      * The name of the subject

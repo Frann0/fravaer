@@ -1,26 +1,13 @@
 package GUI.CONTROLLER;
 import BE.BarChartUtil;
 import BE.User;
-import Mock.Absence;
-
-import BE.Class;
-import BE.User;
-import BE.Subject;
-import BE.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.net.URL;
-import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class StudentDashboardController implements Initializable {
