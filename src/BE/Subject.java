@@ -77,13 +77,12 @@ public class Subject {
         List<LocalDateTime> dateTimes = new ArrayList<LocalDateTime>(lectures.keySet());
         dateTimes.sort(Comparator.comparingInt((LocalDateTime localDateTime) -> localDateTime.getDayOfWeek().getValue()));
             dateTimes.forEach((s) -> {
-                    System.out.printf("%-10s %02d:%02d:%02d - %02d:%02d:%02d %10s %n",
+                    System.out.printf("%-10s %02d:%02d - %02d:%02d  %-5s %n",
                             s.getDayOfWeek(),
-                            s.getHour(), s.getMinute(),
-                            s.getSecond(),
+                            s.getHour(),
+                            s.getMinute(),
                             lectures.get(s).getHour(),
                             lectures.get(s).getMinute(),
-                            lectures.get(s).getSecond(),
                             name);
             });
     }

@@ -62,10 +62,10 @@ public class Course {
                     subjectName.set(s.getName());
 
         });
-            System.out.printf("%-10s %02d:%02d:%02d - %02d:%02d:%02d %5s %5s %n",
+            System.out.printf("%-10s %02d:%02d - %02d:%02d:%02d %5s %5s %n",
                     startTime.getDayOfWeek(),
-                    startTime.getHour(), startTime.getMinute(),
-                    startTime.getSecond(),
+                    startTime.getHour(),
+                    startTime.getMinute(),
                     lectures.get(startTime).getHour(),
                     lectures.get(startTime).getMinute(),
                     lectures.get(startTime).getSecond(),
