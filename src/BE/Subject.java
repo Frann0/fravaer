@@ -5,8 +5,8 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class Subject {
-    private String name;
     private int id;
+    private String name;
     private List<User> students = new ArrayList<>();
     private List<User> teachers = new ArrayList<>();
     private Set<LocalDate> attendances = new HashSet<>();

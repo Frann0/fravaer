@@ -9,10 +9,10 @@ public class Attendance {
     private int id;
     private LocalDateTime attendDate;
     Map<LocalDate, Boolean> attendance = new HashMap<>();
-    private User user;
+    private Student student;
 
-    public Attendance(User user){
-        this.user=user;
+    public Attendance(Student student){
+        this.student=student;
     }
 
     /**
@@ -20,7 +20,7 @@ public class Attendance {
      * @throws Exception if the date is invalid
      */
     public void attendDate(){
-        user.getSubjects().forEach(s ->
+        student.getSubjects().forEach(s ->
                 s.getLectures().forEach((t, t2) ->
                         dateCheck(LocalDateTime.now(), s, t, t2)
                 ));
@@ -30,7 +30,7 @@ public class Attendance {
      * Attends the given subject at the given date
      */
     public void attendDate(LocalDateTime localDateTime) {
-            user.getSubjects().forEach(s ->
+            student.getSubjects().forEach(s ->
                     s.getLectures().forEach((t, t2) ->
                             dateCheck(localDateTime, s, t, t2)
                     ));
@@ -74,7 +74,7 @@ public class Attendance {
      */
     private void attend(Subject subject, LocalDate d) {
         subject.getDates().add(d);
-        user.getAttendedDates().add(d);
+        student.getAttendedDates().add(d);
         attendance.put(d,true);
     }
 
@@ -114,16 +114,16 @@ public class Attendance {
      * Gets the student
      * @return the student
      */
-    public User getUser() {
-        return user;
+    public User getStudent() {
+        return student;
     }
 
     /**
      * Sets the student
-     * @param user the new student
+     * @param student the new student
      */
-    public void setUser(User user) {
-        this.user = user;
+    public void setStudent(Student student) {
+        this.student=student;
     }
 
     public LocalDateTime getAttendDate() {

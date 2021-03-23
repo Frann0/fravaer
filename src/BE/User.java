@@ -1,6 +1,5 @@
 package BE;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
@@ -14,9 +13,6 @@ public class User {
     private String lastName;
     private List<Course> courses = new ArrayList<>();
     private List<Subject> subjects = new ArrayList<>();
-    private Attendance attendance = new Attendance(this);
-    private Set<LocalDate> attendedDates = new HashSet<>();
-    private static List<LocalDate> allAttendedDates = new ArrayList<>();
 
     public User(UserRole role, String username, String password, String firstName, String lastName) {
         setRole(role);
@@ -42,25 +38,6 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-    }
-
-    /**
-     * Constructor
-     *
-     * @param role
-     * @param username
-     * @param password
-     * @param firstName
-     * @param lastName
-     */
-    public User(int id, UserRole role, String username, String password, String firstName, String lastName, Set<LocalDate> attendance) {
-        this.id = id;
-        this.role = role;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.attendedDates = attendance;
     }
 
     /**
@@ -186,61 +163,6 @@ public class User {
 
     public List<Course> getCourses() {
         return courses;
-    }
-
-    /**
-     * Gets the list of attended dates
-     *
-     * @return the list of attended dates
-     */
-    public Set<LocalDate> getAttendedDates() {
-        return attendedDates;
-    }
-
-    /**
-     * Gets the list of attendances
-     *
-     * @return the list of attendance
-     */
-    public Attendance getAttendance() {
-        return attendance;
-    }
-
-    public List<LocalDate> getAbsence() {
-        List<LocalDate> absence = new ArrayList<>();
-        getSubjects().forEach(s -> {
-            if (!attendedDates.containsAll(s.getDates())) {
-                s.getDates().forEach(
-                        d -> {
-                            if (!attendedDates.contains(d))
-                                absence.add(d);
-                        }
-                );
-            }
-        });
-        return absence;
-    }
-
-    public List<LocalDate> getAbsence(Subject subject) {
-        List<LocalDate> absence = new ArrayList<>();
-        if (!attendedDates.containsAll(subject.getDates())) {
-            subject.getDates().forEach(
-                    d -> {
-                        if (!attendedDates.contains(d))
-                            absence.add(d);
-                    }
-            );
-        }
-        return absence;
-    }
-
-    public List<LocalDate> getAttendedDates(Subject subject) {
-        List<LocalDate> subjectDates = new ArrayList<>(subject.getDates());
-        subject.getDates().forEach(d -> {
-            if (attendedDates.contains(d))
-                subjectDates.add(d);
-        });
-        return subjectDates;
     }
 
     /**
