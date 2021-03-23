@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicReference;
 
 
 public class Course {
+    private int id;
     private String name;
     private List<Student> students;
     private List<User> teachers = new ArrayList<>();
@@ -27,6 +28,32 @@ public class Course {
             teachers.addAll(s.getTeachers());
             s.getLectures().keySet().forEach(l -> lectures.put(l, s.getLectures().get(l)));
         });
+    }
+
+    /**
+     * Constructor
+     *
+     * @param name     the name of the course
+     * @param students The students enrolled
+     * @param subjects the subjects of the course
+     */
+    public Course(int id,String name, List<Student> students, List<Subject> subjects) {
+        this.id=id;
+        setName(name);
+        this.students = students;
+        this.subjects = subjects;
+        subjects.forEach(s -> {
+            teachers.addAll(s.getTeachers());
+            s.getLectures().keySet().forEach(l -> lectures.put(l, s.getLectures().get(l)));
+        });
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void setName(String name) {
