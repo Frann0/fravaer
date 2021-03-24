@@ -1,5 +1,7 @@
 package BE;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -11,6 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AttendanceTest {
 
     @Test
+    @DisplayName("User should be able to attend a lecture")
     void attendDate() {
         //Creates a student object
         Student student = new Student(0, UserRole.Student, "Dennis", "PC", "Dennis", "PC");
@@ -22,9 +25,10 @@ class AttendanceTest {
         student.getSubjects().add(subject);
 
         //checks if the student can attend a valid date
-        assert student.getAttendance().attendDate();
-        assert !student.getAttendance().attendDate(LocalDateTime.now().minusHours(2));
-        assert !student.getAttendedDates().isEmpty();
-        assert !subject.getDates().isEmpty();
+        assertTrue( student.getAttendance().attendDate(),"Can Attend a valid date!");
+        assertFalse(student.getAttendance().attendDate(LocalDateTime.now().minusHours(2)), "cant attend a invalid date");
+        assertTrue(student.getAttendance().attendDate(LocalDateTime.now().minusHours(1).minusMinutes(14)),"Can attend slightly before a lecture begins");
+        assertFalse(student.getAttendedDates().isEmpty(), "The students valid date was added to the List of attended dates");
+        assertFalse(subject.getDates().isEmpty(), "The subjects dates were updated");
     }
 }
