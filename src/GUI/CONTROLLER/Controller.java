@@ -1,6 +1,7 @@
 package GUI.CONTROLLER;
 
 import BE.User;
+import BE.UserRole;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 import javafx.event.EventHandler;
@@ -48,18 +49,19 @@ public class Controller {
     }
 
     public void login(MouseEvent mouseEvent) throws IOException {
+        User user=null;
         List<User> users = new ArrayList<>();
-        users.add(new User(1, "mikeh", "test", "Mike", "Hovedskov"));
-        users.add(new User(2,"Jeppe","test","Jeppe","Led"));
+        users.add(new User(UserRole.Student, "mikeh", "test", "Mike", "Hovedskov"));
+        users.add(new User(UserRole.Student,"Jeppe","test","Jeppe","Led"));
         User n = null;
         for (User u : users) {
             if (txtUsername.getText().contains(u.getUsername()) && txtPassword.getText().contains(u.getPassword())) {
-                n = u;
+                user = u;
                 break;
             }
         }
 
-        if (n != null) {
+        if (user != null) {
             Stage root1 = (Stage) root.getScene().getWindow();
 
             Stage stage = new Stage();
@@ -100,9 +102,9 @@ public class Controller {
             });
 
             DashboardController controller = fxmlLoader.getController();
-            controller.setUser(n);
-            controller.setName(n.getFirstName());
-            if (n.getRole() == 2){
+            controller.setUser(user);
+            controller.setName(user.getFirstName());
+            if (user.getRole() == UserRole.Admin){
                 controller.setIsTeacher();
             }
             root1.close();

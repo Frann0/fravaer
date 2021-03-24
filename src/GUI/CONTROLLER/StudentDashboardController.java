@@ -1,24 +1,12 @@
 package GUI.CONTROLLER;
-
-import BE.Class;
 import BE.User;
-import BE.Subject;
-import BE.User;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.cell.PropertyValueFactory;
-
 import java.net.URL;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 public class StudentDashboardController implements Initializable {
@@ -70,17 +58,14 @@ public class StudentDashboardController implements Initializable {
     }
 
     public void setUser(User user) {
+        /*
         System.out.println(user.getAttendance());
         this.user = user;
+         */
 
         //absence.addAll(user.getAttendance());
         //tblAbsence.setItems(absence);
         //tblDate.setCellValueFactory(new PropertyValueFactory<>("lectureDate"));
         //tblSubject.setCellValueFactory(new PropertyValueFactory<>("subjectName"));
-    }
-
-    public void initValues() {
-        if (user != null) {
-        }
     }
 }
