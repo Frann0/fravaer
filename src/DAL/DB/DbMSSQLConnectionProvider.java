@@ -6,6 +6,7 @@
 package DAL.DB;
 
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -34,6 +35,11 @@ public class DbMSSQLConnectionProvider implements DAL.DB.IDbConnectionProvider {
     public DbMSSQLConnectionProvider() {
     }
 
+    public DbMSSQLConnectionProvider(String settingsFile) {
+        loadSettingsFile(settingsFile);
+        connect();
+    }
+
     public static DbMSSQLConnectionProvider getInstance() {
         if (instance == null) instance = new DbMSSQLConnectionProvider();
         return instance;
@@ -42,28 +48,33 @@ public class DbMSSQLConnectionProvider implements DAL.DB.IDbConnectionProvider {
     /**
      * Connect to the database.
      */
-    public void connect() {
+    public Connection connect() {
         ds = new SQLServerDataSource();
         ds.setServerName(getHost());
         ds.setDatabaseName(getDatabase());
         ds.setUser(getUser());
         ds.setPassword(getPassword());
         ds.setPortNumber(getPort());
+
+        System.out.println(String.format("[%s]: Successfully connected to database: %s!", this.getClass().getSimpleName(), getDatabase()));
+        return getConnection();
     }
 
     /**
      * Reconnect to the database.
      */
     @Override
-    public void reconnect() {
+    public Connection reconnect() {
         try {
-            if (getConnection().isClosed()) {
-                connect();
-            }
+            if (getConnection() == null || getConnection() != null && getConnection().isClosed())
+                return connect();
+            return ds.getConnection();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return null;
     }
+
 
     /**
      * Get the current connection.
@@ -72,11 +83,7 @@ public class DbMSSQLConnectionProvider implements DAL.DB.IDbConnectionProvider {
      */
     @Override
     public Connection getConnection() {
-        try {
-            return ds.getConnection();
-        } catch (SQLException e) {
-            return null;
-        }
+        return reconnect();
     }
 
     /**

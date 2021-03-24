@@ -1,6 +1,8 @@
 package Main;
 
 import BE.*;
+import DAL.DB.DbConnectionHandler;
+import DAL.DB.DbMysqlConnectionProvider;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +12,9 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLNonTransientConnectionException;
+import java.sql.Statement;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.*;
@@ -107,7 +112,6 @@ public class Main extends Application {
         root.setOnMouseReleased((event) -> {
             primaryStage.setOpacity(1.0f);
         });
-
     }
 
 
