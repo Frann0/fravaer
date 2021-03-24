@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Set;
 
 public class Student extends User{
-    private Attendance attendance = new Attendance(this);
+    private final Attendance attendance = new Attendance(this);
     private Set<LocalDate> attendedDates = new HashSet<>();
     private static List<LocalDate> allAttendedDates = new ArrayList<>();
 
@@ -29,6 +29,10 @@ public class Student extends User{
         return attendedDates;
     }
 
+    public void addDate(LocalDate localDate){
+        attendedDates.add(localDate);
+    }
+
     /**
      * Gets the list of attendances
      *
@@ -40,7 +44,7 @@ public class Student extends User{
 
     public List<LocalDate> getAbsence() {
         List<LocalDate> absence = new ArrayList<>();
-        getSubjects().forEach(s -> {
+        getAllSubjects().forEach(s -> {
             if (!attendedDates.containsAll(s.getDates())) {
                 s.getDates().forEach(
                         d -> {

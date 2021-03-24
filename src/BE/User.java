@@ -153,11 +153,18 @@ public class User {
      *
      * @return the subjects
      */
+    public Set<Subject> getAllSubjects() {
+        Set<Subject> subjectsWithCourseSubjects = new HashSet<>(subjects);
+        courses.forEach(course -> subjectsWithCourseSubjects.addAll(course.getSubjects()));
+        return subjectsWithCourseSubjects;
+    }
+
+    /**
+     * Gets the list of subjects
+     *
+     * @return the subjects
+     */
     public Set<Subject> getSubjects() {
-        courses.forEach(course -> course.getSubjects().forEach(s -> {
-            if (!subjects.contains(s))
-                subjects.add(s);
-        }));
         return subjects;
     }
 
@@ -179,16 +186,16 @@ public class User {
      * Prints the users subjects by day
      */
     public void printStudentLectures() {
-        Map<LocalDateTime,LocalDateTime> lectures = new HashMap<>();
+        Map<LocalDateTime, LocalDateTime> lectures = new HashMap<>();
         getSubjects().forEach(s -> {
             s.getLectures().keySet().forEach(l -> lectures.put(l, s.getLectures().get(l)));
         });
         List<LocalDateTime> dateTimes = new ArrayList(lectures.keySet());
-        Collections.sort(dateTimes, Comparator.comparingInt((LocalDateTime localDateTime) -> localDateTime.getDayOfWeek().getValue()*24+localDateTime.getHour()));
+        Collections.sort(dateTimes, Comparator.comparingInt((LocalDateTime localDateTime) -> localDateTime.getDayOfWeek().getValue() * 24 + localDateTime.getHour()));
         dateTimes.forEach((startTime) -> {
             AtomicReference<String> subjectName = new AtomicReference<>("");
-            subjects.forEach(s-> {
-                if(s.getLectures().containsKey(startTime))
+            subjects.forEach(s -> {
+                if (s.getLectures().containsKey(startTime))
                     subjectName.set(s.getName());
 
             });
