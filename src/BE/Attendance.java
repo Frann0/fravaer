@@ -59,7 +59,7 @@ public class Attendance {
     }
 
     /**
-     * Checks that the dateTimeToCheck is within the time limit of the lecture. If it is it returns true, otherwise it returns false
+     * Checks that the dateTimeToCheck is within the time limit of the lecture. If the dateTimeToCheck is valid it returns true, otherwise it returns false
      * If the date time is valid it will also attend the date.
      * @param dateTimeToCheck   the time you want to make sure is within a lecture
      * @param subject           the subject you are checking, and attending given the dateTimeToCheck is valid
