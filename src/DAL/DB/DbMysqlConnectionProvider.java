@@ -28,6 +28,10 @@ public class DbMysqlConnectionProvider implements DAL.DB.IDbConnectionProvider {
     public DbMysqlConnectionProvider() {
     }
 
+    public DbMysqlConnectionProvider(String settingsFile) {
+        loadSettingsFile(settingsFile);
+        connect();
+    }
 
     public static DbMysqlConnectionProvider getInstance() {
         if (instance == null) instance = new DbMysqlConnectionProvider();
@@ -38,24 +42,27 @@ public class DbMysqlConnectionProvider implements DAL.DB.IDbConnectionProvider {
      * Connect to the database.
      */
     @Override
-    public void connect() {
+    public Connection connect() {
         try {
             // Connect to the database.
             connection = DriverManager.getConnection(String.format("jdbc:mysql://%s:%d/%s", getHost(), getPort(), getDatabase()), getUser(), getPassword());
+            System.out.println(String.format("[%s]: Successfully connected to database: %s!", this.getClass().getSimpleName(), getDatabase()));
         } catch (SQLException e) {
             System.out.println(String.format("MySQL connect exception: %s", e.getMessage()));
         }
+        return connection;
     }
 
     @Override
-    public void reconnect() {
+    public Connection reconnect() {
         try {
-            if (getConnection().isClosed()) {
-                connect();
-            }
+            if (connection == null || connection.isClosed())
+                return connect();
+            return connection;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return null;
     }
 
 
@@ -66,7 +73,7 @@ public class DbMysqlConnectionProvider implements DAL.DB.IDbConnectionProvider {
      */
     @Override
     public Connection getConnection() {
-        return connection;
+        return reconnect();
     }
 
     /**
