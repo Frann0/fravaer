@@ -10,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.paint.Color;
@@ -49,7 +51,7 @@ public class Controller {
 
     }
 
-    public void login(MouseEvent mouseEvent) throws IOException {
+    public void login() throws IOException {
         LoginModel loginModel = new LoginModel();
         User user = loginModel.attemptLogin(txtUsername.getText(),txtPassword.getText());
 
@@ -106,6 +108,17 @@ public class Controller {
             lblError.setTextFill(Color.RED);
             txtPassword.clear();
             txtUsername.clear();
+        }
+    }
+
+    /**
+     * Login with the enter key.
+     * @param keyEvent the keycode we check if its the ENTER key.
+     * @throws IOException 
+     */
+    public void LoginByEnter(KeyEvent keyEvent) throws IOException {
+        if (keyEvent.getCode() == KeyCode.ENTER){
+            login();
         }
     }
 }
