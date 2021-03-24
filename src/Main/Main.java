@@ -1,6 +1,5 @@
 package Main;
 
-import BE.*;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -9,10 +8,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.*;
 
 public class Main extends Application {
     private double xOffset = 0;
@@ -107,7 +102,6 @@ public class Main extends Application {
         root.setOnMouseReleased((event) -> {
             primaryStage.setOpacity(1.0f);
         });
-
     }
 
 
