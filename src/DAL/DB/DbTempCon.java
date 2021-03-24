@@ -10,7 +10,7 @@ import java.util.Properties;
 
 public class DbTempCon {
 
-    private final static String FILE_PATH = "src/Resources/dbinfo.settings";
+    private final static String FILE_PATH = "src/Resources/database.settings";
     private SQLServerDataSource dataSource;
 
     public DbTempCon() throws IOException {

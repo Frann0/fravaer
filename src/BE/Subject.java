@@ -61,14 +61,27 @@ public class Subject {
         return lectures;
     }
 
+    /**
+     * Gets a list of Students assigned to this subject
+     * @return a list of students assigned to this subject.
+     */
     public List<User> getStudents() {
         return students;
     }
 
+    /**
+     * Gets a list of teachers, teaching this subject.
+     * @return a list of teachers, teaching this subject.
+     */
     public List<User> getTeachers() {
         return teachers;
     }
 
+    /**
+     * TODO Er det her rigtigt forstået?
+     * Gets a set of dates which the Subject is being held on.
+     * @return a set of dates which the Subject is being held on.
+     */
     public Set<LocalDate> getDates(){
         return attendances;
     }

@@ -54,12 +54,12 @@ public interface IDbConnectionProvider {
     /**
      * Connect to the database.
      */
-    void connect();
+    Connection connect();
 
     /**
      * Reconnect to the database.
      */
-    void reconnect();
+    Connection reconnect();
 
     /**
      * Set the database name.
@@ -102,14 +102,14 @@ public interface IDbConnectionProvider {
     void loadSettingsFile(String path);
 
     /**
-     * Set the specified settings file.
+     * Set the specified database settings file.
      *
      * @param path
      */
     void setSettingsFile(String path);
 
     /**
-     * Get the path for the settings file.
+     * Get the path for the database settings file.
      *
      * @return
      */
