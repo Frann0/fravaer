@@ -1,9 +1,5 @@
 package GUI.MODEL;
 
-import BE.Class;
-
-import java.util.List;
-
 
 public class AttendanceModel {
     //AbsenceManager myAbsenceManager = new AbsenceManager();

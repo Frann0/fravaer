@@ -1,5 +1,4 @@
 package GUI.CONTROLLER;
-import BE.BarChartUtil;
 import BE.User;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -59,18 +58,14 @@ public class StudentDashboardController implements Initializable {
     }
 
     public void setUser(User user) {
+        /*
         System.out.println(user.getAttendance());
         this.user = user;
+         */
 
         //absence.addAll(user.getAttendance());
         //tblAbsence.setItems(absence);
         //tblDate.setCellValueFactory(new PropertyValueFactory<>("lectureDate"));
         //tblSubject.setCellValueFactory(new PropertyValueFactory<>("subjectName"));
-    }
-
-    public void initValues() {
-        if (user != null) {
-            chartAbcence= BarChartUtil.getUserAbsence(user);
-        }
     }
 }

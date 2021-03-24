@@ -63,8 +63,8 @@ public class UserDAL {
     }
 
     public List<User> loadUsers() {
-
         List<User> allUsers = new ArrayList<>();
+/*
         Subject s1 = new Subject("ITO");
         Subject s2 = new Subject("SCO");
         Subject s3 = new Subject("DBOS");
@@ -114,6 +114,8 @@ public class UserDAL {
         t2.setId(6);
         allUsers.add(t2);
 
+
+ */
         return allUsers;
     }
 

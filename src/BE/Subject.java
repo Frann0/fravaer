@@ -5,14 +5,12 @@ import java.time.LocalDateTime;
 import java.util.*;
 
 public class Subject {
-    private String name;
     private int id;
+    private String name;
+    private List<User> students = new ArrayList<>();
     private List<User> teachers = new ArrayList<>();
-    private List<User> enrolledStudents = new ArrayList<>();
-    private Map<LocalDateTime, LocalDateTime> subjectTimes = new HashMap<>();
     private Set<LocalDate> attendances = new HashSet<>();
-
-    public Subject(){}
+    private Map<LocalDateTime, LocalDateTime> lectures = new HashMap<>();
 
     /**
      * The name of the subject
@@ -59,35 +57,34 @@ public class Subject {
      * and the last time being the late limiter.
      * @return A map of subject times
      */
-    public Map<LocalDateTime, LocalDateTime> getSubjectTimes() {
-        return subjectTimes;
+    public Map<LocalDateTime, LocalDateTime> getLectures() {
+        return lectures;
     }
 
-    public void addTeachers(User teacher) {
-        this.teachers.add(teacher);
+    public List<User> getStudents() {
+        return students;
     }
 
-    public void removeTeacher(User teacher){
-        this.teachers.remove(teacher);
+    public List<User> getTeachers() {
+        return teachers;
     }
 
     public Set<LocalDate> getDates(){
         return attendances;
     }
 
-    public void printSubjectTimes() {
-            subjectTimes.keySet().forEach((s) -> {
-                    System.out.printf("%s %d/%d-%d %02d:%02d:%02d - %02d:%02d:%02d - %s %n",
-                            s.getDayOfWeek(),s.getDayOfMonth(),
-                            s.getMonthValue(),
-                            s.getYear(),
-                            s.getHour(), s.getMinute(),
-                            s.getSecond(),
-                            subjectTimes.get(s).getHour(),
-                            subjectTimes.get(s).getMinute(),
-                            subjectTimes.get(s).getSecond(),
+    public void printSubjectLectures() {
+        List<LocalDateTime> dateTimes = new ArrayList<LocalDateTime>(lectures.keySet());
+        dateTimes.sort(Comparator.comparingInt((LocalDateTime localDateTime) -> localDateTime.getDayOfWeek().getValue()));
+            dateTimes.forEach((s) -> {
+                    System.out.printf("%-10s %02d:%02d - %02d:%02d  %-5s %n",
+                            s.getDayOfWeek(),
+                            s.getHour(),
+                            s.getMinute(),
+                            lectures.get(s).getHour(),
+                            lectures.get(s).getMinute(),
                             name);
             });
-        }
+    }
     }
 

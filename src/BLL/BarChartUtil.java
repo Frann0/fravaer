@@ -1,11 +1,12 @@
-package BE;
+package BLL;
 
+import BE.Student;
+import BE.Subject;
 import javafx.collections.FXCollections;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
-
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.Collection;
@@ -14,31 +15,31 @@ import java.util.List;
 public class BarChartUtil {
     static List<String> days = Arrays.asList("Monday", "Tuesday", "Wednesday", "Thursday", "Friday");
 
-    public static BarChart getUserAbsence(User user) {
-        return getBarchartFromCollection(user.getAbsence(), "Absence",user.toString() + "'s Absence","Absence");
+    public static BarChart getStudentAbsence(Student student) {
+        return getBarchartFromCollection(student.getAbsence(), "Absence",student.toString() + "'s Absence","Absence");
     }
 
-    public static BarChart getUserAttendance(User user) {
-        return getBarchartFromCollection(user.getAttendedDates(),"Attendance",user.toString() + "'s Attendance", user.toString());
+    public static BarChart getStudentAttendance(Student student) {
+        return getBarchartFromCollection(student.getAttendedDates(),"Attendance",student.toString() + "'s Attendance", student.toString());
     }
 
-    public static BarChart getUserAttendanceSubject(User user, Subject subject) {
-        return getBarchartFromCollection(user.getAttendedDates(subject),"Attendance subject", user.toString() + "'s attendance in " + subject.getName(), subject.getName());
+    public static BarChart getStudentAttendanceSubject(Student student, Subject subject) {
+        return getBarchartFromCollection(student.getAttendedDates(subject),"Attendance subject", student.toString() + "'s attendance in " + subject.getName(), subject.getName());
     }
 
-    public static BarChart getUserAbsenceSubject(User user, Subject subject) {
-        return getBarchartFromCollection(user.getAbsence(subject), "Absence", subject.getName() + "'s absence in " + subject.getName(), subject.getName());
+    public static BarChart getStudentAbsenceSubject(Student student, Subject subject) {
+        return getBarchartFromCollection(student.getAbsence(subject), "Absence", subject.getName() + "'s absence in " + subject.getName(), subject.getName());
     }
 
     public static BarChart getSubjectAttendance(Subject subject) {
         return getBarchartFromCollection(subject.getDates(), "subject Attendance", subject.getName(), subject.getName());
     }
 
-    public static BarChart getUserTotalAbsence(User user){
-        return getBarchartFromCollection(user.getAbsence(), "Absence",user.toString() + "'s absence", "Total Absence");
+    public static BarChart getStudentTotalAbsence(Student student){
+        return getBarchartFromCollection(student.getAbsence(), "Absence",student.toString() + "'s absence", "Total Absence");
     }
 
-    public static BarChart getBarchartFromCollection(Collection<LocalDate> source, String label,String title, String seriesName) {
+    private static BarChart getBarchartFromCollection(Collection<LocalDate> source, String label,String title, String seriesName) {
         CategoryAxis xAxis = new CategoryAxis();
         xAxis.setCategories(FXCollections.<String>observableList(days));
         NumberAxis yAxis = new NumberAxis();
@@ -52,6 +53,7 @@ public class BarChartUtil {
         for (int i = 0; i <= 4; i++) {
             series.getData().add(new XYChart.Data<>(days.get(i), dayFreq[i]));
         }
+        barChart.getData().add(series);
 
         return barChart;
     }
