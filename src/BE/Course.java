@@ -48,33 +48,62 @@ public class Course {
         });
     }
 
+    /**
+     * Gets the courses ID
+     * @return the id of the course
+     */
     public int getId() {
         return id;
     }
 
+    /**
+     * Sets the courses ID.
+     * @param id the specified ID.
+     */
     public void setId(int id) {
         this.id = id;
     }
 
+    /**
+     * Sets the name of the course.
+     * @param name the given name.
+     */
     public void setName(String name) {
         this.name = name;
     }
 
+    /**
+     * Gets the current name of the course.
+     * @return the name of the course
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Gets a list of Students attending the course.
+     * @return a list of students attending the course.
+     */
     public List<Student> getStudents() {
         return students;
     }
 
+    /**
+     * Gets the teachers assigned to this course.
+     * @return a list of teachers assigned to this course.
+     */
     public List<User> getTeachers() {
         return teachers;
     }
 
+    /**
+     * Gets the subjects assigned to this course.
+     * @return a list of subjects assigned to this course.
+     */
     public List<Subject> getSubjects() {
         return subjects;
     }
+
 
     public void printCourseLectures() {
         subjects.forEach(s -> {

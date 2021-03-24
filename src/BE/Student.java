@@ -29,6 +29,10 @@ public class Student extends User{
         return attendedDates;
     }
 
+    /**
+     * Adds a date to the list of attended dates.
+     * @param localDate the date to add.
+     */
     public void addDate(LocalDate localDate){
         attendedDates.add(localDate);
     }
@@ -42,6 +46,11 @@ public class Student extends User{
         return attendance;
     }
 
+    /**
+     * Gets the list of absent days
+     *
+     * @return the list of absent days
+     */
     public List<LocalDate> getAbsence() {
         List<LocalDate> absence = new ArrayList<>();
         getAllSubjects().forEach(s -> {
@@ -57,6 +66,11 @@ public class Student extends User{
         return absence;
     }
 
+    /**
+     * Gets a list of absent days in a specific subject
+     * @param subject the subject which the user is absent in.
+     * @return A list of absent days where the user is absent in the subject.
+     */
     public List<LocalDate> getAbsence(Subject subject) {
         List<LocalDate> absence = new ArrayList<>();
         if (!attendedDates.containsAll(subject.getDates())) {
@@ -70,6 +84,11 @@ public class Student extends User{
         return absence;
     }
 
+    /**
+     * Gets a list of attended days in a specific subject.
+     * @param subject the subject where the user has attended.
+     * @return a list of dates where the user was attending that specific subject.
+     */
     public List<LocalDate> getAttendedDates(Subject subject) {
         List<LocalDate> subjectDates = new ArrayList<>(subject.getDates());
         subject.getDates().forEach(d -> {
