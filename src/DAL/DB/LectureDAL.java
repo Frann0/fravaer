@@ -1,13 +1,11 @@
 package DAL.DB;
 
 
-import DAL.DB.DbTempCon;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 /**
@@ -15,7 +13,7 @@ import java.time.LocalTime;
  * Version: 1.0
  */
 public class LectureDAL {
-    private DbTempCon dbCon = new DbTempCon();
+    private DbConnectionHandler dbCon = DbConnectionHandler.getInstance();
 
     public LectureDAL() throws IOException {
     }

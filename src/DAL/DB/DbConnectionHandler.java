@@ -35,14 +35,10 @@ public class DbConnectionHandler {
 
             // Get the database type and determine which of the connection providers to use.
             databaseType = DatabaseType.valueOf(databaseProperties.getProperty("DatabaseType"));
-            switch (databaseType) {
-                case MySQL:
-                    database = new DbMysqlConnectionProvider();
-                    break;
 
-                case MSSQL:
-                    database = new DbMSSQLConnectionProvider();
-                    break;
+            switch (databaseType) {
+                case MySQL -> database = new DbMysqlConnectionProvider();
+                case MSSQL -> database = new DbMSSQLConnectionProvider();
             }
 
             // Now load database settings.
@@ -71,6 +67,7 @@ public class DbConnectionHandler {
 
     /**
      * Get the current active singleton instance. If null a new instance will be created.
+     *
      * @return Returns the current active singleton instance.
      */
     public static DbConnectionHandler getInstance() {
