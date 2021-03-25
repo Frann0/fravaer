@@ -14,21 +14,22 @@ import java.sql.SQLException;
  */
 
 public class UserDAL {
-    private DbTempCon dbCon = new DbTempCon();
+    private DbConnectionHandler dbCon = DbConnectionHandler.getInstance();
 
     public UserDAL() throws IOException {
     }
 
     /**
      * Add user to database
+     *
      * @param firstName
      * @param lastName
      * @param password
-     * @param role  0 = teacher , 1 = student
+     * @param role      0 = teacher , 1 = student
      */
-    public void addUser(String firstName, String lastName, String password, int role){
+    public void addUser(String firstName, String lastName, String password, int role) {
 
-        try(Connection con = dbCon.getConnection()){
+        try (Connection con = dbCon.getConnection()) {
 
             PreparedStatement pSql = con.prepareStatement("INSERT INTO [User] VALUES(?,?,?,?)");
             pSql.setString(1, firstName);
@@ -47,7 +48,7 @@ public class UserDAL {
     }
 
 
-    public void example(){
+    public void example() {
 
 
     }
@@ -56,8 +57,6 @@ public class UserDAL {
         UserDAL userDAL = new UserDAL();
 
         //userDAL.addUser("Jeppe", "Led", "test", 0);
-
-
 
 
     }

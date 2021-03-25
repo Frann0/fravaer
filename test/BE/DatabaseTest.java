@@ -14,14 +14,26 @@ public class DatabaseTest {
 
     @DisplayName("Connection Test")
     @Test
-    public void ConnectionTest() throws SQLException {
+    public void connectionTest() throws SQLException {
         var db = DbConnectionHandler.getInstance();
         Assertions.assertNotNull(db.getConnection());
     }
 
     @DisplayName("Query Test")
     @Test
-    public void QueryTest() {
+    public void queryTest() throws SQLException {
+        var db = DbConnectionHandler.getInstance();
+        var sql = "SELECT * FROM playlist WHERE playlist_name = ?;";
+
+        var con = db.getConnection();
+        PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+        st.setString(1, "Test");
+        st.executeQuery();
+    }
+
+    @DisplayName("Wrong Query Test")
+    @Test
+    public void wrongQueryTest() {
         var db = DbConnectionHandler.getInstance();
         var sql = "SELECT * FROM playlist WHERE playlist_name = ?;";
 
