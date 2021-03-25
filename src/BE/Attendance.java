@@ -6,36 +6,52 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Attendance {
     private Student student;
+    /**
+     * Some buffer before and after each lecture where the student has the extra buffer to attend.
+     */
+    private static final int minuteBuffer = 15;
 
     public Attendance(Student student) {
         this.student = student;
     }
 
     /**
-     * Attempts to attend at the current date
-     *
-     * @throws Exception if the date is invalid
+     * Loops through the student's subjects, and makes sure that the student has lectures at the given time
+     * @return whether or not the attendance attempt was successful
      */
     public boolean attendDate() {
+        //Atomic boolean because variables in for each loops have to be effectively final
         AtomicBoolean dateCheck = new AtomicBoolean(false);
+        //Get students subjects and loop through them
         student.getSubjects().forEach(s -> {
-            s.getLectures().forEach((t, t2) -> {
-                        if (dateCheck(LocalDateTime.now(), s, t, t2))
+            //Check the lectures in the subjects for matches on the current time
+            //Since the lectures are maps we can use lambda on the keyset and the resultset which it does automatically
+            s.getLectures().forEach((startTime, endTime) -> {
+                        if (dateCheck(LocalDateTime.now(), s, startTime.minusMinutes(minuteBuffer), endTime.plusMinutes(minuteBuffer))){
+                            //Flips the boolean if the attendance was valid
                             dateCheck.set(true);
+                        }
                     }
             );
         });
+        //Returns whether or not the check was successful
         return dateCheck.get();
     }
 
     /**
+     *
      * Attends the given subject at the given date
+     * Basically does the same as the above, but instead of taking the current time, it attends at the
+     * @param localDateTime
+     * and
+     * @return s whether or not the attempt was successful
+     * if you want to see line by line check above
      */
     public boolean attendDate(LocalDateTime localDateTime) {
         AtomicBoolean dateCheck = new AtomicBoolean(false);
         student.getSubjects().forEach(s ->
-                s.getLectures().forEach((t, t2) ->{
-                        if(dateCheck(localDateTime, s, t, t2))
+                s.getLectures().forEach((startTime, endTime) ->{
+                        if(dateCheck(localDateTime, s, startTime.minusMinutes(minuteBuffer), endTime.plusMinutes(minuteBuffer)))
                             dateCheck.set(true);
                 }
                 ));
@@ -43,47 +59,54 @@ public class Attendance {
     }
 
     /**
-     * Checks the date is within the subject
-     *
-     * @param localDateTime the attended date
-     * @param subject       the subject
-     * @param t             early time limit
-     * @param t2            late time limit
+     * Checks that the dateTimeToCheck is within the time limit of the lecture. If the dateTimeToCheck is valid it returns true, otherwise it returns false
+     * If the date time is valid it will also attend the date.
+     * @param dateTimeToCheck   the time you want to make sure is within a lecture
+     * @param subject           the subject you are checking, and attending given the dateTimeToCheck is valid
+     * @param startTime         the startTime of the lecture
+     * @param endTime           the endTime of the lecture
+     * @return                  If the dateTimeToCheck is valid
      */
-    private boolean dateCheck(LocalDateTime localDateTime, Subject subject, LocalDateTime t, LocalDateTime t2) {
-        //Checks attendance day
-        if (localDateTime.getDayOfWeek() == t.getDayOfWeek() || localDateTime.getDayOfWeek() == t2.getDayOfWeek()) {
-            //Checks if attendance is within the right hour
-            if (localDateTime.getHour() > t.getHour() || localDateTime.getHour() < t2.getHour()) {
-                attend(subject, localDateTime.toLocalDate());
+    private boolean dateCheck(LocalDateTime dateTimeToCheck, Subject subject, LocalDateTime startTime, LocalDateTime endTime) {
+        //Checks that the dateTimeToCheck is within the day constraints of the lecture
+        if (dateTimeToCheck.getDayOfWeek() == startTime.getDayOfWeek() || dateTimeToCheck.getDayOfWeek() == endTime.getDayOfWeek()) {
+            //Checks if the dateTimeToCheck is within the hourly constraint of the lecture
+            if (dateTimeToCheck.getHour() > startTime.getHour() && dateTimeToCheck.getHour() < endTime.getHour()) {
+                //The attendance is valid so we attend and return true!
+                attend(subject, dateTimeToCheck.toLocalDate());
                 return true;
             }
-            if (localDateTime.getHour() == t.getHour()) {
-                //Checks if it is within the class given it is on the hour limit
-                if (localDateTime.getMinute() > t.getMinute()) {
-                    attend(subject, localDateTime.toLocalDate());
+            //Checks if the of the dateTimeToCheck hour is equal to the start time, if it is we need to check whether or not it is within the minute limit
+            if (dateTimeToCheck.getHour() == startTime.getHour()) {
+                //Checks if the dateTimeToCheck is within the minute limit of the startTime
+                if (dateTimeToCheck.getMinute() > startTime.getMinute()) {
+                    //The attendance is valid so we attend and return true!
+                    attend(subject, dateTimeToCheck.toLocalDate());
                     return true;
                 }
             }
-            if (localDateTime.getHour() == t2.getHour()) {
-                //Checks if it is within the class given it is on the hour limit
-                if (localDateTime.getMinute() < t2.getMinute()) {
-                    attend(subject, localDateTime.toLocalDate());
+            //Checks if the of the dateTimeToCheck hour is equal to the end time, if it is we need to check whether or not it is within the minute limit
+            if (dateTimeToCheck.getHour() == endTime.getHour()) {
+                //Checks if the dateTimeToCheck is within the minute limit of the endTime
+                if (dateTimeToCheck.getMinute() < Math.max(startTime.getMinute(),endTime.getMinute())) {
+                    //The attendance is valid so we attend and return true!
+                    attend(subject, dateTimeToCheck.toLocalDate());
                     return true;
                 }
             }
         }
+        //The dateTimeToCheck is not within the time constraints, så we return false.
         return false;
     }
 
     /**
-     * Attends a date
+     * Adds a dateToAttend to the subject's attended dates and Adds a dateToAttend to the student's attended dates.
      *
-     * @param subject the subject
-     * @param d       the date you attend
+     * @param subject the subject you attend
+     * @param dateToAttend       the dateToAttend you attend
      */
-    private void attend(Subject subject, LocalDate d) {
-        subject.getDates().add(d);
-        student.getAttendedDates().add(d);
+    private void attend(Subject subject, LocalDate dateToAttend) {
+        subject.getDates().add(dateToAttend);
+        student.getAttendedDates().add(dateToAttend);
     }
 }
