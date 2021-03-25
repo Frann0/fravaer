@@ -3,6 +3,7 @@ package BE;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 
 class UserTest {
     Student s1 = new Student(0, UserRole.Student, "Dennis", "PC", "Dennis", "PC");
@@ -10,7 +11,7 @@ class UserTest {
     Subject subject2 = new Subject("subject");
     Subject subject3 = new Subject("subject");
 
-    Course course = new Course(0,"Course", new ArrayList<>(),new ArrayList<>());
+    Course course = new Course(0,"Course", new HashSet<>(),new HashSet<>());
 
     @Test
     void getSubjects() {
