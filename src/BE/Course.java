@@ -8,10 +8,10 @@ import java.util.concurrent.atomic.AtomicReference;
 public class Course {
     private int id;
     private String name;
-    private List<Student> students;
-    private List<User> teachers = new ArrayList<>();
+    private Set<Student> students;
+    private Set<User> teachers = new HashSet<User>();
     private Map<LocalDateTime, LocalDateTime> lectures = new HashMap<>();
-    private List<Subject> subjects;
+    private Set<Subject> subjects;
 
     /**
      * Constructor
@@ -20,7 +20,7 @@ public class Course {
      * @param students The students enrolled
      * @param subjects the subjects of the course
      */
-    public Course(String name, List<Student> students, List<Subject> subjects) {
+    public Course(String name, Set<Student> students, Set<Subject> subjects) {
         setName(name);
         this.students = students;
         this.subjects = subjects;
@@ -28,6 +28,7 @@ public class Course {
             teachers.addAll(s.getTeachers());
             s.getLectures().keySet().forEach(l -> lectures.put(l, s.getLectures().get(l)));
         });
+        addCourseToStudents(students);
     }
 
     /**
@@ -37,7 +38,7 @@ public class Course {
      * @param students The students enrolled
      * @param subjects the subjects of the course
      */
-    public Course(int id,String name, List<Student> students, List<Subject> subjects) {
+    public Course(int id,String name, Set<Student> students, Set<Subject> subjects) {
         this.id=id;
         setName(name);
         this.students = students;
@@ -46,6 +47,13 @@ public class Course {
             teachers.addAll(s.getTeachers());
             s.getLectures().keySet().forEach(l -> lectures.put(l, s.getLectures().get(l)));
         });
+
+        addCourseToStudents(students);
+    }
+
+    private void addCourseToStudents(Set<Student> students) {
+        if (!students.isEmpty())
+            students.forEach(s -> s.getCourses().add(this));
     }
 
     /**
@@ -84,7 +92,7 @@ public class Course {
      * Gets a list of Students attending the course.
      * @return a list of students attending the course.
      */
-    public List<Student> getStudents() {
+    public Set<Student> getStudents() {
         return students;
     }
 
@@ -92,7 +100,7 @@ public class Course {
      * Gets the teachers assigned to this course.
      * @return a list of teachers assigned to this course.
      */
-    public List<User> getTeachers() {
+    public Set<User> getTeachers() {
         return teachers;
     }
 
@@ -100,7 +108,7 @@ public class Course {
      * Gets the subjects assigned to this course.
      * @return a list of subjects assigned to this course.
      */
-    public List<Subject> getSubjects() {
+    public Set<Subject> getSubjects() {
         return subjects;
     }
 
