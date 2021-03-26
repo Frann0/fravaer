@@ -9,29 +9,41 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private List<Attendance> attendances;
+    private List<Subject> subjects;
 
     public User() {
     }
 
     public User(UserRole role, String username, String password, String firstName, String lastName) {
-        this.id = id;
         this.role = role;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.subjects = new ArrayList<>();
     }
 
-    public User(int id, UserRole role, String username, String password, String firstName, String lastName, List<Attendance> attendances) {
+    public User(int id, UserRole role, String username, String password, String firstName, String lastName) {
         this.id = id;
         this.role = role;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.attendances = attendances;
+        this.subjects = new ArrayList<>();
     }
+
+    public User(int id, UserRole role, String username, String password, String firstName, String lastName, List<Subject> subjects) {
+        this.id = id;
+        this.role = role;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.subjects = subjects;
+    }
+
+
 
     public int getId() {
         return id;
@@ -81,12 +93,12 @@ public class User {
         this.lastName = lastName;
     }
 
-    public List<Attendance> getAttendances() {
-        return attendances;
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
     }
 
-    public void setAttendances(List<Attendance> attendances) {
-        this.attendances = attendances;
+    public List<Subject> getSubjects() {
+        return subjects;
     }
 }
 
