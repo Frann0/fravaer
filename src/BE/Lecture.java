@@ -1,36 +1,51 @@
 package BE;
 
-import java.time.Duration;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Lecture {
-    private Subject subject;
-    private LocalDateTime date;
+    private int lectureId;
+    private String subjectName;
+    private LocalDateTime lectureDate;
     private Duration lectureDuration;
 
     public Lecture() {
     }
 
+    public Lecture(int lectureId, String subjectName, LocalDateTime lectureDate, Duration lectureDuration){
+        this.lectureId = lectureId;
+        this.subjectName = subjectName;
+        this.lectureDate = lectureDate;
+        this.lectureDuration = lectureDuration;
+    }
+
     public Lecture(LocalDateTime date) {
-        this.date = date;
+        this.lectureDate = date;
     }
 
-    public Lecture(Subject subject) {
-        this.subject = subject;
+    public Lecture(String subject) {
+        this.subjectName = subject;
     }
 
-    public Lecture(Subject subject, LocalDateTime date, Duration lectureDuration) {
-        this.subject = subject;
-        this.date = date;
-        this.lectureDuration=lectureDuration;
+    public Lecture(String subjectName, LocalDateTime date) {
+        this.subjectName = subjectName;
+        this.lectureDate = date;
     }
 
-    public Subject getSubject() {
-        return subject;
+    public int getLectureId() {
+        return lectureId;
     }
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setLectureId(int lectureId) {
+        this.lectureId = lectureId;
+    }
+
+    public String getSubjectName() {
+        return subjectName;
+    }
+
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
     }
 
     public LocalDateTime getDate() {
