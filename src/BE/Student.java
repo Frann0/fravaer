@@ -1,39 +1,26 @@
 package BE;
 
-<<<<<<< Updated upstream
-=======
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
->>>>>>> Stashed changes
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-<<<<<<< Updated upstream
 public class Student extends User{
-    private List<Attendance> attendance;
-=======
-public class Student extends User {
     List<Lecture> lectures = new ArrayList<>();
     List<Attendance> attendances = new ArrayList<>();
     private static final Duration REGISTRATION_BUFFER = Duration.ofMinutes(15);
->>>>>>> Stashed changes
 
     public Student() {
     }
 
     public Student(int id, UserRole role, String username, String password, String firstName, String lastName) {
         super(id, role, username, password, firstName, lastName);
-        attendance = new ArrayList<>();
+        attendances = new ArrayList<>();
     }
 
-<<<<<<< Updated upstream
-    public Student(int id, UserRole role, String username, String password, String firstName, String lastName, List<Attendance> attendance) {
-        super(id, role, username, password, firstName, lastName);
-        this.attendance = attendance;
-=======
     public Student(int id, UserRole role, String username, String password, String firstName, String lastName, List<Attendance> attendances) {
         super(id, role, username, password, firstName, lastName);
         this.attendances=attendances;
@@ -105,6 +92,5 @@ public class Student extends User {
      */
     private void updateStudentAttendance(Lecture lecture) {
         getAttendances().add(new Attendance(lecture, true));
->>>>>>> Stashed changes
     }
 }
