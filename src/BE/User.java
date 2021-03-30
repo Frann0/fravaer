@@ -9,7 +9,7 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
-    private List<Subject> subjects;
+
 
     public User() {
     }
@@ -20,7 +20,7 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.subjects = new ArrayList<>();
+
     }
 
     public User(int id, UserRole role, String username, String password, String firstName, String lastName) {
@@ -30,7 +30,7 @@ public class User {
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.subjects = new ArrayList<>();
+
     }
 
 
@@ -83,12 +83,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public void setSubjects(List<Subject> subjects) {
-        this.subjects = subjects;
-    }
 
-    public List<Subject> getSubjects() {
-        return subjects;
-    }
 }
 
