@@ -1,7 +1,8 @@
 package BE;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class Lecture {
     private int lectureId;
@@ -49,11 +50,11 @@ public class Lecture {
     }
 
     public LocalDateTime getDate() {
-        return date;
+        return lectureDate;
     }
 
-    public void setDate(LocalDateTime date) {
-        this.date = date;
+    public void setDate(LocalDateTime lectureDate) {
+        this.lectureDate = lectureDate;
     }
 
     public Duration getLectureDuration() {
