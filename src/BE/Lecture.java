@@ -1,40 +1,66 @@
 package BE;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class Lecture {
-    private Subject subject;
-    private LocalDate date;
+    private int lectureId;
+    private String subjectName;
+    private LocalDate lectureDate;
+    private LocalTime lectureTime;
 
     public Lecture() {
     }
 
+    public Lecture(int lectureId, String subjectName, LocalDate lectureDate, LocalTime lectureTime){
+        this.lectureId = lectureId;
+        this.subjectName = subjectName;
+        this.lectureDate = lectureDate;
+        this.lectureTime = lectureTime;
+    }
+
     public Lecture(LocalDate date) {
-        this.date = date;
+        this.lectureDate = date;
     }
 
-    public Lecture(Subject subject) {
-        this.subject = subject;
+    public Lecture(String subject) {
+        this.subjectName = subject;
     }
 
-    public Lecture(Subject subject, LocalDate date) {
-        this.subject = subject;
-        this.date = date;
+    public Lecture(String subjectName, LocalDate date) {
+        this.subjectName = subjectName;
+        this.lectureDate = date;
     }
 
-    public Subject getSubject() {
-        return subject;
+    public int getLectureId() {
+        return lectureId;
     }
 
-    public void setSubject(Subject subject) {
-        this.subject = subject;
+    public void setLectureId(int lectureId) {
+        this.lectureId = lectureId;
     }
 
-    public LocalDate getDate() {
-        return date;
+    public String getSubjectName() {
+        return subjectName;
     }
 
-    public void setDate(LocalDate date) {
-        this.date = date;
+    public void setSubjectName(String subjectName) {
+        this.subjectName = subjectName;
+    }
+
+    public LocalDate getLectureDate() {
+        return lectureDate;
+    }
+
+    public void setLectureDate(LocalDate lectureDate) {
+        this.lectureDate = lectureDate;
+    }
+
+    public LocalTime getLectureTime() {
+        return lectureTime;
+    }
+
+    public void setLectureTime(LocalTime lectureTime) {
+        this.lectureTime = lectureTime;
     }
 }

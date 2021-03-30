@@ -19,15 +19,8 @@ public class UserDAL {
     public UserDAL() throws IOException {
     }
 
-    /**
-     * Add user to database
-     *
-     * @param firstName
-     * @param lastName
-     * @param password
-     * @param role      0 = teacher , 1 = student
-     */
-    public void addUser(String firstName, String lastName, String password, int role) {
+
+    public void addUser(String firstName, String lastName, String userName, String password, int role) {
 
         try (Connection con = dbCon.getConnection()) {
 
@@ -47,19 +40,26 @@ public class UserDAL {
 
     }
 
+    /**
+     * By default, all lectures are added to a student, with the attendance set to 0 (false).
+     * This method sets the attendance value to 1 (true), and uses userId and lectureId as identifiers.
+     * @param userId
+     * @param lectureId
+     */
+    public void addAttendanceRegistration(int userId, int lectureId) {
 
-    public void example() {
+        try(Connection con = dbCon.getConnection()){
 
+            PreparedStatement pSql = con.prepareStatement("UPDATE Attendance SET Attended=? WHERE UserId=? AND LectureId=?");
+            pSql.setInt(1,1);
+            pSql.setInt(2,userId);
+            pSql.setInt(3, lectureId);
+            pSql.execute();
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
     }
-
-    public static void main(String[] args) throws IOException {
-        UserDAL userDAL = new UserDAL();
-
-        //userDAL.addUser("Jeppe", "Led", "test", 0);
-
-
-    }
-
 
 }
