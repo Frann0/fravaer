@@ -1,11 +1,13 @@
 package DAL.DB;
 
+import BE.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 
 
 /**
@@ -19,7 +21,14 @@ public class UserDAL {
     public UserDAL() throws IOException {
     }
 
-
+    /**
+     * Add user to database (id is generated and assigned by the database)
+     * @param firstName
+     * @param lastName
+     * @param userName
+     * @param password
+     * @param role
+     */
     public void addUser(String firstName, String lastName, String userName, String password, int role) {
 
         try (Connection con = dbCon.getConnection()) {
@@ -61,5 +70,7 @@ public class UserDAL {
         }
 
     }
+
+    
 
 }
