@@ -37,5 +37,6 @@ public class Subject {
     public void setUsers(List<User> users) {
         this.users = users;
     }
+
 }
 

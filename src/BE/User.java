@@ -33,16 +33,6 @@ public class User {
         this.subjects = new ArrayList<>();
     }
 
-    public User(int id, UserRole role, String username, String password, String firstName, String lastName, List<Subject> subjects) {
-        this.id = id;
-        this.role = role;
-        this.username = username;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.subjects = subjects;
-    }
-
 
 
     public int getId() {
