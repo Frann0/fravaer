@@ -1,15 +1,17 @@
 package BE;
 
-import java.time.LocalDate;
+import java.time.Duration;
+import java.time.LocalDateTime;
 
 public class Lecture {
     private Subject subject;
-    private LocalDate date;
+    private LocalDateTime date;
+    private Duration lectureDuration;
 
     public Lecture() {
     }
 
-    public Lecture(LocalDate date) {
+    public Lecture(LocalDateTime date) {
         this.date = date;
     }
 
@@ -17,9 +19,10 @@ public class Lecture {
         this.subject = subject;
     }
 
-    public Lecture(Subject subject, LocalDate date) {
+    public Lecture(Subject subject, LocalDateTime date, Duration lectureDuration) {
         this.subject = subject;
         this.date = date;
+        this.lectureDuration=lectureDuration;
     }
 
     public Subject getSubject() {
@@ -30,11 +33,19 @@ public class Lecture {
         this.subject = subject;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
+    }
+
+    public Duration getLectureDuration() {
+        return lectureDuration;
+    }
+
+    public void setLectureDuration(Duration lectureDuration) {
+        this.lectureDuration = lectureDuration;
     }
 }

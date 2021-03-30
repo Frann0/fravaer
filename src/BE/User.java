@@ -9,7 +9,10 @@ public class User {
     private String password;
     private String firstName;
     private String lastName;
+<<<<<<< Updated upstream
     private List<Subject> subjects;
+=======
+>>>>>>> Stashed changes
 
     public User() {
     }
@@ -33,14 +36,21 @@ public class User {
         this.subjects = new ArrayList<>();
     }
 
+<<<<<<< Updated upstream
     public User(int id, UserRole role, String username, String password, String firstName, String lastName, List<Subject> subjects) {
+=======
+    public User(int id, UserRole role, String username, String password, String firstName, String lastName) {
+>>>>>>> Stashed changes
         this.id = id;
         this.role = role;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
+<<<<<<< Updated upstream
         this.subjects = subjects;
+=======
+>>>>>>> Stashed changes
     }
 
 
@@ -93,6 +103,7 @@ public class User {
         this.lastName = lastName;
     }
 
+<<<<<<< Updated upstream
     public void setSubjects(List<Subject> subjects) {
         this.subjects = subjects;
     }
@@ -100,5 +111,7 @@ public class User {
     public List<Subject> getSubjects() {
         return subjects;
     }
+=======
+>>>>>>> Stashed changes
 }
 
