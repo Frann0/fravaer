@@ -1,6 +1,6 @@
 # MySQL
 # MSSQL
-DatabaseType=MySQL
+DatabaseType=MSSQL
 Server=10.176.111.31
 Database=Attendance
 User=CSe20A_23

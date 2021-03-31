@@ -1,6 +1,7 @@
 package BE;
 
 import DAL.DB.DbConnectionHandler;
+import com.microsoft.sqlserver.jdbc.SQLServerException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,11 +24,11 @@ public class DatabaseTest {
     @Test
     public void queryTest() throws SQLException {
         var db = DbConnectionHandler.getInstance();
-        var sql = "SELECT * FROM playlist WHERE playlist_name = ?;";
+        var sql = "SELECT * FROM Attendance WHERE Id = ?;";
 
         var con = db.getConnection();
         PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        st.setString(1, "Test");
+        st.setInt(1, 1);
         st.executeQuery();
     }
 
@@ -38,7 +39,7 @@ public class DatabaseTest {
         var sql = "SELECT * FROM playlist WHERE playlist_name = ?;";
 
         // Act + assert
-        Exception connectionException = Assertions.assertThrows(SQLNonTransientConnectionException.class, () -> {
+        Exception connectionException = Assertions.assertThrows(SQLServerException.class, () -> {
             var con = db.getConnection();
             PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
             st.setString(1, "Test");
