@@ -23,11 +23,11 @@ public class DatabaseTest {
     @Test
     public void queryTest() throws SQLException {
         var db = DbConnectionHandler.getInstance();
-        var sql = "SELECT * FROM playlist WHERE playlist_name = ?;";
+        var sql = "SELECT * FROM Attendance WHERE Id = ?;";
 
         var con = db.getConnection();
         PreparedStatement st = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-        st.setString(1, "Test");
+        st.setInt(1, 1);
         st.executeQuery();
     }
 
