@@ -66,7 +66,7 @@ public class DbMSSQLConnectionProvider implements DAL.DB.IDbConnectionProvider {
     @Override
     public Connection reconnect() {
         try {
-            if (getConnection() == null || getConnection() != null && getConnection().isClosed())
+            if (ds == null || ds.getConnection() != null && ds.getConnection().isClosed())
                 return connect();
             return ds.getConnection();
         } catch (SQLException throwables) {
