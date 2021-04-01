@@ -7,6 +7,7 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableView;
@@ -101,7 +102,11 @@ public class DashboardController implements Initializable {
         FXMLLoader fxmlLoader = new FXMLLoader();
         fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/PopUpView.fxml"));
 
-        Scene scene = new Scene(fxmlLoader.load());
+        Parent root = (Parent) fxmlLoader.load();
+        PopUpController popUpController = fxmlLoader.getController();
+
+        popUpController.setUser(currentUser);
+        Scene scene = new Scene(root);
 
         scene.setOnMousePressed(new EventHandler<MouseEvent>() {
             @Override
@@ -127,6 +132,8 @@ public class DashboardController implements Initializable {
         scene.setOnMouseReleased((event) -> {
             stage.setOpacity(1.0f);
         });
+
+
 
         stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
