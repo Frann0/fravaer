@@ -1,5 +1,7 @@
 package BE;
 
+import BLL.AttendanceManager;
+
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -8,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class Student extends User{
+public class Student extends User {
     List<Lecture> lectures = new ArrayList<>();
     List<Attendance> attendances = new ArrayList<>();
     private static final Duration REGISTRATION_BUFFER = Duration.ofMinutes(15);
@@ -23,12 +25,12 @@ public class Student extends User{
 
     public Student(int id, UserRole role, String username, String password, String firstName, String lastName, List<Attendance> attendances) {
         super(id, role, username, password, firstName, lastName);
-        this.attendances=attendances;
+        this.attendances = attendances;
     }
 
     public Student(int id, UserRole role, String username, String password, String firstName, String lastName, List<Attendance> attendances, List<Lecture> lectures) {
         super(id, role, username, password, firstName, lastName);
-        this.attendances=attendances;
+        this.attendances = attendances;
         this.lectures = lectures;
     }
 
@@ -51,6 +53,7 @@ public class Student extends User{
 
     /**
      * Tries to register attendance at the given date, and checks that the registration is within the users lectures
+     *
      * @param registration the time you want to register
      * @return If the registration was valid or not
      */
@@ -66,31 +69,21 @@ public class Student extends User{
         AtomicBoolean isValid = new AtomicBoolean(false);
 
         //Loops through the lectures
-        this.getLectures().forEach(lecture -> {
+        for (Lecture lecture : this.getLectures()) {
             if (
-                    //Checks the registration date is the same as the lecture date
+                //Checks the registration date is the same as the lecture date
                     lecture.getDate().toLocalDate().equals(registrationDate) &&
 
-                    //Checks the registration is within the lecture (minus the REGISTRATION_BUFFER)
-                    registrationTime.isAfter(lecture.getDate().toLocalTime().minus(REGISTRATION_BUFFER)) &&
+                            //Checks the registration is within the lecture (minus the REGISTRATION_BUFFER)
+                            registrationTime.isAfter(lecture.getDate().toLocalTime().minus(REGISTRATION_BUFFER)) &&
 
-                    //Checks the registration is within the lecture (plus the REGISTRATION_BUFFER)
-                    registrationTime.isBefore(LocalTime.from(lecture.getDate().plus(lecture.getLectureDuration()).plus(REGISTRATION_BUFFER)))
-            ){
+                            //Checks the registration is within the lecture (plus the REGISTRATION_BUFFER)
+                            registrationTime.isBefore(LocalTime.from(lecture.getDate().plus(lecture.getLectureDuration()).plus(REGISTRATION_BUFFER)))
+            ) {
                 isValid.set(true);
-                updateStudentAttendance(lecture);
-
+                AttendanceManager.updateStudentAttendance(this, lecture);
             }
-        });
+        }
         return isValid.get();
-    }
-
-    // TODO: 29-03-2021 make update student attendance also update db
-    /**
-     * Updates the users attendance for the given class
-     * @param lecture the lecture the student attends
-     */
-    private void updateStudentAttendance(Lecture lecture) {
-        getAttendances().add(new Attendance(lecture, true));
     }
 }

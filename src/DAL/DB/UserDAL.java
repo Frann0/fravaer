@@ -18,7 +18,7 @@ import java.util.List;
 public class UserDAL {
     private DbConnectionHandler dbCon = DbConnectionHandler.getInstance();
 
-    public UserDAL() throws IOException {
+    public UserDAL() {
     }
 
     /**
