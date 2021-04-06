@@ -53,9 +53,9 @@ public class Controller {
 
     public void login() throws IOException {
         LoginModel loginModel = new LoginModel();
-        Student student = loginModel.attemptLogin(txtUsername.getText(),txtPassword.getText());
+        User user = loginModel.attemptLogin(txtUsername.getText(),txtPassword.getText());
 
-        if (student != null) {
+        if (user != null) {
             Stage root1 = (Stage) root.getScene().getWindow();
 
             Stage stage = new Stage();
@@ -96,9 +96,9 @@ public class Controller {
             });
 
             DashboardController controller = fxmlLoader.getController();
-            controller.setUser(student);
-            controller.setName(student.getFirstName());
-            if (student.getRole() == UserRole.Admin){
+            controller.setUser(user);
+            controller.setName(user.getFirstName());
+            if (user.getRole() == UserRole.Admin){
                 controller.setIsTeacher();
             }
             root1.close();

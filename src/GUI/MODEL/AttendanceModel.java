@@ -1,28 +1,19 @@
 package GUI.MODEL;
 
-
 import BE.Student;
-import BE.User;
-import BLL.LoginManager;
 import DAL.DB.UserDAL;
-
-import java.util.List;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 
 public class AttendanceModel {
     UserDAL userDAL = new UserDAL();
-    private List<Student> students = userDAL.getStudents();
-    private List<Student> debugStudents = LoginManager.getDebugStudents();
-    private Student student;
 
-
-    //@TODO remember to change debugStudents to students
-    public boolean registerAttendance(User user, LocalDateTime date){
-        debugStudents.forEach(student -> {
-            if(student.getId()==user.getId())
-                this.student=student;
-        });
+    /**
+     * Registers attendance for the given student at the given date
+     * @param student the student
+     * @param date the date you want to register
+     * @return if the attempt to register attendance was successful
+     */
+    public boolean registerAttendance(Student student, LocalDateTime date){
         if(student!=null){
             student.registerAttendance(date);
             return true;
