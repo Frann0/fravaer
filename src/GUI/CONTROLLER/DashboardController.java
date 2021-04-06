@@ -48,7 +48,7 @@ public class DashboardController implements Initializable {
     private double xOffset = 0;
     private double yOffset = 0;
 
-    public void setUser(Student u){
+    public void setUser(User u){
         currentUser = u;
 
         FXMLLoader load = new FXMLLoader();
@@ -106,7 +106,6 @@ public class DashboardController implements Initializable {
         Parent root = (Parent) fxmlLoader.load();
         PopUpController popUpController = fxmlLoader.getController();
 
-        popUpController.setUser(currentUser);
         Scene scene = new Scene(root);
 
         scene.setOnMousePressed(new EventHandler<MouseEvent>() {

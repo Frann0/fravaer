@@ -42,7 +42,6 @@ public class Student extends User {
         this.lectures = lectures;
     }
 
-
     public List<Attendance> getAttendances() {
         return attendances;
     }
@@ -81,7 +80,7 @@ public class Student extends User {
                             registrationTime.isBefore(LocalTime.from(lecture.getDate().plus(lecture.getLectureDuration()).plus(REGISTRATION_BUFFER)))
             ) {
                 isValid.set(true);
-                AttendanceManager.updateStudentAttendance(this, lecture);
+                AttendanceManager.updateStudentAttendance(this, lecture, true);
             }
         }
         return isValid.get();
