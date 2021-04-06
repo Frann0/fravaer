@@ -1,5 +1,6 @@
 package GUI.CONTROLLER;
 
+import BE.Student;
 import BE.User;
 import GUI.FxmlLoader;
 import com.jfoenix.controls.JFXButton;
@@ -47,7 +48,7 @@ public class DashboardController implements Initializable {
     private double xOffset = 0;
     private double yOffset = 0;
 
-    public void setUser(User u){
+    public void setUser(Student u){
         currentUser = u;
 
         FXMLLoader load = new FXMLLoader();

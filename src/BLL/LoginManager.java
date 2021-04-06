@@ -49,7 +49,7 @@ public class LoginManager {
         debugUsers.add(new User(UserRole.Admin, "Jeppe","test","Jeppe","Led"));
         debugUsers.addAll(debugStudents);
 
-        for (User u : debugUsers){
+        for (Student u : debugUsers){
             if (username.equalsIgnoreCase(u.getUsername()) && password.contains(u.getPassword())){
                 return u;
             }

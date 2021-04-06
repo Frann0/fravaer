@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 public class PopUpController {
     @FXML
     private AnchorPane root;
-    private User user;
+    private Student student;
 
 
     public void handleYes(){
