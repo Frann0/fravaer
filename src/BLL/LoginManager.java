@@ -1,5 +1,6 @@
 package BLL;
 
+import BE.Student;
 import BE.User;
 import BE.UserRole;
 import DAL.UserDAL;
@@ -31,12 +32,12 @@ public class LoginManager {
      * @param password
      * @return
      */
-    public User debugAttemptLogin(String username, String password){
-        List<User> debugUsers = new ArrayList<>();
-        debugUsers.add(new User(UserRole.Student, "Mikeh","test","Mike","Hovedskov"));
-        debugUsers.add(new User(UserRole.Admin, "Jeppe","test","Jeppe","Led"));
+    public Student debugAttemptLogin(String username, String password){
+        List<Student> debugUsers = new ArrayList<>();
+        debugUsers.add(new Student(0,UserRole.Student, "Mikeh","test","Mike","Hovedskov"));
+        debugUsers.add(new Student(1,UserRole.Admin, "Jeppe","test","Jeppe","Led"));
 
-        for (User u : debugUsers){
+        for (Student u : debugUsers){
             if (username.equalsIgnoreCase(u.getUsername()) && password.contains(u.getPassword())){
                 return u;
             }

@@ -1,5 +1,6 @@
 package GUI.CONTROLLER;
 
+import BE.Student;
 import BE.User;
 import BE.UserRole;
 import GUI.MODEL.LoginModel;
@@ -53,9 +54,9 @@ public class Controller {
 
     public void login() throws IOException {
         LoginModel loginModel = new LoginModel();
-        User user = loginModel.attemptLogin(txtUsername.getText(),txtPassword.getText());
+        Student student = loginModel.attemptLogin(txtUsername.getText(),txtPassword.getText());
 
-        if (user != null) {
+        if (student != null) {
             Stage root1 = (Stage) root.getScene().getWindow();
 
             Stage stage = new Stage();
@@ -96,9 +97,9 @@ public class Controller {
             });
 
             DashboardController controller = fxmlLoader.getController();
-            controller.setUser(user);
-            controller.setName(user.getFirstName());
-            if (user.getRole() == UserRole.Admin){
+            controller.setUser(student);
+            controller.setName(student.getFirstName());
+            if (student.getRole() == UserRole.Admin){
                 controller.setIsTeacher();
             }
             root1.close();

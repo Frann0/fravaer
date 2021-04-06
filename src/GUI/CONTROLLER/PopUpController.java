@@ -1,5 +1,6 @@
 package GUI.CONTROLLER;
 
+import BE.Student;
 import BE.User;
 import GUI.MODEL.AttendanceModel;
 import javafx.fxml.FXML;
@@ -11,15 +12,15 @@ import java.time.LocalDateTime;
 public class PopUpController {
     @FXML
     private AnchorPane root;
-    private User user;
+    private Student student;
 
 
     public void handleYes(){
-        System.out.println("Registreret fravær for " + user.getUsername() + " : " + LocalDateTime.now());
+        System.out.println("Registreret fravær for " + student.getUsername() + " : " + LocalDateTime.now());
         Stage root1 = (Stage) root.getScene().getWindow();
 
         AttendanceModel attendanceModel = new AttendanceModel();
-        attendanceModel.registerAttendance(user,LocalDateTime.now());
+        attendanceModel.registerAttendance(student,LocalDateTime.now());
 
         root1.close();
     }
@@ -31,7 +32,7 @@ public class PopUpController {
         root1.close();
     }
 
-    public void setUser(User currentUser) {
-        user = currentUser;
+    public void setStudent(Student student) {
+        this.student = student;
     }
 }
