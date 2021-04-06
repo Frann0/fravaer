@@ -48,7 +48,6 @@ public class Controller {
     }
 
     public void maximize(MouseEvent mouseEvent) {
-
     }
 
     public void login() throws IOException {

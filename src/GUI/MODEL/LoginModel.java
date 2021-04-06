@@ -7,12 +7,6 @@ import java.util.List;
 
 public class LoginModel {
     LoginManager myLoginManager = new LoginManager();
-/*
-
-    public List<User> getAllUsers(){
-        return myLoginManager.getAllUsers();
-    }
- */
 
     /**
      * Attempt a login with the given credentials.

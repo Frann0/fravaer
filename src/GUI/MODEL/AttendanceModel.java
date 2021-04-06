@@ -1,24 +1,34 @@
 package GUI.MODEL;
 
 
+import BE.Student;
 import BE.User;
+import BLL.LoginManager;
+import DAL.DB.UserDAL;
 
+import java.util.List;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 public class AttendanceModel {
-    private User user;
-    private LocalDateTime date;
-    //AbsenceManager myAbsenceManager = new AbsenceManager();
+    UserDAL userDAL = new UserDAL();
+    private List<Student> students = userDAL.getStudents();
+    private List<Student> debugStudents = LoginManager.getDebugStudents();
+    private Student student;
 
-    public void registerAttendance(User u, LocalDateTime date){
-        user = u;
-        this.date = date;
-    }
-    /*public List<Class> getSubjectAttendance() {
-        return myAbsenceManager.getSubjectAttendance();
-    }
 
-     */
+    //@TODO remember to change debugStudents to students
+    public boolean registerAttendance(User user, LocalDateTime date){
+        debugStudents.forEach(student -> {
+            if(student.getId()==user.getId())
+                this.student=student;
+        });
+        if(student!=null){
+            student.registerAttendance(date);
+            return true;
+        }
+        return false;
+    }
 
 }
 

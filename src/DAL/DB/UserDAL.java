@@ -1,12 +1,15 @@
 package DAL.DB;
 
-import BE.User;
+import BE.*;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -17,12 +20,15 @@ import java.util.List;
 
 public class UserDAL {
     private DbConnectionHandler dbCon = DbConnectionHandler.getInstance();
+    private List<Student> students = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
     public UserDAL() {
     }
 
     /**
      * Add user to database (id is generated and assigned by the database)
+     *
      * @param firstName
      * @param lastName
      * @param userName
@@ -52,16 +58,17 @@ public class UserDAL {
     /**
      * By default, all lectures are added to a student, with the attendance set to 0 (false).
      * This method sets the attendance value to 1 (true), and uses userId and lectureId as identifiers.
+     *
      * @param userId
      * @param lectureId
      */
-    public void addAttendanceRegistration(int userId, int lectureId) {
+    public void addAttendanceRegistration(int userId, int lectureId, boolean isAttended) {
 
-        try(Connection con = dbCon.getConnection()){
+        try (Connection con = dbCon.getConnection()) {
 
             PreparedStatement pSql = con.prepareStatement("UPDATE Attendance SET Attended=? WHERE UserId=? AND LectureId=?");
-            pSql.setInt(1,1);
-            pSql.setInt(2,userId);
+            pSql.setInt(1, isAttended?1:0);
+            pSql.setInt(2, userId);
             pSql.setInt(3, lectureId);
             pSql.execute();
 
@@ -71,6 +78,18 @@ public class UserDAL {
 
     }
 
-    
+    //TODO make this
+    public List<Student> getStudents() {
+        return students;
+    }
 
+    //TODO make this
+    public List<User> getUsers() {
+        return users;
+    }
+
+    //TODO make this
+    private void loadUsers(){
+
+    }
 }

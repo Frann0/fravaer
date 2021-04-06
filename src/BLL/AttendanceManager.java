@@ -14,10 +14,10 @@ public class AttendanceManager {
      * @param student the student you want to update
      * @param lecture the lecture you want the student to register to
      */
-    public static void updateStudentAttendance(Student student, Lecture lecture) {
+    public static void updateStudentAttendance(Student student, Lecture lecture, boolean isAttended) {
         UserDAL userDAL = new UserDAL();
-        student.getAttendances().add(new Attendance(lecture, true));
-        userDAL.addAttendanceRegistration(student.getId(),lecture.getLectureId());
+        student.getAttendances().add(new Attendance(lecture, isAttended));
+        userDAL.addAttendanceRegistration(student.getId(),lecture.getLectureId(), isAttended);
     }
 
 }
