@@ -9,7 +9,8 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CONTROLLER.TeacherDashboardController">
+
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="576.0" prefWidth="562.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.CONTROLLER.TeacherDashboardController">
    <children>
       <BarChart fx:id="chartOverallAbsence" layoutX="31.0" layoutY="14.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="200.0" prefWidth="500.0">
         <xAxis>
@@ -35,7 +36,7 @@
             <NumberAxis fx:id="individualSubNum" side="LEFT" />
          </yAxis>
       </BarChart>
-      <TableView fx:id="tblStudents" layoutX="72.0" layoutY="234.0" prefHeight="200.0" prefWidth="449.0">
+      <TableView fx:id="tblStudents" layoutX="72.0" layoutY="234.0" onMouseClicked="#SelectStudent" prefHeight="200.0" prefWidth="449.0">
         <columns>
           <TableColumn fx:id="tblFirstname" prefWidth="149.33325958251953" text="First name" />
           <TableColumn fx:id="tblLastname" prefWidth="200.66673278808594" text="Last name" />

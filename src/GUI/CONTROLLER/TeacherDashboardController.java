@@ -1,5 +1,6 @@
 package GUI.CONTROLLER;
 
+import BE.Student;
 import BE.User;
 import com.jfoenix.controls.JFXComboBox;
 import javafx.collections.FXCollections;
@@ -12,6 +13,7 @@ import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -30,13 +32,13 @@ public class TeacherDashboardController implements Initializable {
     @FXML
     private NumberAxis individualSubNum;
     @FXML
-    private TableView<User> tblStudents;
+    private TableView<Student> tblStudents;
     @FXML
-    private TableColumn<User, String> tblFirstname;
+    private TableColumn<Student, String> tblFirstname;
     @FXML
-    private TableColumn<User, String> tblLastname;
+    private TableColumn<Student, String> tblLastname;
     @FXML
-    private TableColumn<User, Integer> tblAbsence;
+    private TableColumn<Student, Integer> tblAbsence;
     @FXML
     private JFXComboBox dropSelector;
 
@@ -45,11 +47,16 @@ public class TeacherDashboardController implements Initializable {
     private XYChart.Series data = new XYChart.Series();
     //private UserDAL userDAL = new UserDAL();
 
-    private ObservableList<User> students = FXCollections.observableArrayList();
+    private ObservableList<Student> students = FXCollections.observableArrayList();
 
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+
+        //Hide initial student abcence charts
+        chartIndividualDay.setVisible(false);
+        chartIndividualSubject.setVisible(false);
+
         //
         //OVERALL SUBJECT ABSENCE
         //
@@ -127,5 +134,41 @@ public class TeacherDashboardController implements Initializable {
         this.user = user;
         //System.out.println(user.getClasses());
         //dropSelector.getItems().addAll(user.getClasses());
+    }
+
+    /**
+     * Selects a student, and shows the individual charts for that specific student.
+     */
+    public void SelectStudent() {
+        Student selectedStudent = tblStudents.getSelectionModel().getSelectedItem();
+        if (selectedStudent != null){
+
+            //TODO: set data to charts from model.
+            XYChart.Series days = new XYChart.Series<>();
+
+            days.setName("Individual day absence");
+            //Todo: Replace random data with data from model
+            days.getData().add(new XYChart.Data<>("Mon", (int)(Math.random() * 50 + 1)));
+            days.getData().add(new XYChart.Data<>("Tue", (int)(Math.random() * 50 + 1)));
+            days.getData().add(new XYChart.Data<>("Wed", (int)(Math.random() * 50 + 1)));
+            days.getData().add(new XYChart.Data<>("Thu", (int)(Math.random() * 50 + 1)));
+            days.getData().add(new XYChart.Data<>("Fri", (int)(Math.random() * 50 + 1)));
+
+
+            XYChart.Series classes = new XYChart.Series<>();
+
+            classes.setName("Individual class absence");
+            //Todo: Replace random data with data from model
+            classes.getData().add(new XYChart.Data<>("SCO", (int)(Math.random() * 50 + 1)));
+            classes.getData().add(new XYChart.Data<>("DBOS", (int)(Math.random() * 50 + 1)));
+            classes.getData().add(new XYChart.Data<>("SDE", (int)(Math.random() * 50 + 1)));
+            classes.getData().add(new XYChart.Data<>("ITO", (int)(Math.random() * 50 + 1)));
+
+            chartIndividualSubject.getData().addAll(classes);
+            chartIndividualDay.getData().addAll(days);
+
+            chartIndividualSubject.setVisible(true);
+            chartIndividualDay.setVisible(true);
+        }
     }
 }
