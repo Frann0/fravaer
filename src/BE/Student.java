@@ -1,18 +1,19 @@
 package BE;
 
 import BLL.AttendanceManager;
-
 import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.ArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 public class Student extends User {
-    List<Lecture> lectures = new ArrayList<>();
-    List<Attendance> attendances = new ArrayList<>();
+    private int attendance;
+    private int absence;
+    private List<Lecture> lectures = new ArrayList<>();
+    private List<Attendance> attendances = new ArrayList<>();
     private static final Duration REGISTRATION_BUFFER = Duration.ofMinutes(15);
 
     public Student() {
@@ -50,6 +51,22 @@ public class Student extends User {
         this.attendances = attendances;
     }
 
+    public int getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(int attendance) {
+        this.attendance = attendance;
+    }
+
+    public int getAbsence() {
+        return absence;
+    }
+
+    public void setAbsence(int absence) {
+        this.absence = absence;
+    }
+
     /**
      * Tries to register attendance at the given date, and checks that the registration is within the users lectures
      *
@@ -85,4 +102,6 @@ public class Student extends User {
         }
         return isValid.get();
     }
+
+
 }
