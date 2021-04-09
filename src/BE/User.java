@@ -11,6 +11,7 @@ public class User {
     private String firstName;
     private String lastName;
     private List<Attendance> attendance;
+    private List<Subject> subjects;
 
 
     public User(int role, String username, String password, String firstName, String lastName) {
@@ -29,7 +30,19 @@ public class User {
         setPassword(password);
         setFirstName(firstName);
         setLastName(lastName);
+
         attendance = new ArrayList<>();
+    }
+
+    public User(int id, int role, String username, String password, String firstName, String lastName, List<Attendance> attendance, List<Subject> subjects) {
+        this.id = id;
+        this.role = role;
+        this.username = username;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.attendance = attendance;
+        this.subjects = subjects;
     }
 
     public int getId() {
@@ -38,6 +51,14 @@ public class User {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public void setSubjects(List<Subject> subjects) {
+        this.subjects = subjects;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
     }
 
     public int getRole() {

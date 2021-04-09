@@ -1,11 +1,14 @@
 package DAL.DB;
 
+import BE.User;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -47,20 +50,23 @@ public class UserDAL {
     }
 
 
-    public void example(){
+    public List<User> getUsers()  {
+        List<User> allUsers = new ArrayList<>();
+
+        try(Connection con = dbCon.getConnection()){
+
+            // allUsers.addAll(getUsersFromDb());
+
+            // addSubject(); join class + subject, add subjectname to user
+
+            // 
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
 
+        return allUsers;
     }
-
-    public static void main(String[] args) throws IOException {
-        UserDAL userDAL = new UserDAL();
-
-        //userDAL.addUser("Jeppe", "Led", "test", 0);
-
-
-
-
-    }
-
 
 }
