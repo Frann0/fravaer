@@ -54,6 +54,10 @@ public class Student extends User {
         this.attendances = attendances;
     }
 
+    public void addAttendance(Lecture lecture){
+        this.attendances.add(new Attendance(lecture));
+    }
+
     /**
      * Tries to register attendance at the given date, and checks that the registration is within the users lectures
      *

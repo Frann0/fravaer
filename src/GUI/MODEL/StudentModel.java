@@ -8,11 +8,11 @@ import java.util.List;
 
 public class StudentModel {
 
-    public static List<String> subjects;
+    private List<String> subjects;
     private static StudentModel instance;
-    public static List<User> teachers;
-    public static List<Student> students;
-    public static List<Lecture> allLectures;
+    private List<User> teachers;
+    private List<Student> students;
+    private List<Lecture> allLectures;
 
     private static StudentManager studentManager;
 
@@ -40,15 +40,23 @@ public class StudentModel {
     }
 
 
-    private static void addAttendances() {
+    private void addAttendances() {
 
         int[][] attendances = studentManager.getAttendances();
+        System.out.println("attendances from db: " + attendances.length);
 
         for(int i = 0; i < attendances.length; i++){
+            System.out.println("attendance " + i);
             for(Student s : students){
+                for(Lecture l : allLectures){
+                    s.addAttendance(l);
+                }
+                System.out.println(s.getFirstName());
                 if(s.getId() == attendances[i][0]){
+                    System.out.println("id match");
                     for(Attendance a : s.getAttendances()){
                         if(a.getLecture().getLectureId() == attendances[i][1]){
+                            System.out.println("lecture match");
                             a.setAttended(attendances[i][2] == 1);
                         }
                     }
@@ -59,11 +67,11 @@ public class StudentModel {
 
     }
 
-    private static void setSubjects() {
+    private void setSubjects() {
         while(true){
             if(!allLectures.isEmpty()){
                 for(Lecture l : allLectures){
-                    if(subjects.contains(l.getSubjectName())){
+                    if(!subjects.contains(l.getSubjectName())){
                         subjects.add(l.getSubjectName());
                     }
                 }
@@ -73,7 +81,7 @@ public class StudentModel {
 
     }
 
-    private static void addLectures() {
+    private void addLectures() {
         List<Lecture> allLectures = studentManager.getLectures();
         setAllLectures(allLectures);
 
@@ -87,7 +95,7 @@ public class StudentModel {
         }
     }
 
-    private static void addUsers() {
+    private void addUsers() {
         List<User> allUsers = studentManager.getUsers();
         
         for(User u : allUsers){
@@ -99,35 +107,31 @@ public class StudentModel {
         }
     }
 
-    public static void setAllLectures(List<Lecture> allLectures) {
-        StudentModel.allLectures = allLectures;
+    public void setAllLectures(List<Lecture> allLectures) {
+        this.allLectures = allLectures;
     }
 
-    public static List<String> getSubjects() {
+    public List<String> getSubjects() {
         return subjects;
     }
 
-    public static void setSubjects(List<String> subjects) {
-        StudentModel.subjects = subjects;
-    }
-
-    public static List<User> getTeachers() {
+    public List<User> getTeachers() {
         return teachers;
     }
 
-    public static void setTeachers(List<User> teachers) {
-        StudentModel.teachers = teachers;
+    public void setTeachers(List<User> teachers) {
+        this.teachers = teachers;
     }
 
-    public static List<Student> getStudents() {
+    public List<Student> getStudents() {
         return students;
     }
 
-    public static void setStudents(List<Student> students) {
-        StudentModel.students = students;
+    public void setStudents(List<Student> students) {
+        this.students = students;
     }
 
-    public static List<Lecture> getAllLectures() {
+    public List<Lecture> getAllLectures() {
         return allLectures;
     }
 

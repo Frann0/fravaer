@@ -9,6 +9,7 @@ public class Attendance {
 
     public Attendance(Lecture lecture) {
         this.lecture = lecture;
+        this.attended = false;
     }
 
     public Attendance(Lecture lecture, boolean attended) {
