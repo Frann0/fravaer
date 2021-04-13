@@ -33,6 +33,12 @@ public class Lecture {
         this.lectureDate = date;
     }
 
+    public Lecture(int lectureId, String subjectName, LocalDateTime lecture) {
+        this.lectureId = lectureId;
+        this.subjectName = subjectName;
+        this.lectureDate = lecture;
+    }
+
     public int getLectureId() {
         return lectureId;
     }
@@ -63,5 +69,15 @@ public class Lecture {
 
     public void setLectureDuration(Duration lectureDuration) {
         this.lectureDuration = lectureDuration;
+    }
+
+    @Override
+    public String toString() {
+        return "Lecture{" +
+                "lectureId=" + lectureId +
+                ", subjectName='" + subjectName + '\'' +
+                ", lectureDate=" + lectureDate +
+                ", lectureDuration=" + lectureDuration +
+                '}';
     }
 }

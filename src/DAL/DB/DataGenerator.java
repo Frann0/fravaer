@@ -1,5 +1,7 @@
 package DAL.DB;
 
+import GUI.MODEL.StudentModel;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -12,9 +14,12 @@ public class DataGenerator {
 
     public static void main(String[] args) throws IOException {
         LectureDAL lectureDAL = new LectureDAL();
+        StudentModel studentModel = StudentModel.getInstance();
 
-        addLectures(lectureDAL);
-        setAttendance(lectureDAL);
+       
+
+
+
 
     }
 
