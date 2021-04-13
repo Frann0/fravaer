@@ -34,6 +34,10 @@ public class Student extends User {
         this.lectures = lectures;
     }
 
+    public Student(User u) {
+        super(u.getId(), u.getRole(), u.getUsername(), u.getPassword(), u.getFirstName(), u.getLastName());
+    }
+
     public List<Lecture> getLectures() {
         return lectures;
     }
