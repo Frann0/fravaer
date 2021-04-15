@@ -3,6 +3,7 @@ package BLL;
 import BE.Attendance;
 import BE.Lecture;
 import BE.Student;
+import BE.Subject;
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -26,8 +27,8 @@ public class DataGenerator {
      * @param students  the list of students you want to examine
      * @return A Series of XYChart of the attendance to subjects
      */
-    public XYChart.Series<String, Number> getAttendanceData(String className, List<Student> students) {
-        return getStringNumberSeries(className, students, subjectAttendance);
+    public static XYChart.Series<String, Number> getAttendanceData(String className, List<Student> students) {
+        return getStringNumberSeries(className,students,subjectAttendance);
     }
 
     /**
@@ -37,8 +38,8 @@ public class DataGenerator {
      * @param students  the list of students you want to examine
      * @return A Series of XYChart of the absence to subjects
      */
-    public XYChart.Series<String, Number> getAbsenceData(String className, List<Student> students) {
-        return getStringNumberSeries(className, students, subjectAbsence);
+    public static XYChart.Series<String, Number> getAbsenceData(String className, List<Student> students) {
+        return getStringNumberSeries(className,students,subjectAbsence);
     }
 
     /**
@@ -47,8 +48,8 @@ public class DataGenerator {
      * @param student the student you want to examine
      * @return a attendance data series split by subject
      */
-    public XYChart.Series<String, Number> getAttendanceData(Student student) {
-        return getStringNumberSeries(student.getFirstName() + " " + student.getLastName(), student, subjectAttendance);
+    public static XYChart.Series<String, Number> getAttendanceData(Student student) {
+        return getStringNumberSeries(student.getFirstName() + " " + student.getLastName(),student,subjectAttendance);
     }
 
     /**
@@ -57,8 +58,56 @@ public class DataGenerator {
      * @param student the student you want to examine
      * @return a absence data series split by subject
      */
-    public XYChart.Series<String, Number> getAbsenceData(Student student) {
-        return getStringNumberSeries(student.getFirstName() + " " + student.getLastName(), student, subjectAbsence);
+    public static XYChart.Series<String, Number> getAbsenceData(Student student) {
+        return getStringNumberSeries(student.getFirstName() + " " + student.getLastName(),student,subjectAbsence);
+    }
+
+    /**
+     * Gets the students absence percentage for the student
+     * @param student the student
+     * @return the absence in percentage
+     */
+    public double getAbsencePercentage(Student student){
+        updateAttendanceMap(student,true);
+        int attendances = 0;
+        int absence = 0;
+        for(String subject : subjectAttendance.keySet()){
+            attendances+=subjectAttendance.get(subject);
+        }
+        for(String subject : subjectAbsence.keySet()){
+            absence+=subjectAbsence.get(subject);
+        }
+        return (double) (absence*100)/(absence+attendances);
+    }
+
+    /**
+     * gets the absencePercentage in each subject
+     * @param student the student you want to examine
+     * @return a series of the students absence in percentage split by subject
+     */
+    public static XYChart.Series<String, Number> getAbsencePercentageInEachSubject(Student student){
+        updateAttendanceMap(student,true);
+        XYChart.Series<String,Number> series = new XYChart.Series<>();
+        subjects.forEach(s->{
+            int attendance = subjectAttendance.getOrDefault(s,0);
+            int absence = subjectAbsence.getOrDefault(s,0);
+            series.getData().add(new XYChart.Data<>(s,(double)(absence*100)/(absence+attendance)));
+        });
+        return series;
+    }
+
+    /**
+     * gets the absencePercentage in each subject
+     * @param student the student you want to examine
+     * @return a series of the students absence in percentage split by subject
+     */
+    public static XYChart.Series<String, Number> getAbsencePercentageInSubject(Student student, Subject subject){
+        updateAttendanceMap(student,true);
+        XYChart.Series<String,Number> series = new XYChart.Series<>();
+            int attendance = subjectAttendance.getOrDefault(subject.getName(),0);
+            int absence = subjectAbsence.getOrDefault(subject.getName(),0);
+        series.getData().add(new XYChart.Data<>(subject.getName(),(double)(absence*100)/(absence+attendance)));
+        return series;
     }
 
 
