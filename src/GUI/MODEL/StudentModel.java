@@ -40,23 +40,24 @@ public class StudentModel {
     }
 
 
+    /**
+     * Somehow this method add some attendance shit to students.
+     */
     private void addAttendances() {
 
         int[][] attendances = studentManager.getAttendances();
-        System.out.println("attendances from db: " + attendances.length);
+        //System.out.println("attendances from db: " + attendances.length);
 
         for(int i = 0; i < attendances.length; i++){
-            System.out.println("attendance " + i);
+            //System.out.println("attendance " + i);
             for(Student s : students){
-                for(Lecture l : allLectures){
-                    s.addAttendance(l);
-                }
-                System.out.println(s.getFirstName());
+
+                //System.out.println(s.getFirstName());
                 if(s.getId() == attendances[i][0]){
-                    System.out.println("id match");
+                    //System.out.println("id match");
                     for(Attendance a : s.getAttendances()){
                         if(a.getLecture().getLectureId() == attendances[i][1]){
-                            System.out.println("lecture match");
+                            //System.out.println("lecture match");
                             a.setAttended(attendances[i][2] == 1);
                         }
                     }
@@ -89,6 +90,11 @@ public class StudentModel {
             if(!students.isEmpty()){
                 for(Student s : students){
                     s.setLectures(allLectures);
+
+                    // Create attendance objects in student
+                    for(Lecture l : allLectures){
+                        s.addAttendance(l);
+                    }
                 }
                 break;
             }
