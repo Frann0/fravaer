@@ -67,7 +67,7 @@ public class UserDAL {
         try (Connection con = dbCon.getConnection()) {
 
             PreparedStatement pSql = con.prepareStatement("UPDATE Attendance SET Attended=? WHERE UserId=? AND LectureId=?");
-            pSql.setInt(1, isAttended?1:0);
+            pSql.setInt(1, isAttended ? 1 : 0);
             pSql.setInt(2, userId);
             pSql.setInt(3, lectureId);
             pSql.execute();
@@ -94,7 +94,7 @@ public class UserDAL {
             pSql.execute();
 
             ResultSet rs = pSql.getResultSet();
-            while(rs.next()){
+            while (rs.next()) {
                 int id = rs.getInt("Id");
                 UserRole role = rs.getBoolean("Role") ? UserRole.Student : UserRole.Admin;
                 String username = rs.getString("Username");
@@ -112,7 +112,7 @@ public class UserDAL {
         return allUsers;
     }
 
-    public int[][] getAttendances(){
+    public int[][] getAttendances() {
 
         int[][] attendances = new int[0][];
 
@@ -128,10 +128,10 @@ public class UserDAL {
             attendances = new int[getResultSetSize(rs)][3];
 
 
-            while(rs.next()){
-                attendances[rs.getRow()-1][0] = rs.getInt("UserId");
-                attendances[rs.getRow()-1][1] = rs.getInt("LectureId");
-                attendances[rs.getRow()-1][2] = rs.getInt("Attended");
+            while (rs.next()) {
+                attendances[rs.getRow() - 1][0] = rs.getInt("UserId");
+                attendances[rs.getRow() - 1][1] = rs.getInt("LectureId");
+                attendances[rs.getRow() - 1][2] = rs.getInt("Attended");
             }
 
         } catch (SQLException throwables) {
@@ -141,9 +141,8 @@ public class UserDAL {
     }
 
     private int getResultSetSize(ResultSet rs) throws SQLException {
-        int size =0;
-        if (rs != null)
-        {
+        int size = 0;
+        if (rs != null) {
             rs.last();    // moves cursor to the last row
             size = rs.getRow(); // get row id
         }
@@ -154,9 +153,10 @@ public class UserDAL {
 
     /**
      * Retrieve all lectures from the database.
+     *
      * @return
      */
-    public List<Lecture> getLectures(){
+    public List<Lecture> getLectures() {
 
         List<Lecture> allLectures = new ArrayList<>();
 
@@ -170,13 +170,15 @@ public class UserDAL {
             pSql.execute();
 
             ResultSet rs = pSql.getResultSet();
-            while(rs.next()){
+            while (rs.next()) {
                 int lectureId = rs.getInt("Id");
-                String subjectName = rs.getString("SubjectName");
+                int subjectId = rs.getInt("SubjectId");
+                var subjectName = rs.getString("SubjectName");
+
                 LocalDate lectureDate = rs.getDate("LectureDate").toLocalDate();
                 LocalTime lectureTime = rs.getTime("LectureTime").toLocalTime();
-                LocalDateTime lecture = LocalDateTime.of(lectureDate,lectureTime);
-                allLectures.add(new Lecture(lectureId, subjectName, lecture));
+                LocalDateTime lecture = LocalDateTime.of(lectureDate, lectureTime);
+                allLectures.add(new Lecture(lectureId, new Subject(subjectId, subjectName), lecture));
             }
 
         } catch (SQLException throwables) {
@@ -186,6 +188,58 @@ public class UserDAL {
         return allLectures;
     }
 
+    /**
+     * Get a subject with the specified id.
+     *
+     * @param subjectId The id of the subject to get.
+     * @return Returns the fetched subject.
+     */
+    public Subject getSubject(int subjectId) {
+        try (Connection con = dbCon.getConnection()) {
+
+            PreparedStatement pSql = con.prepareStatement("SELECT * FROM Subject WHERE Id = ?");
+            pSql.setInt(1, subjectId);
+            pSql.execute();
+
+            ResultSet rs = pSql.getResultSet();
+            if (rs.getRow() > 0) {
+                String subjectName = rs.getString("SubjectName");
+                return new Subject(subjectId, subjectName);
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }
+
+    /**
+     * Retrieve all subjects from the database.
+     *
+     * @return
+     */
+    public List<Subject> getSubjects() {
+
+        List<Subject> allSubjects = new ArrayList<>();
+
+        try (Connection con = dbCon.getConnection()) {
+
+            PreparedStatement pSql = con.prepareStatement("SELECT * FROM Subject");
+            pSql.execute();
+
+            ResultSet rs = pSql.getResultSet();
+            while (rs.next()) {
+                int subjectId = rs.getInt("Id");
+                String subjectName = rs.getString("SubjectName");
+                allSubjects.add(new Subject(subjectId, subjectName));
+            }
+
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+
+        return allSubjects;
+    }
 
     public static void main(String[] args) {
         UserDAL userDAL = new UserDAL();
@@ -194,7 +248,7 @@ public class UserDAL {
         List<Lecture> lectures = userDAL.getLectures();
         int[][] attendances = userDAL.getAttendances();
 
-        for(int i = 0; i < attendances.length; i++){
+        for (int i = 0; i < attendances.length; i++) {
             System.out.println("UserId: " + attendances[i][0]);
             System.out.println("LectureId: " + attendances[i][1]);
             System.out.println("Attended: " + attendances[i][2]);

@@ -3,10 +3,17 @@ package BE;
 import java.util.List;
 
 public class Subject {
-    String name;
-    List<User> users;
+    private int id;
+    private String name;
+    private List<User> users;
 
     public Subject() {
+    }
+
+
+    public Subject(int id, String name) {
+        setId(id);
+        setName(name);
     }
 
     public Subject(String name) {
@@ -20,6 +27,14 @@ public class Subject {
     public Subject(String name, List<User> users) {
         this.name = name;
         this.users = users;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -36,6 +51,11 @@ public class Subject {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return getName();
     }
 
 }
