@@ -71,8 +71,9 @@ public class DataGenerator {
         updateAttendanceMap(student,true);
         XYChart.Series<String,Number> series = new XYChart.Series<>();
         subjects.forEach(s->{
-            int absence = subjectAttendance.getOrDefault(s,0);
-            series.getData().add(new XYChart.Data<>(s,(double)(absence*100)/(student.getAttendances().size())));
+            int attendance = subjectAttendance.getOrDefault(s,0);
+            int absence = subjectAbsence.getOrDefault(s,0);
+            series.getData().add(new XYChart.Data<>(s,(double)(absence*100)/(absence+attendance)));
         });
         return series;
     }
