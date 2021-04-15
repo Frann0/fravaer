@@ -32,4 +32,12 @@ public class Attendance {
     public void setAttended(boolean attended) {
         this.attended = attended;
     }
+
+    @Override
+    public String toString() {
+        return "Attendance{" +
+                "lecture=" + lecture +
+                ", attended=" + attended +
+                '}';
+    }
 }

@@ -23,7 +23,13 @@ public class DataGenerator {
 
 
 
+        List<Student> students = studentModel.getStudents();
 
+        for(Student s : students){
+            for(Attendance a : s.getAttendances()){
+                System.out.println(a);
+            }
+        }
 
 
 
