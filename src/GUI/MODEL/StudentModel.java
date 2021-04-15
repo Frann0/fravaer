@@ -48,9 +48,7 @@ public class StudentModel {
         for (int i = 0; i < attendances.length; i++) {
             //System.out.println("attendance " + i);
             for (Student s : students) {
-                for (Lecture l : allLectures) {
-                    s.addAttendance(l);
-                }
+
                 //System.out.println(s.getFirstName());
                 if (s.getId() == attendances[i][0]) {
                     //System.out.println("id match");
@@ -82,6 +80,9 @@ public class StudentModel {
             // Add all the lectures to all the students.
             for (Student student : students) {
                 student.setLectures(allLectures);
+                for (Lecture l : allLectures) {
+                    student.addAttendance(l);
+                }
             }
         } else System.out.println("No students! Can't add lectures.");
     }
