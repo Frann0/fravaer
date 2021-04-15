@@ -1,5 +1,6 @@
 package Main;
 
+import BLL.DataGenerator;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -74,7 +75,6 @@ public class Main extends Application {
         studentList.get(0).printSubjects();
 
          */
-
         primaryStage.show();
 
 
