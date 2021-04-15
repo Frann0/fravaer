@@ -130,9 +130,11 @@ public class UserDAL {
     public void assignSubjectsToStudent(User student){
     }
 
+    // TODO Delete ?
     public void setMostAbsentDay(){
     }
 
+    // TODO Delete ?
     public void setAbsentDays(){
         for(User student : this.allUsers){
             if(student.getRole() == UserRole.Student){
@@ -141,6 +143,7 @@ public class UserDAL {
         }
     }
 
+    // TODO Delete ?
     private void assignAbsentDays(User student) {
     }
 }
