@@ -2,17 +2,19 @@ package GUI.MODEL;
 
 import BE.*;
 import BLL.StudentManager;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class StudentModel {
 
-    private List<Subject> subjects;
+    private ObservableList<Subject> subjects;
     private static StudentModel instance;
-    private List<User> teachers;
-    private List<Student> students;
-    private List<Lecture> allLectures;
+    private ObservableList<User> teachers;
+    private ObservableList<Student> students;
+    private ObservableList<Lecture> allLectures;
 
     private static StudentManager studentManager;
 
@@ -26,12 +28,16 @@ public class StudentModel {
         return instance;
     }
 
+
+    /**
+     * The StudentModel constructor initially loads all user/student/teacher/subject information from the database.
+     */
     private StudentModel() {
         studentManager = new StudentManager();
-        subjects = new ArrayList<>();
-        teachers = new ArrayList<>();
-        students = new ArrayList<>();
-        allLectures = new ArrayList<>();
+        subjects = FXCollections.observableArrayList();
+        teachers = FXCollections.observableArrayList();
+        students = FXCollections.observableArrayList();
+        allLectures = FXCollections.observableArrayList();
 
         addUsers();
         addLectures();
@@ -40,18 +46,22 @@ public class StudentModel {
     }
 
 
-
+    /**
+     * Retrieves an integer array from UserDAL. This array contains information about attendance with respect to
+     * user id, and lecture id. Each user's list of attendances is then updated with the information fetched from the
+     * database.
+     */
     private void addAttendances(){
 
         int[][] attendances = studentManager.getAttendances();
 
-        for(int i = 0; i < attendances.length; i++){
+        for (int[] attendance : attendances) {
 
-            for(Student s : students){
-                if(s.getId() == attendances[i][0]){
-                    for(Attendance a : s.getAttendances()){
-                        if(a.getLecture().getLectureId() == attendances[i][1]){
-                            a.setAttended(attendances[i][2] == 1);
+            for (Student s : students) {
+                if (s.getId() == attendance[0]) {
+                    for (Attendance a : s.getAttendances()) {
+                        if (a.getLecture().getLectureId() == attendance[1]) {
+                            a.setAttended(attendance[2] == 1);
                         }
                     }
                 }
@@ -59,14 +69,21 @@ public class StudentModel {
         }
     }
 
+    /**
+     * Retrieves all subjects registered in the database.
+     */
     private void addSubjects() {
         var allSubjects = studentManager.getSubjects();
         if (!allSubjects.isEmpty()) {
-            for (Subject subject : allSubjects)
-                subjects.add(subject);
+            subjects.addAll(allSubjects);
         }
     }
 
+    /**
+     * Adds a list of all lectures to each student. After this, the list of lectures is used to create a list of
+     * attendance objects, which are added to each student (with default attendance set to "false" this state will
+     * be updated with data from the database by the addAttendances() method).
+     */
     private void addLectures() {
         List<Lecture> allLectures = studentManager.getLectures();
         setAllLectures(allLectures);
@@ -83,6 +100,10 @@ public class StudentModel {
         } else System.out.println("No students! Can't add lectures.");
     }
 
+    /**
+     * Retrieves a list of all users from the database. Users with "student" role, are added to the students list.
+     * Users with "teacher" role, are added to teachers list.
+     */
     private void addUsers() {
         List<User> allUsers = studentManager.getUsers();
 
@@ -95,33 +116,6 @@ public class StudentModel {
         }
     }
 
-    public void setAllLectures(List<Lecture> allLectures) {
-        this.allLectures = allLectures;
-    }
-
-    public List<Subject> getSubjects() {
-        return subjects;
-    }
-
-    public List<User> getTeachers() {
-        return teachers;
-    }
-
-    public void setTeachers(List<User> teachers) {
-        this.teachers = teachers;
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
-
-    public List<Lecture> getAllLectures() {
-        return allLectures;
-    }
 
     /**
      * Get the students in a given subject.
@@ -149,4 +143,35 @@ public class StudentModel {
         }
         return foundStudents;
     }
+
+
+    public void setAllLectures(List<Lecture> allLectures) {
+        this.allLectures = (ObservableList<Lecture>) allLectures;
+    }
+
+    public List<Subject> getSubjects() {
+        return subjects;
+    }
+
+    public List<User> getTeachers() {
+        return teachers;
+    }
+
+    public void setTeachers(List<User> teachers) {
+        this.teachers = (ObservableList<User>) teachers;
+    }
+
+    public List<Student> getStudents() {
+        return students;
+    }
+
+    public void setStudents(List<Student> students) {
+        this.students = (ObservableList<Student>) students;
+    }
+
+    public List<Lecture> getAllLectures() {
+        return allLectures;
+    }
+
 }
+

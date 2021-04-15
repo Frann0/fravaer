@@ -3,9 +3,7 @@ package DAL.DB;
 import BE.*;
 import com.microsoft.sqlserver.jdbc.SQLServerException;
 
-import java.io.IOException;
 import java.sql.*;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -78,11 +76,15 @@ public class UserDAL {
 
     }
 
-    //TODO make this
+    //TODO make this - DELETE ?
     public List<Student> getStudents() {
         return students;
     }
 
+    /**
+     * Retrieves all user information from the database, and creates a list of users.
+     * @return A list of all users.
+     */
     public List<User> getUsers() {
 
         List<User> allUsers = new ArrayList<>();
@@ -112,6 +114,11 @@ public class UserDAL {
         return allUsers;
     }
 
+    /**
+     * Creates an integer array with all attendance information in the database. This array is used by a method in
+     * StudentModel to couple attendances to students, with respect to UserId and LectureId.
+     * @return integer array with all attendance inforamtion.
+     */
     public int[][] getAttendances() {
 
         int[][] attendances = new int[0][];
@@ -140,6 +147,12 @@ public class UserDAL {
         return attendances;
     }
 
+    /**
+     * Returns the size of a ResultSet as an int.
+     * @param rs
+     * @return size of the ResultSet.
+     * @throws SQLException
+     */
     private int getResultSetSize(ResultSet rs) throws SQLException {
         int size = 0;
         if (rs != null) {
@@ -150,11 +163,9 @@ public class UserDAL {
         return size;
     }
 
-
     /**
      * Retrieve all lectures from the database.
-     *
-     * @return
+     * @return a list of all lectures.
      */
     public List<Lecture> getLectures() {
 
@@ -216,7 +227,7 @@ public class UserDAL {
     /**
      * Retrieve all subjects from the database.
      *
-     * @return
+     * @return a list of all subjects.
      */
     public List<Subject> getSubjects() {
 
@@ -241,18 +252,5 @@ public class UserDAL {
         return allSubjects;
     }
 
-    public static void main(String[] args) {
-        UserDAL userDAL = new UserDAL();
 
-        List<User> users = userDAL.getUsers();
-        List<Lecture> lectures = userDAL.getLectures();
-        int[][] attendances = userDAL.getAttendances();
-
-        for (int i = 0; i < attendances.length; i++) {
-            System.out.println("UserId: " + attendances[i][0]);
-            System.out.println("LectureId: " + attendances[i][1]);
-            System.out.println("Attended: " + attendances[i][2]);
-            System.out.println("---------------------------------");
-        }
-    }
 }
