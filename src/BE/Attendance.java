@@ -9,6 +9,7 @@ public class Attendance {
 
     public Attendance(Lecture lecture) {
         this.lecture = lecture;
+        this.attended = false;
     }
 
     public Attendance(Lecture lecture, boolean attended) {
@@ -30,5 +31,13 @@ public class Attendance {
 
     public void setAttended(boolean attended) {
         this.attended = attended;
+    }
+
+    @Override
+    public String toString() {
+        return "Attendance{" +
+                "lecture=" + lecture +
+                ", attended=" + attended +
+                '}';
     }
 }

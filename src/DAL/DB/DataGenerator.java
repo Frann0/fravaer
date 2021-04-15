@@ -1,8 +1,12 @@
 package DAL.DB;
 
+import BE.*;
+import GUI.MODEL.StudentModel;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 /**
  * TEMPORARY CLASS FOR DATA GENERATION
@@ -12,9 +16,23 @@ public class DataGenerator {
 
     public static void main(String[] args) throws IOException {
         LectureDAL lectureDAL = new LectureDAL();
+        StudentModel studentModel = StudentModel.getInstance();
+        UserDAL userDAL = new UserDAL();
 
-        addLectures(lectureDAL);
-        setAttendance(lectureDAL);
+        int[][] att = userDAL.getAttendances();
+
+
+
+        List<Student> students = studentModel.getStudents();
+
+        for(Student s : students){
+            for(Attendance a : s.getAttendances()){
+                System.out.println(a);
+            }
+        }
+
+
+
 
     }
 

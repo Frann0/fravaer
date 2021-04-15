@@ -6,31 +6,37 @@ import java.time.LocalDateTime;
 
 public class Lecture {
     private int lectureId;
-    private String subjectName;
     private LocalDateTime lectureDate;
     private Duration lectureDuration;
+    private Subject subject;
 
     public Lecture() {
     }
 
-    public Lecture(int lectureId, String subjectName, LocalDateTime lectureDate, Duration lectureDuration){
-        this.lectureId = lectureId;
-        this.subjectName = subjectName;
-        this.lectureDate = lectureDate;
-        this.lectureDuration = lectureDuration;
+    public Lecture(int lectureId, Subject subject, LocalDateTime lectureDate, Duration lectureDuration) {
+        setLectureId(lectureId);
+        setSubject(subject);
+        setLectureDate(lectureDate);
+        setLectureDuration(lectureDuration);
     }
 
     public Lecture(LocalDateTime date) {
         this.lectureDate = date;
     }
 
-    public Lecture(String subject) {
-        this.subjectName = subject;
+    public Lecture(Subject subject) {
+        setSubject(subject);
     }
 
-    public Lecture(String subjectName, LocalDateTime date) {
-        this.subjectName = subjectName;
-        this.lectureDate = date;
+    public Lecture(Subject subject, LocalDateTime date) {
+        setSubject(subject);
+        setLectureDate(date);
+    }
+
+    public Lecture(int lectureId, Subject subject, LocalDateTime lecture) {
+        setLectureId(lectureId);
+        setSubject(subject);
+        setLectureDate(lectureDate);
     }
 
     public int getLectureId() {
@@ -39,14 +45,6 @@ public class Lecture {
 
     public void setLectureId(int lectureId) {
         this.lectureId = lectureId;
-    }
-
-    public String getSubjectName() {
-        return subjectName;
-    }
-
-    public void setSubjectName(String subjectName) {
-        this.subjectName = subjectName;
     }
 
     public LocalDateTime getDate() {
@@ -63,5 +61,31 @@ public class Lecture {
 
     public void setLectureDuration(Duration lectureDuration) {
         this.lectureDuration = lectureDuration;
+    }
+
+    @Override
+    public String toString() {
+        return "Lecture{" +
+                "lectureId=" + lectureId +
+                ", subjectName='" + getSubject().getName() + '\'' +
+                ", lectureDate=" + lectureDate +
+                ", lectureDuration=" + lectureDuration +
+                '}';
+    }
+
+    public Subject getSubject() {
+        return subject;
+    }
+
+    public void setSubject(Subject subject) {
+        this.subject = subject;
+    }
+
+    public LocalDateTime getLectureDate() {
+        return lectureDate;
+    }
+
+    public void setLectureDate(LocalDateTime lectureDate) {
+        this.lectureDate = lectureDate;
     }
 }
