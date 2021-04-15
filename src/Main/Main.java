@@ -1,6 +1,5 @@
 package Main;
 
-import BLL.DataGenerator;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
@@ -76,7 +75,7 @@ public class Main extends Application {
 
          */
 
-        DataGenerator.debugTest();
+        primaryStage.show();
 
 
         root.setOnMousePressed(new EventHandler<MouseEvent>() {
