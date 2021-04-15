@@ -63,6 +63,24 @@ public class DataGenerator {
     }
 
     /**
+     * Gets the students absence percentage for the student
+     * @param student the student
+     * @return the absence in percentage
+     */
+    public double getAbsencePercentage(Student student){
+        updateAttendanceMap(student,true);
+        int attendances = 0;
+        int absence = 0;
+        for(String subject : subjectAttendance.keySet()){
+            attendances+=subjectAttendance.get(subject);
+        }
+        for(String subject : subjectAbsence.keySet()){
+            absence+=subjectAbsence.get(subject);
+        }
+        return (double) (absence*100)/(absence+attendances);
+    }
+
+    /**
      * gets the absencePercentage in each subject
      * @param student the student you want to examine
      * @return a series of the students absence in percentage split by subject
@@ -86,8 +104,9 @@ public class DataGenerator {
     public static XYChart.Series<String, Number> getAbsencePercentageInSubject(Student student, Subject subject){
         updateAttendanceMap(student,true);
         XYChart.Series<String,Number> series = new XYChart.Series<>();
-            int absence = subjectAttendance.getOrDefault(subject.getName(),0);
-            series.getData().add(new XYChart.Data<>(subject.getName(),(double)(absence*100)/(student.getAttendances().size())));
+            int attendance = subjectAttendance.getOrDefault(subject.getName(),0);
+            int absence = subjectAbsence.getOrDefault(subject.getName(),0);
+        series.getData().add(new XYChart.Data<>(subject.getName(),(double)(absence*100)/(absence+attendance)));
         return series;
     }
 
