@@ -28,7 +28,7 @@ public class DataGenerator {
      * @return A Series of XYChart of the attendance to subjects
      */
     public static XYChart.Series<String, Number> getAttendanceData(String className, List<Student> students) {
-        return getStringNumberSeries(className,students,subjectAttendance);
+        return getStringNumberSeries(className, students, subjectAttendance);
     }
 
     /**
@@ -39,7 +39,7 @@ public class DataGenerator {
      * @return A Series of XYChart of the absence to subjects
      */
     public static XYChart.Series<String, Number> getAbsenceData(String className, List<Student> students) {
-        return getStringNumberSeries(className,students,subjectAbsence);
+        return getStringNumberSeries(className, students, subjectAbsence);
     }
 
     /**
@@ -49,7 +49,7 @@ public class DataGenerator {
      * @return a attendance data series split by subject
      */
     public static XYChart.Series<String, Number> getAttendanceData(Student student) {
-        return getStringNumberSeries(student.getFirstName() + " " + student.getLastName(),student,subjectAttendance);
+        return getStringNumberSeries(student.getFirstName() + " " + student.getLastName(), student, subjectAttendance);
     }
 
     /**
@@ -59,54 +59,57 @@ public class DataGenerator {
      * @return a absence data series split by subject
      */
     public static XYChart.Series<String, Number> getAbsenceData(Student student) {
-        return getStringNumberSeries(student.getFirstName() + " " + student.getLastName(),student,subjectAbsence);
+        return getStringNumberSeries(student.getFirstName() + " " + student.getLastName(), student, subjectAbsence);
     }
 
     /**
      * Gets the students absence percentage for the student
+     *
      * @param student the student
      * @return the absence in percentage
      */
-    public double getAbsencePercentage(Student student){
-        updateAttendanceMap(student,true);
+    public double getAbsencePercentage(Student student) {
+        updateAttendanceMap(student, true);
         int attendances = 0;
         int absence = 0;
-        for(String subject : subjectAttendance.keySet()){
-            attendances+=subjectAttendance.get(subject);
+        for (String subject : subjectAttendance.keySet()) {
+            attendances += subjectAttendance.get(subject);
         }
-        for(String subject : subjectAbsence.keySet()){
-            absence+=subjectAbsence.get(subject);
+        for (String subject : subjectAbsence.keySet()) {
+            absence += subjectAbsence.get(subject);
         }
-        return (double) (absence*100)/(absence+attendances);
+        return (double) (absence * 100) / (absence + attendances);
     }
 
     /**
      * gets the absencePercentage in each subject
+     *
      * @param student the student you want to examine
      * @return a series of the students absence in percentage split by subject
      */
-    public static XYChart.Series<String, Number> getAbsencePercentageInEachSubject(Student student){
-        updateAttendanceMap(student,true);
-        XYChart.Series<String,Number> series = new XYChart.Series<>();
-        subjects.forEach(s->{
-            int attendance = subjectAttendance.getOrDefault(s,0);
-            int absence = subjectAbsence.getOrDefault(s,0);
-            series.getData().add(new XYChart.Data<>(s,(double)(absence*100)/(absence+attendance)));
+    public static XYChart.Series<String, Number> getAbsencePercentageInEachSubject(Student student) {
+        updateAttendanceMap(student, true);
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        subjects.forEach(s -> {
+            int attendance = subjectAttendance.getOrDefault(s, 0);
+            int absence = subjectAbsence.getOrDefault(s, 0);
+            series.getData().add(new XYChart.Data<>(s, (double) (absence * 100) / (absence + attendance)));
         });
         return series;
     }
 
     /**
      * gets the absencePercentage in each subject
+     *
      * @param student the student you want to examine
      * @return a series of the students absence in percentage split by subject
      */
-    public static XYChart.Series<String, Number> getAbsencePercentageInSubject(Student student, Subject subject){
-        updateAttendanceMap(student,true);
-        XYChart.Series<String,Number> series = new XYChart.Series<>();
-            int attendance = subjectAttendance.getOrDefault(subject.getName(),0);
-            int absence = subjectAbsence.getOrDefault(subject.getName(),0);
-        series.getData().add(new XYChart.Data<>(subject.getName(),(double)(absence*100)/(absence+attendance)));
+    public static XYChart.Series<String, Number> getAbsencePercentageInSubject(Student student, Subject subject) {
+        updateAttendanceMap(student, true);
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        int attendance = subjectAttendance.getOrDefault(subject.getName(), 0);
+        int absence = subjectAbsence.getOrDefault(subject.getName(), 0);
+        series.getData().add(new XYChart.Data<>(subject.getName(), (double) (absence * 100) / (absence + attendance)));
         return series;
     }
 
@@ -174,17 +177,17 @@ public class DataGenerator {
             });
         }
         //resets the students attendance
-        //student.setAttendance(0);
-        //student.setAbsence(0);
+        student.setAttendanceCount(0);
+        student.setAbsenceCount(0);
 
         //runs through the students attendances increments attendance when is attended and decrements when not attended
         for (Attendance value : student.getAttendances()) {
             if (value.isAttended()) {
                 subjectAttendance.put(value.getLecture().getSubject().getName(), subjectAttendance.getOrDefault(value.getLecture().getSubject().getName(), 0) + 1);
-                //student.setAttendance(student.getAttendance() + 1);
+                student.setAttendanceCount(student.getAttendanceCount() + 1);
             } else {
                 subjectAbsence.put(value.getLecture().getSubject().getName(), subjectAbsence.getOrDefault(value.getLecture().getSubject().getName(), 0) + 1);
-                //student.setAbsence(student.getAbsence() + 1);
+                student.setAbsenceCount(student.getAbsenceCount() + 1);
             }
         }
     }

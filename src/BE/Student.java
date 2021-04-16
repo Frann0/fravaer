@@ -1,6 +1,8 @@
 package BE;
 
 import BLL.AttendanceManager;
+import javafx.beans.property.SimpleDoubleProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 
 import java.time.Duration;
 import java.time.LocalDate;
@@ -13,6 +15,11 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public class Student extends User {
     List<Lecture> lectures = new ArrayList<>();
     List<Attendance> attendances = new ArrayList<>();
+
+    private int attendanceCount;
+    private int absenceCount;
+
+    private SimpleDoubleProperty totalAbsencePercentageProperty;
     private static final Duration REGISTRATION_BUFFER = Duration.ofMinutes(15);
 
     public Student() {
@@ -38,6 +45,12 @@ public class Student extends User {
         super(u.getId(), u.getRole(), u.getUsername(), u.getPassword(), u.getFirstName(), u.getLastName());
     }
 
+    @Override
+    protected void initialize() {
+        super.initialize();
+        totalAbsencePercentageProperty = new SimpleDoubleProperty();
+    }
+
     public List<Lecture> getLectures() {
         return lectures;
     }
@@ -54,7 +67,7 @@ public class Student extends User {
         this.attendances = attendances;
     }
 
-    public void addAttendance(Lecture lecture){
+    public void addAttendance(Lecture lecture) {
         this.attendances.add(new Attendance(lecture));
     }
 
@@ -92,5 +105,68 @@ public class Student extends User {
             }
         }
         return isValid.get();
+    }
+
+    /**
+     * Get the amount of time the student has attended.
+     *
+     * @return Returns the student's attendance count.
+     */
+    public int getAttendanceCount() {
+        return attendanceCount;
+    }
+
+    /**
+     * Set the amount of time the student has attended.
+     *
+     * @param attendanceCount The amount of attendance to set.
+     */
+    public void setAttendanceCount(int attendanceCount) {
+        this.attendanceCount = attendanceCount;
+    }
+
+    /**
+     * Get the amount of time the student has been absent.
+     *
+     * @return Returns the student's absence count.
+     */
+    public int getAbsenceCount() {
+        return absenceCount;
+    }
+
+    /**
+     * Set the amount of time the student has been absent.
+     *
+     * @param absenceCount The amount of absence to set.
+     */
+    public void setAbsenceCount(int absenceCount) {
+        this.absenceCount = absenceCount;
+    }
+
+    /**
+     * Get the total absence percentage of this student.
+     *
+     * @return Returns the total absence percentage.
+     */
+    public double getTotalAbsencePercentage() {
+        return totalAbsencePercentageProperty.get();
+    }
+
+    /**
+     * Get the total absence percentage property.
+     *
+     * @return Returns the total absence percentage property.
+     */
+    public SimpleDoubleProperty getTotalAbsencePercentageProperty() {
+        return totalAbsencePercentageProperty;
+    }
+
+    /**
+     * Set the total absence percentage of this student.
+     *
+     * @param totalAbsencePercentage The total absence percentage to set.
+     */
+    public void setTotalAbsencePercentage(double totalAbsencePercentage) {
+        this.totalAbsencePercentageProperty.set(Math.round(totalAbsencePercentage * 100.0) / 100.0);
     }
 }
