@@ -146,7 +146,8 @@ public class StudentModel {
 
 
     public void setAllLectures(List<Lecture> allLectures) {
-        this.allLectures = (ObservableList<Lecture>) allLectures;
+        this.allLectures.addAll(allLectures);
+        //this.allLectures = (ObservableList<Lecture>) allLectures;
     }
 
     public List<Subject> getSubjects() {
