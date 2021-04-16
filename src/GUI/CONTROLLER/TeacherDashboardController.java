@@ -203,31 +203,16 @@ public class TeacherDashboardController implements Initializable {
         Student selectedStudent = tblStudents.getSelectionModel().getSelectedItem();
         if (selectedStudent != null) {
 
-            //TODO: set data to charts from model.
+            chartIndividualDay.getData().clear();
+            chartIndividualSubject.getData().clear();
+
+            //TODO: få DP til at lave en function til at få fraværs procent over dagene.
             XYChart.Series days = DataGenerator.getAttendanceData(selectedStudent);
-
             days.setName("Individual day absence");
-            //Todo: Replace random data with data from model
-            /*
-            days.getData().add(new XYChart.Data<>("Mon", (int) (Math.random() * 50 + 1)));
-            days.getData().add(new XYChart.Data<>("Tue", (int) (Math.random() * 50 + 1)));
-            days.getData().add(new XYChart.Data<>("Wed", (int) (Math.random() * 50 + 1)));
-            days.getData().add(new XYChart.Data<>("Thu", (int) (Math.random() * 50 + 1)));
-            days.getData().add(new XYChart.Data<>("Fri", (int) (Math.random() * 50 + 1)));
-             */
 
-
-            XYChart.Series classes = DataGenerator.getAbsenceData(selectedStudent);
+            XYChart.Series classes = DataGenerator.getAbsencePercentageInEachSubject(selectedStudent);
 
             classes.setName("Individual class absence");
-            //Todo: Replace random data with data from model
-            //classes.getData().addAll(DataGenerator.getAbsenceData(selectedStudent));
-            /*
-            classes.getData().add(new XYChart.Data<>("SCO", (int) (Math.random() * 50 + 1)));
-            classes.getData().add(new XYChart.Data<>("DBOS", (int) (Math.random() * 50 + 1)));
-            classes.getData().add(new XYChart.Data<>("SDE", (int) (Math.random() * 50 + 1)));
-            classes.getData().add(new XYChart.Data<>("ITO", (int) (Math.random() * 50 + 1)));
-             */
 
             chartIndividualSubject.getData().addAll(classes);
             chartIndividualDay.getData().addAll(days);
