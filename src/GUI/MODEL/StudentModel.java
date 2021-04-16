@@ -1,6 +1,7 @@
 package GUI.MODEL;
 
 import BE.*;
+import BLL.DataGenerator;
 import BLL.StudentManager;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -15,8 +16,34 @@ public class StudentModel {
     private ObservableList<User> teachers;
     private ObservableList<Student> students;
     private ObservableList<Lecture> allLectures;
+    private DataGenerator attendanceData;
 
     private static StudentManager studentManager;
+
+    /**
+     * The StudentModel constructor initially loads all user/student/teacher/subject information from the database.
+     */
+    private StudentModel() {
+        intialize();
+    }
+
+    /**
+     * Initialize the class.
+     */
+    private void intialize() {
+        studentManager = new StudentManager();
+        attendanceData = new DataGenerator();
+        subjects = FXCollections.observableArrayList();
+        teachers = FXCollections.observableArrayList();
+        students = FXCollections.observableArrayList();
+        allLectures = FXCollections.observableArrayList();
+
+        addUsers();
+        addLectures();
+        addSubjects();
+        addAttendances();
+        updateStudentsAttendanceData();
+    }
 
     /**
      * Get the singleton instance of StudentModel.
@@ -28,31 +55,12 @@ public class StudentModel {
         return instance;
     }
 
-
-    /**
-     * The StudentModel constructor initially loads all user/student/teacher/subject information from the database.
-     */
-    private StudentModel() {
-        studentManager = new StudentManager();
-        subjects = FXCollections.observableArrayList();
-        teachers = FXCollections.observableArrayList();
-        students = FXCollections.observableArrayList();
-        allLectures = FXCollections.observableArrayList();
-
-        addUsers();
-        addLectures();
-        addSubjects();
-        addAttendances();
-    }
-
-
     /**
      * Retrieves an integer array from UserDAL. This array contains information about attendance with respect to
      * user id, and lecture id. Each user's list of attendances is then updated with the information fetched from the
      * database.
      */
-    private void addAttendances(){
-
+    private void addAttendances() {
         int[][] attendances = studentManager.getAttendances();
 
         for (int[] attendance : attendances) {
@@ -116,6 +124,20 @@ public class StudentModel {
         }
     }
 
+    /**
+     * Update all the student's attendance and absence data.
+     */
+    private void updateStudentsAttendanceData() {
+        if (!students.isEmpty()) {
+
+            // Update the student's attendance & absence data.
+            // Add more data if necessary.
+            for (Student student : students) {
+                student.setTotalAbsencePercentage(attendanceData.getAbsencePercentage(student));
+            }
+        }
+    }
+
 
     /**
      * Get the students in a given subject.
@@ -134,7 +156,7 @@ public class StudentModel {
 
                     if (assignedSubject != null && assignedSubject.getId() == subject.getId()) {
                         foundStudents.add(student);
-                        //System.out.println("Filtered student: " + student.getFirstName());
+                        System.out.println("Filtered student: " + student.getFirstName());
                         break;
                     }
                     // else System.out.println("No student with subject found: " + assignedSubject.getName());
@@ -146,7 +168,7 @@ public class StudentModel {
 
 
     public void setAllLectures(List<Lecture> allLectures) {
-        this.allLectures = (ObservableList<Lecture>) allLectures;
+        this.allLectures.setAll(allLectures);
     }
 
     public List<Subject> getSubjects() {

@@ -40,7 +40,7 @@ public class TeacherDashboardController implements Initializable {
     @FXML
     private TableColumn<Student, String> tblLastname;
     @FXML
-    private TableColumn<Student, Integer> tblAbsence;
+    private TableColumn<Student, Number> tblAbsence;
     @FXML
     private JFXComboBox subjectFilterCombobox;
 
@@ -71,7 +71,8 @@ public class TeacherDashboardController implements Initializable {
      * Initialize the subject filter combo box.
      */
     private void initializeCombobox() {
-        subjects.setAll(studentModel.getSubjects());
+        subjects.add(new Subject(5, "Alle"));
+        subjects.addAll(studentModel.getSubjects());
         subjectFilterCombobox.setItems(subjects);
     }
 
@@ -83,6 +84,7 @@ public class TeacherDashboardController implements Initializable {
         // Assign the table columns to automatically update their cell.
         tblFirstname.setCellValueFactory(cellData -> cellData.getValue().getFirstNameProperty());
         tblLastname.setCellValueFactory(cellData -> cellData.getValue().getLastNameProperty());
+        tblAbsence.setCellValueFactory(cellData -> cellData.getValue().getTotalAbsencePercentageProperty());
 
         // Then assign the table to get the observable student list.
         tblStudents.setItems(students);
@@ -102,6 +104,7 @@ public class TeacherDashboardController implements Initializable {
         //INDIVIDUAL DAY ABSENCE
         //
 
+        attendanceDataGenerator = new DataGenerator();
         individualDayNum.setLabel("Procent fravær");
 
         individualDayNum.setLayoutY(100);
@@ -150,7 +153,14 @@ public class TeacherDashboardController implements Initializable {
         subjectFilterCombobox.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             selectedSubject = (Subject) newValue;
             if (selectedSubject != null) {
-                students.setAll(studentModel.getStudentsBySubject(selectedSubject));
+                switch (selectedSubject.getName()) {
+                    case "Alle":
+                        students.setAll(studentModel.getStudents());
+                        break;
+
+                    default:
+                        students.setAll(studentModel.getStudentsBySubject(selectedSubject));
+                }
                 System.out.println(String.format("Selected subject: %s", selectedSubject.getName()));
             }
         }));
@@ -164,13 +174,9 @@ public class TeacherDashboardController implements Initializable {
         overallNumAxis.setLabel(data.getName());
         overallNumAxis.setAutoRanging(false);
 
-        data.getData().add(new XYChart.Data("SCO", (int) (Math.random() * 50 + 1)));
-        data.getData().add(new XYChart.Data("ITO", (int) (Math.random() * 50 + 1)));
-        data.getData().add(new XYChart.Data("DBO", (int) (Math.random() * 50 + 1)));
-        data.getData().add(new XYChart.Data("SDE", (int) (Math.random() * 50 + 1)));
         chartOverallAttendance.setLegendVisible(false);
         chartOverallAttendance.getData().addAll(data);
-        //chartOverallAttendance.getData().add(dataGenerator.getAttendanceData("badclass", students));
+        chartOverallAttendance.getData().add(attendanceDataGenerator.getAttendanceData("Team Qwert", students));
     }
 
     /**
