@@ -3,6 +3,7 @@ package GUI.CONTROLLER;
 import BE.Student;
 import BE.Subject;
 import BE.User;
+import BE.UserRole;
 import BLL.DataGenerator;
 import GUI.MODEL.StudentModel;
 import com.jfoenix.controls.JFXComboBox;
@@ -111,18 +112,25 @@ public class TeacherDashboardController implements Initializable {
 
         data.setName("Fravær");
 
+        DataGenerator dataGenerator = new DataGenerator();
+
         //provided data
-        XYChart.Series data1 = new XYChart.Series();
+        //XYChart.Series data1 = new XYChart.Series();
         individualDayNum.setAutoRanging(false);
 
+        /*
         data1.getData().add(new XYChart.Data("Mon", (int) (Math.random() * 50 + 1)));
+
         data1.getData().add(new XYChart.Data("Tue", (int) (Math.random() * 50 + 1)));
         data1.getData().add(new XYChart.Data("Wed", (int) (Math.random() * 50 + 1)));
         data1.getData().add(new XYChart.Data("Thu", (int) (Math.random() * 50 + 1)));
         data1.getData().add(new XYChart.Data("Fri", (int) (Math.random() * 50 + 1)));
 
-        chartIndividualDay.getData().addAll(data1);
 
+        chartIndividualDay.getData().addAll();
+
+
+         */
         //
         //INDIVIDUAL SUBJECT ABSENCE
         //
@@ -196,25 +204,30 @@ public class TeacherDashboardController implements Initializable {
         if (selectedStudent != null) {
 
             //TODO: set data to charts from model.
-            XYChart.Series days = new XYChart.Series<>();
+            XYChart.Series days = DataGenerator.getAttendanceData(selectedStudent);
 
             days.setName("Individual day absence");
             //Todo: Replace random data with data from model
+            /*
             days.getData().add(new XYChart.Data<>("Mon", (int) (Math.random() * 50 + 1)));
             days.getData().add(new XYChart.Data<>("Tue", (int) (Math.random() * 50 + 1)));
             days.getData().add(new XYChart.Data<>("Wed", (int) (Math.random() * 50 + 1)));
             days.getData().add(new XYChart.Data<>("Thu", (int) (Math.random() * 50 + 1)));
             days.getData().add(new XYChart.Data<>("Fri", (int) (Math.random() * 50 + 1)));
+             */
 
 
-            XYChart.Series classes = new XYChart.Series<>();
+            XYChart.Series classes = DataGenerator.getAbsenceData(selectedStudent);
 
             classes.setName("Individual class absence");
             //Todo: Replace random data with data from model
+            //classes.getData().addAll(DataGenerator.getAbsenceData(selectedStudent));
+            /*
             classes.getData().add(new XYChart.Data<>("SCO", (int) (Math.random() * 50 + 1)));
             classes.getData().add(new XYChart.Data<>("DBOS", (int) (Math.random() * 50 + 1)));
             classes.getData().add(new XYChart.Data<>("SDE", (int) (Math.random() * 50 + 1)));
             classes.getData().add(new XYChart.Data<>("ITO", (int) (Math.random() * 50 + 1)));
+             */
 
             chartIndividualSubject.getData().addAll(classes);
             chartIndividualDay.getData().addAll(days);

@@ -17,7 +17,7 @@ public class LoginModel {
      * @return returns a user object if successful, else null.
      */
     public User attemptLogin(String username, String password){
-        myLoginManager.debugAttemptLogin(username,password);
+        myLoginManager.attemptLogin(username,password);
         return LoginManager.getCurrentUser();
     }
 }
