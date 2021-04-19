@@ -2,8 +2,11 @@ package GUI.CONTROLLER;
 import BE.*;
 import BLL.DataGenerator;
 import GUI.MODEL.StudentModel;
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.beans.property.ReadOnlyStringWrapper;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableMapValue;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +21,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -28,7 +32,7 @@ public class StudentDashboardController implements Initializable {
     @FXML
     private TableView<Attendance> tblAbsence;
     @FXML
-    private TableColumn<Attendance, LocalDateTime> tblDate;
+    private TableColumn<Attendance, String> tblDate;
     @FXML
     private TableColumn<Attendance, String> tblSubject;
     @FXML
@@ -101,30 +105,13 @@ public class StudentDashboardController implements Initializable {
         for (Attendance a : studentAttendances){
             if (!a.isAttended()){
                 absences.add(a);
-                //System.out.println(a.getLecture().getLectureDate() + " : " + a.getLecture().getSubject());
-                System.out.println(loggedInStudent.getLectures());
             }
         }
-        //absence.addAll(user.getAttendance());
+
         tblAbsence.setItems(absences);
 
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-/*
-        tblDate.setCellFactory(d -> new TableCell<Attendance, LocalDateTime>() {
-            @Override
-            protected void updateItem(LocalDateTime date, boolean empty) {
-                super.updateItem(date, empty);
-                if (empty) {
-                    setText("");
-                } else {
-                    setText(formatter.format(date));
-                }
-            }
-        });
-
- */
-        //tblDate.setCellValueFactory(cellData -> cellData.getValue().getLecture().getLectureDate());
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        tblDate.setCellValueFactory(d -> new ReadOnlyObjectWrapper<>(d.getValue().getLecture().getLectureDate().toLocalDate().format(format)));
         tblSubject.setCellValueFactory(s -> new ReadOnlyStringWrapper(s.getValue().getLecture().getSubject().getName()));
     }
 }

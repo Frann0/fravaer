@@ -2,7 +2,10 @@ package BE;
 
 
 import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 import javafx.beans.value.ObservableValue;
+import javafx.util.converter.LocalDateTimeStringConverter;
 
 import java.time.Duration;
 import java.time.LocalDate;
