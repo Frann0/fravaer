@@ -1,9 +1,6 @@
 package GUI.CONTROLLER;
 
-import BE.Attendance;
-import BE.Lecture;
-import BE.Student;
-import BE.Subject;
+import BE.*;
 import BLL.DataGenerator;
 import GUI.MODEL.LoginModel;
 import javafx.collections.FXCollections;
@@ -37,7 +34,8 @@ public class RegistrationsController implements Initializable {
 
     }
 
-    public void setStudent(Student student) {
+    //TODO VIRKER IKKE PT
+    public void setUser(User user) {
         this.student = student;
 
         tblView.getItems().addAll(student.getAttendances());

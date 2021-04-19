@@ -151,7 +151,7 @@ public class DashboardController implements Initializable {
         Parent root = (Parent) fxmlLoader.load();
         RegistrationsController registrationsController = fxmlLoader.getController();
 
-        registrationsController.setStudent((Student) currentUser);
+        registrationsController.setUser(currentUser);
 
         borderPane.setCenter(view);
     }

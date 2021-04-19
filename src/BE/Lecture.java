@@ -1,6 +1,9 @@
 package BE;
 
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.value.ObservableValue;
+
 import java.time.Duration;
 import java.time.LocalDateTime;
 
