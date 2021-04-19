@@ -46,9 +46,9 @@ public class StudentDashboardController implements Initializable {
 
     //private ObservableList<Absence> absence = FXCollections.observableArrayList();
 
-    private User user = null;
+    private User user;
 
-    private Student loggedInStudent = null;
+    private Student loggedInStudent;
     XYChart.Series data = new XYChart.Series();
 
     @Override
@@ -60,35 +60,19 @@ public class StudentDashboardController implements Initializable {
 
         numAxis.setLabel("Procent fravær");
 
-        //BarChart barChart = new BarChart(xA,yA);
         data.setName("Fravær");
 
-        /*
-        //provided data
-        AbsenceManager ab = new AbsenceManager();
-        ArrayList<Class> absence = ab.getStudentAbsence("madsq");
-
-        for (Class sub : absence) {
-            data.getData().add(new XYChart.Data(sub.getName(), sub.getAbsence()));
-        }
-
-
-         */
         chartAbcence.getData().add(data);
-
     }
 
     public void setUser(User user) {
-        /*
-        System.out.println(user.getAttendance());
         this.user = user;
-         */
 
         //TODO: MEGET CRUDE, ryd op.
         List<Student> students = StudentModel.getInstance().getStudents();
 
         for (Student s : students){
-            if (user.getId() == s.getId()){
+            if (this.user.getId() == s.getId()){
                 loggedInStudent = s;
             }
         }

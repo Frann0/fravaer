@@ -95,9 +95,16 @@ public class DashboardController implements Initializable {
     }
 
     public void handleDashboard(){
-        Pane view = loader.getPage("StudentDashboardView");
+        FXMLLoader load = new FXMLLoader();
+        load.setLocation(getClass().getResource("/GUI/VIEW/StudentDashboardView.fxml"));
 
-        borderPane.setCenter(view);
+        try {
+            borderPane.setCenter(load.load());
+            StudentDashboardController conn = load.getController();
+            conn.setUser(currentUser);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void handleRegistrer() throws IOException {
