@@ -206,8 +206,7 @@ public class TeacherDashboardController implements Initializable {
             chartIndividualDay.getData().clear();
             chartIndividualSubject.getData().clear();
 
-            //TODO: få DP til at lave en function til at få fraværs procent over dagene.
-            XYChart.Series days = DataGenerator.getAttendanceData(selectedStudent);
+            XYChart.Series days = DataGenerator.getMostAbsentDays(selectedStudent);
             days.setName("Individual day absence");
 
             XYChart.Series classes = DataGenerator.getAbsencePercentageInEachSubject(selectedStudent);
