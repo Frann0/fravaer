@@ -13,8 +13,10 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
+
 import java.util.*;
 import java.time.DayOfWeek;
+
 import javafx.util.*;
 
 public class DataGenerator {
@@ -157,6 +159,7 @@ public class DataGenerator {
 
     /**
      * Uses the students attendances to make a chart of the most absent day
+     *
      * @param student the student you want to examine
      * @return A Pair of the most absent days and the the amount of absence on the given days
      */
@@ -173,9 +176,9 @@ public class DataGenerator {
         }
         //initialize the mostAbsentDays variable
         List<DayOfWeek> mostAbsentDays = new ArrayList<>(mapOfDays.keySet());
-        mostAbsentDays.sort(Comparator.comparingInt(d->d.getValue()));
-        XYChart.Series<String,Number> series = new XYChart.Series<>();
-        mostAbsentDays.forEach(d->series.getData().add(new XYChart.Data<String,Number>(d.toString(),mapOfDays.get(d))));
+        mostAbsentDays.sort(Comparator.comparingInt(d -> d.getValue()));
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        mostAbsentDays.forEach(d -> series.getData().add(new XYChart.Data<String, Number>(d.toString(), mapOfDays.get(d))));
         return series;
     }
 
