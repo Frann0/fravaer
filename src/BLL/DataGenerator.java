@@ -13,8 +13,10 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
+
 import java.util.*;
 import java.time.DayOfWeek;
+
 import javafx.util.*;
 
 public class DataGenerator {
@@ -156,11 +158,12 @@ public class DataGenerator {
     }
 
     /**
-     * Gets the most absent days (and count) for the student or an empty list if there is no absence
+     * Uses the students attendances to make a chart of the most absent day
+     *
      * @param student the student you want to examine
      * @return A Pair of the most absent days and the the amount of absence on the given days
      */
-    public static Pair<List<DayOfWeek>,Integer> getMostAbsentDays(Student student) {
+    public static XYChart.Series<String, Number> getMostAbsentDays(Student student) {
         // Initialize a map of days of the week and integers, which are going to be the count of absent days
         Map<DayOfWeek, Integer> mapOfDays = new HashMap<>();
         //Loops through attendances to get the frequency of absence each day
@@ -172,23 +175,11 @@ public class DataGenerator {
             }
         }
         //initialize the mostAbsentDays variable
-        List<DayOfWeek> mostAbsentDays = new ArrayList<>();
-        //A int to compare the counts
-        int max = 0;
-        //Loop to get the day with highest absence
-        for (DayOfWeek dayOfWeek : mapOfDays.keySet()) {
-            int dowAbsentDays = mapOfDays.get(dayOfWeek);
-            //if the count is equal to the max frequency the absent day gets added
-            if (dowAbsentDays == max) {
-                mostAbsentDays.add(dayOfWeek);
-            }
-            //if the count is higher than the max the list gets cleared and we add the new most absent day.
-            else if(dowAbsentDays>max){
-                mostAbsentDays.clear();
-                mostAbsentDays.add(dayOfWeek);
-            }
-        }
-        return new Pair<>(mostAbsentDays,max);
+        List<DayOfWeek> mostAbsentDays = new ArrayList<>(mapOfDays.keySet());
+        mostAbsentDays.sort(Comparator.comparingInt(d -> d.getValue()));
+        XYChart.Series<String, Number> series = new XYChart.Series<>();
+        mostAbsentDays.forEach(d -> series.getData().add(new XYChart.Data<String, Number>(d.toString(), mapOfDays.get(d))));
+        return series;
     }
 
     /**
