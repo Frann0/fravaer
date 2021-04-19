@@ -21,16 +21,22 @@ public class DataGenerator {
 
         int[][] att = userDAL.getAttendances();
 
+        List<Lecture> lectures = userDAL.getLectures();
 
 
         List<Student> students = studentModel.getStudents();
 
+        /*
         for(Student s : students){
             for(Attendance a : s.getAttendances()){
                 System.out.println(a);
             }
         }
+         */
 
+        for(Lecture l : lectures){
+            System.out.println(l.getLectureDate());
+        }
 
 
 

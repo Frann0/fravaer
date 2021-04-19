@@ -189,7 +189,7 @@ public class UserDAL {
                 LocalDate lectureDate = rs.getDate("LectureDate").toLocalDate();
                 LocalTime lectureTime = rs.getTime("LectureTime").toLocalTime();
                 LocalDateTime lecture = LocalDateTime.of(lectureDate, lectureTime);
-                allLectures.add(new Lecture(lectureId, new Subject(subjectId, subjectName), lecture));
+                allLectures.add(new Lecture(lectureId, new Subject(subjectId, subjectName), lectureDate, lectureTime));
             }
 
         } catch (SQLException throwables) {

@@ -146,7 +146,7 @@ public class StudentModel {
 
 
     public void setAllLectures(List<Lecture> allLectures) {
-        this.allLectures = (ObservableList<Lecture>) allLectures;
+        this.allLectures.addAll(allLectures);
     }
 
     public List<Subject> getSubjects() {
@@ -158,7 +158,7 @@ public class StudentModel {
     }
 
     public void setTeachers(List<User> teachers) {
-        this.teachers = (ObservableList<User>) teachers;
+        this.teachers.addAll(teachers);
     }
 
     public List<Student> getStudents() {
@@ -166,11 +166,23 @@ public class StudentModel {
     }
 
     public void setStudents(List<Student> students) {
-        this.students = (ObservableList<Student>) students;
+        this.students.addAll(students);
     }
 
     public List<Lecture> getAllLectures() {
         return allLectures;
+    }
+
+    public static void main(String[] args) {
+        StudentModel studentModel = StudentModel.getInstance();
+
+        List<Student> students = studentModel.getStudents();
+
+        for(Student s : students){
+            for(Lecture l : s.getLectures()){
+                System.out.println(l.getDate());
+            }
+        }
     }
 
 }

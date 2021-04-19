@@ -2,7 +2,9 @@ package BE;
 
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 
 public class Lecture {
     private int lectureId;
@@ -37,6 +39,12 @@ public class Lecture {
         setLectureId(lectureId);
         setSubject(subject);
         setLectureDate(lectureDate);
+    }
+
+    public Lecture(int lectureId, Subject subject, LocalDate lectureDate, LocalTime lectureTime) {
+        this.lectureId = lectureId;
+        this.subject = subject;
+        this.lectureDate = LocalDateTime.of(lectureDate, lectureTime);
     }
 
     public int getLectureId() {
