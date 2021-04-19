@@ -13,11 +13,11 @@ public class User {
 
 
     public User() {
-        intiialize();
+        initialize();
     }
 
     public User(UserRole role, String username, String password, String firstName, String lastName) {
-        intiialize();
+        initialize();
         setRole(role);
         setUsername(username);
         setPassword(password);
@@ -26,7 +26,7 @@ public class User {
     }
 
     public User(int id, UserRole role, String username, String password, String firstName, String lastName) {
-        intiialize();
+        initialize();
         setId(id);
         setRole(role);
         setUsername(username);
@@ -36,7 +36,7 @@ public class User {
 
     }
 
-    private void intiialize() {
+    protected void initialize() {
         username = new SimpleStringProperty();
         password = new SimpleStringProperty();
         firstName = new SimpleStringProperty();

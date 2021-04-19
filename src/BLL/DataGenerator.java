@@ -215,17 +215,17 @@ public class DataGenerator {
             });
         }
         //resets the students attendance
-        //student.setAttendance(0);
-        //student.setAbsence(0);
+        student.setAttendanceCount(0);
+        student.setAbsenceCount(0);
 
         //runs through the students attendances increments attendance when is attended and decrements when not attended
-        for (Attendance attendance : student.getAttendances()) {
-            if (attendance.isAttended()) {
-                subjectAttendance.put(attendance.getLecture().getSubject().getName(), subjectAttendance.getOrDefault(attendance.getLecture().getSubject().getName(), 0) + 1);
-                //student.setAttendance(student.getAttendance() + 1);
+        for (Attendance value : student.getAttendances()) {
+            if (value.isAttended()) {
+                subjectAttendance.put(value.getLecture().getSubject().getName(), subjectAttendance.getOrDefault(value.getLecture().getSubject().getName(), 0) + 1);
+                student.setAttendanceCount(student.getAttendanceCount() + 1);
             } else {
-                subjectAbsence.put(attendance.getLecture().getSubject().getName(), subjectAbsence.getOrDefault(attendance.getLecture().getSubject().getName(), 0) + 1);
-                //student.setAbsence(student.getAbsence() + 1);
+                subjectAbsence.put(value.getLecture().getSubject().getName(), subjectAbsence.getOrDefault(value.getLecture().getSubject().getName(), 0) + 1);
+                student.setAbsenceCount(student.getAbsenceCount() + 1);
             }
         }
     }

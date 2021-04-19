@@ -3,6 +3,7 @@ package GUI.CONTROLLER;
 import BE.Student;
 import BE.Subject;
 import BE.User;
+import BE.UserRole;
 import BLL.DataGenerator;
 import GUI.MODEL.StudentModel;
 import com.jfoenix.controls.JFXComboBox;
@@ -40,7 +41,7 @@ public class TeacherDashboardController implements Initializable {
     @FXML
     private TableColumn<Student, String> tblLastname;
     @FXML
-    private TableColumn<Student, Integer> tblAbsence;
+    private TableColumn<Student, Number> tblAbsence;
     @FXML
     private JFXComboBox subjectFilterCombobox;
 
@@ -71,7 +72,8 @@ public class TeacherDashboardController implements Initializable {
      * Initialize the subject filter combo box.
      */
     private void initializeCombobox() {
-        subjects.setAll(studentModel.getSubjects());
+        subjects.add(new Subject(5, "Alle"));
+        subjects.addAll(studentModel.getSubjects());
         subjectFilterCombobox.setItems(subjects);
     }
 
@@ -83,6 +85,7 @@ public class TeacherDashboardController implements Initializable {
         // Assign the table columns to automatically update their cell.
         tblFirstname.setCellValueFactory(cellData -> cellData.getValue().getFirstNameProperty());
         tblLastname.setCellValueFactory(cellData -> cellData.getValue().getLastNameProperty());
+        tblAbsence.setCellValueFactory(cellData -> cellData.getValue().getTotalAbsencePercentageProperty());
 
         // Then assign the table to get the observable student list.
         tblStudents.setItems(students);
@@ -102,24 +105,32 @@ public class TeacherDashboardController implements Initializable {
         //INDIVIDUAL DAY ABSENCE
         //
 
+        attendanceDataGenerator = new DataGenerator();
         individualDayNum.setLabel("Procent fravær");
 
         individualDayNum.setLayoutY(100);
 
         data.setName("Fravær");
 
+        DataGenerator dataGenerator = new DataGenerator();
+
         //provided data
-        XYChart.Series data1 = new XYChart.Series();
+        //XYChart.Series data1 = new XYChart.Series();
         individualDayNum.setAutoRanging(false);
 
+        /*
         data1.getData().add(new XYChart.Data("Mon", (int) (Math.random() * 50 + 1)));
+
         data1.getData().add(new XYChart.Data("Tue", (int) (Math.random() * 50 + 1)));
         data1.getData().add(new XYChart.Data("Wed", (int) (Math.random() * 50 + 1)));
         data1.getData().add(new XYChart.Data("Thu", (int) (Math.random() * 50 + 1)));
         data1.getData().add(new XYChart.Data("Fri", (int) (Math.random() * 50 + 1)));
 
-        chartIndividualDay.getData().addAll(data1);
 
+        chartIndividualDay.getData().addAll();
+
+
+         */
         //
         //INDIVIDUAL SUBJECT ABSENCE
         //
@@ -150,7 +161,14 @@ public class TeacherDashboardController implements Initializable {
         subjectFilterCombobox.getSelectionModel().selectedItemProperty().addListener(((observableValue, oldValue, newValue) -> {
             selectedSubject = (Subject) newValue;
             if (selectedSubject != null) {
-                students.setAll(studentModel.getStudentsBySubject(selectedSubject));
+                switch (selectedSubject.getName()) {
+                    case "Alle":
+                        students.setAll(studentModel.getStudents());
+                        break;
+
+                    default:
+                        students.setAll(studentModel.getStudentsBySubject(selectedSubject));
+                }
                 System.out.println(String.format("Selected subject: %s", selectedSubject.getName()));
             }
         }));
@@ -164,13 +182,9 @@ public class TeacherDashboardController implements Initializable {
         overallNumAxis.setLabel(data.getName());
         overallNumAxis.setAutoRanging(false);
 
-        data.getData().add(new XYChart.Data("SCO", (int) (Math.random() * 50 + 1)));
-        data.getData().add(new XYChart.Data("ITO", (int) (Math.random() * 50 + 1)));
-        data.getData().add(new XYChart.Data("DBO", (int) (Math.random() * 50 + 1)));
-        data.getData().add(new XYChart.Data("SDE", (int) (Math.random() * 50 + 1)));
         chartOverallAttendance.setLegendVisible(false);
         chartOverallAttendance.getData().addAll(data);
-        //chartOverallAttendance.getData().add(dataGenerator.getAttendanceData("badclass", students));
+        chartOverallAttendance.getData().add(attendanceDataGenerator.getAttendanceData("Team Qwert", students));
     }
 
     /**
@@ -189,26 +203,16 @@ public class TeacherDashboardController implements Initializable {
         Student selectedStudent = tblStudents.getSelectionModel().getSelectedItem();
         if (selectedStudent != null) {
 
-            //TODO: set data to charts from model.
-            XYChart.Series days = new XYChart.Series<>();
+            chartIndividualDay.getData().clear();
+            chartIndividualSubject.getData().clear();
 
+            //TODO: få DP til at lave en function til at få fraværs procent over dagene.
+            XYChart.Series days = DataGenerator.getAttendanceData(selectedStudent);
             days.setName("Individual day absence");
-            //Todo: Replace random data with data from model
-            days.getData().add(new XYChart.Data<>("Mon", (int) (Math.random() * 50 + 1)));
-            days.getData().add(new XYChart.Data<>("Tue", (int) (Math.random() * 50 + 1)));
-            days.getData().add(new XYChart.Data<>("Wed", (int) (Math.random() * 50 + 1)));
-            days.getData().add(new XYChart.Data<>("Thu", (int) (Math.random() * 50 + 1)));
-            days.getData().add(new XYChart.Data<>("Fri", (int) (Math.random() * 50 + 1)));
 
-
-            XYChart.Series classes = new XYChart.Series<>();
+            XYChart.Series classes = DataGenerator.getAbsencePercentageInEachSubject(selectedStudent);
 
             classes.setName("Individual class absence");
-            //Todo: Replace random data with data from model
-            classes.getData().add(new XYChart.Data<>("SCO", (int) (Math.random() * 50 + 1)));
-            classes.getData().add(new XYChart.Data<>("DBOS", (int) (Math.random() * 50 + 1)));
-            classes.getData().add(new XYChart.Data<>("SDE", (int) (Math.random() * 50 + 1)));
-            classes.getData().add(new XYChart.Data<>("ITO", (int) (Math.random() * 50 + 1)));
 
             chartIndividualSubject.getData().addAll(classes);
             chartIndividualDay.getData().addAll(days);

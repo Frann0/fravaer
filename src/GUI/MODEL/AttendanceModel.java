@@ -2,6 +2,7 @@ package GUI.MODEL;
 
 import BE.Student;
 import DAL.DB.UserDAL;
+
 import java.time.LocalDateTime;
 
 public class AttendanceModel {
@@ -20,6 +21,8 @@ public class AttendanceModel {
         }
         return false;
     }
+
+
 
 }
 
