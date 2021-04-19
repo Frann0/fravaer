@@ -15,7 +15,7 @@ import java.time.LocalTime;
 public class Lecture {
     private int lectureId;
     private LocalDateTime lectureDate;
-    private Duration lectureDuration;
+    private Duration lectureDuration = Duration.ofMinutes(45);
     private Subject subject;
 
     public Lecture() {

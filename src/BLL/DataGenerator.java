@@ -4,6 +4,7 @@ import BE.Attendance;
 import BE.Lecture;
 import BE.Student;
 import BE.Subject;
+import com.mysql.cj.conf.ConnectionUrlParser;
 import javafx.collections.FXCollections;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
@@ -12,8 +13,9 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
-
 import java.util.*;
+import java.time.DayOfWeek;
+import javafx.util.*;
 
 public class DataGenerator {
     private static List<String> subjects = new ArrayList();
@@ -68,7 +70,7 @@ public class DataGenerator {
      * @param student the student
      * @return the absence in percentage
      */
-    public double getAbsencePercentage(Student student) {
+    public double getTotalAbsencePercentage(Student student) {
         updateAttendanceMap(student, true);
         int attendances = 0;
         int absence = 0;
@@ -154,6 +156,42 @@ public class DataGenerator {
     }
 
     /**
+     * Gets the most absent days (and count) for the student or an empty list if there is no absence
+     * @param student the student you want to examine
+     * @return A Pair of the most absent days and the the amount of absence on the given days
+     */
+    public static Pair<List<DayOfWeek>,Integer> getMostAbsentDays(Student student) {
+        // Initialize a map of days of the week and integers, which are going to be the count of absent days
+        Map<DayOfWeek, Integer> mapOfDays = new HashMap<>();
+        //Loops through attendances to get the frequency of absence each day
+        for (Attendance attendance : student.getAttendances()) {
+            //If the student is not attended the count for the given day increments
+            if (!attendance.isAttended()) {
+                DayOfWeek dow = attendance.getLecture().getLectureDate().getDayOfWeek();
+                mapOfDays.put(dow, mapOfDays.getOrDefault(dow, 0) + 1);
+            }
+        }
+        //initialize the mostAbsentDays variable
+        List<DayOfWeek> mostAbsentDays = new ArrayList<>();
+        //A int to compare the counts
+        int max = 0;
+        //Loop to get the day with highest absence
+        for (DayOfWeek dayOfWeek : mapOfDays.keySet()) {
+            int dowAbsentDays = mapOfDays.get(dayOfWeek);
+            //if the count is equal to the max frequency the absent day gets added
+            if (dowAbsentDays == max) {
+                mostAbsentDays.add(dayOfWeek);
+            }
+            //if the count is higher than the max the list gets cleared and we add the new most absent day.
+            else if(dowAbsentDays>max){
+                mostAbsentDays.clear();
+                mostAbsentDays.add(dayOfWeek);
+            }
+        }
+        return new Pair<>(mostAbsentDays,max);
+    }
+
+    /**
      * Updates the attendance map, which maps subjects to the amount of days the student(s) have attended
      *
      * @param student      the student
@@ -166,7 +204,7 @@ public class DataGenerator {
         //adds missing subjects to the subjects list
         student.getLectures().forEach(l ->
         {
-            if (!subjects.contains(l.getSubject().getName()))
+            if (l != null && !subjects.contains(l.getSubject().getName()))
                 subjects.add(l.getSubject().getName());
         });
         //clears data
