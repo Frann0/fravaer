@@ -2,6 +2,7 @@ package GUI.CONTROLLER;
 
 import BE.Student;
 import BE.User;
+import BLL.DataGenerator;
 import GUI.FxmlLoader;
 import com.jfoenix.controls.JFXButton;
 import javafx.event.EventHandler;
@@ -21,6 +22,7 @@ import javafx.stage.StageStyle;
 
 import java.io.IOException;
 import java.net.URL;
+import java.rmi.registry.Registry;
 import java.util.ResourceBundle;
 
 public class DashboardController implements Initializable {
@@ -50,7 +52,7 @@ public class DashboardController implements Initializable {
 
     public void setUser(User u){
         currentUser = u;
-
+        
         FXMLLoader load = new FXMLLoader();
         load.setLocation(getClass().getResource("/GUI/VIEW/StudentDashboardView.fxml"));
 
@@ -140,8 +142,16 @@ public class DashboardController implements Initializable {
         stage.show();
     }
 
-    public void handleRegistreringer(){
+    public void handleRegistreringer() throws IOException {
         Pane view = loader.getPage("RegistrationsView");
+
+        FXMLLoader fxmlLoader = new FXMLLoader();
+        fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/RegistrationsView.fxml"));
+
+        Parent root = (Parent) fxmlLoader.load();
+        RegistrationsController registrationsController = fxmlLoader.getController();
+
+        registrationsController.setUser(currentUser);
 
         borderPane.setCenter(view);
     }
