@@ -54,7 +54,7 @@ public class Student extends User {
         this.attendances = attendances;
     }
 
-    public void addAttendance(Lecture lecture){
+    public void addAttendance(Lecture lecture) {
         this.attendances.add(new Attendance(lecture));
     }
 
@@ -78,14 +78,16 @@ public class Student extends User {
         //Loops through the lectures
         for (Lecture lecture : this.getLectures()) {
             if (
-                //Checks the registration date is the same as the lecture date
+                    //Check that values are not null
+                    lecture != null && lecture.getDate() != null && lecture.getLectureDuration() != null &&
+                    //Checks the registration date is the same as the lecture date
                     lecture.getDate().toLocalDate().equals(registrationDate) &&
 
-                            //Checks the registration is within the lecture (minus the REGISTRATION_BUFFER)
-                            registrationTime.isAfter(lecture.getDate().toLocalTime().minus(REGISTRATION_BUFFER)) &&
+                    //Checks the registration is within the lecture (minus the REGISTRATION_BUFFER)
+                    registrationTime.isAfter(lecture.getDate().toLocalTime().minus(REGISTRATION_BUFFER)) &&
 
-                            //Checks the registration is within the lecture (plus the REGISTRATION_BUFFER)
-                            registrationTime.isBefore(LocalTime.from(lecture.getDate().plus(lecture.getLectureDuration()).plus(REGISTRATION_BUFFER)))
+                    //Checks the registration is within the lecture (plus the REGISTRATION_BUFFER)
+                    registrationTime.isBefore(LocalTime.from(lecture.getDate().plus(lecture.getLectureDuration()).plus(REGISTRATION_BUFFER)))
             ) {
                 isValid.set(true);
                 AttendanceManager.updateStudentAttendance(this, lecture, true);

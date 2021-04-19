@@ -67,7 +67,7 @@ public class DataGenerator {
      * @param student the student
      * @return the absence in percentage
      */
-    public double getAbsencePercentage(Student student){
+    public double getTotalAbsencePercentage(Student student){
         updateAttendanceMap(student,true);
         int attendances = 0;
         int absence = 0;
@@ -163,7 +163,7 @@ public class DataGenerator {
         //adds missing subjects to the subjects list
         student.getLectures().forEach(l ->
         {
-            if (!subjects.contains(l.getSubject().getName()))
+            if (l!=null && !subjects.contains(l.getSubject().getName()))
                 subjects.add(l.getSubject().getName());
         });
         //clears data
@@ -178,12 +178,12 @@ public class DataGenerator {
         //student.setAbsence(0);
 
         //runs through the students attendances increments attendance when is attended and decrements when not attended
-        for (Attendance value : student.getAttendances()) {
-            if (value.isAttended()) {
-                subjectAttendance.put(value.getLecture().getSubject().getName(), subjectAttendance.getOrDefault(value.getLecture().getSubject().getName(), 0) + 1);
+        for (Attendance attendance : student.getAttendances()) {
+            if (attendance.isAttended()) {
+                subjectAttendance.put(attendance.getLecture().getSubject().getName(), subjectAttendance.getOrDefault(attendance.getLecture().getSubject().getName(), 0) + 1);
                 //student.setAttendance(student.getAttendance() + 1);
             } else {
-                subjectAbsence.put(value.getLecture().getSubject().getName(), subjectAbsence.getOrDefault(value.getLecture().getSubject().getName(), 0) + 1);
+                subjectAbsence.put(attendance.getLecture().getSubject().getName(), subjectAbsence.getOrDefault(attendance.getLecture().getSubject().getName(), 0) + 1);
                 //student.setAbsence(student.getAbsence() + 1);
             }
         }
