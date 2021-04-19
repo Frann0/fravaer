@@ -1,5 +1,8 @@
 package GUI.CONTROLLER;
+import BE.Student;
 import BE.User;
+import BLL.DataGenerator;
+import GUI.MODEL.StudentModel;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
@@ -7,6 +10,8 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 public class StudentDashboardController implements Initializable {
@@ -28,6 +33,8 @@ public class StudentDashboardController implements Initializable {
     //private ObservableList<Absence> absence = FXCollections.observableArrayList();
 
     private User user = null;
+
+    private Student loggedInStudent = null;
     XYChart.Series data = new XYChart.Series();
 
     @Override
@@ -62,6 +69,20 @@ public class StudentDashboardController implements Initializable {
         System.out.println(user.getAttendance());
         this.user = user;
          */
+
+        //TODO: MEGET CRUDE, ryd op.
+        List<Student> students = StudentModel.getInstance().getStudents();
+
+        for (Student s : students){
+            if (user.getId() == s.getId()){
+                loggedInStudent = s;
+            }
+        }
+        if (loggedInStudent != null) {
+            XYChart.Series totalAbsence = DataGenerator.getAbsenceData(loggedInStudent);
+
+            chartAbcence.getData().addAll(totalAbsence);
+        }
 
         //absence.addAll(user.getAttendance());
         //tblAbsence.setItems(absence);
