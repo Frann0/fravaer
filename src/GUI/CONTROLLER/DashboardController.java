@@ -152,18 +152,17 @@ public class DashboardController implements Initializable {
         stage.show();
     }
 
-    public void handleRegistreringer() throws IOException {
-        Pane view = loader.getPage("RegistrationsView");
+    public void handleRegistreringer(){
+        FXMLLoader load = new FXMLLoader();
+        load.setLocation(getClass().getResource("/GUI/VIEW/RegistrationsView.fxml"));
 
-        FXMLLoader fxmlLoader = new FXMLLoader();
-        fxmlLoader.setLocation(getClass().getResource("/GUI/VIEW/RegistrationsView.fxml"));
-
-        Parent root = (Parent) fxmlLoader.load();
-        RegistrationsController registrationsController = fxmlLoader.getController();
-
-        registrationsController.setUser(currentUser);
-
-        borderPane.setCenter(view);
+        try {
+            borderPane.setCenter(load.load());
+            RegistrationsController conn = load.getController();
+            conn.setUser(currentUser);
+        } catch(IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setIsTeacher(){
