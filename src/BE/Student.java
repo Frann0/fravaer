@@ -84,10 +84,7 @@ public class Student extends User {
 
         //Assigns the registrationTime to a variable for convenience
         LocalTime registrationTime = registration.toLocalTime();
-
-        //A atomic boolean for returning the result of the registration attempt
-        AtomicBoolean isValid = new AtomicBoolean(false);
-
+        
         //Loops through the lectures
         for (Lecture lecture : this.getLectures()) {
             if (
@@ -102,11 +99,11 @@ public class Student extends User {
                     //Checks the registration is within the lecture (plus the REGISTRATION_BUFFER)
                     registrationTime.isBefore(LocalTime.from(lecture.getDate().plus(lecture.getLectureDuration()).plus(REGISTRATION_BUFFER)))
             ) {
-                isValid.set(true);
                 AttendanceManager.updateStudentAttendance(this, lecture, true);
+                return true;
             }
         }
-        return isValid.get();
+        return false;
     }
 
     /**
