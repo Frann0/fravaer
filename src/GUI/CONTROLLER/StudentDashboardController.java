@@ -76,12 +76,19 @@ public class StudentDashboardController implements Initializable {
                 loggedInStudent = s;
             }
         }
+        populateChart();
+        populateTable();
+    }
+
+    private void populateChart(){
         if (loggedInStudent != null) {
             XYChart.Series totalAbsence = DataGenerator.getAbsenceData(loggedInStudent);
 
             chartAbcence.getData().addAll(totalAbsence);
         }
+    }
 
+    private void populateTable(){
         List<Attendance> studentAttendances = loggedInStudent.getAttendances();
 
         ObservableList<Attendance> absences = FXCollections.observableArrayList();
