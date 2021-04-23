@@ -23,12 +23,8 @@ public class StudentModel {
      * Get the singleton instance of StudentModel.
      */
     public static StudentModel getInstance() {
-        if (instance == null) {
-            instance = new StudentModel();
-        }
-        return instance;
+        return instance == null ? instance = new StudentModel() : instance;
     }
-
 
     /**
      * The StudentModel constructor initially loads all user/student/teacher/subject information from the database.
