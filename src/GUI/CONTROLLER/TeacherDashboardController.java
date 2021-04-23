@@ -3,7 +3,6 @@ package GUI.CONTROLLER;
 import BE.Student;
 import BE.Subject;
 import BE.User;
-import BE.UserRole;
 import BLL.DataGenerator;
 import GUI.MODEL.StudentModel;
 import com.jfoenix.controls.JFXComboBox;
@@ -12,7 +11,6 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.chart.BarChart;
-import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.TableColumn;
@@ -67,6 +65,7 @@ public class TeacherDashboardController implements Initializable {
         subjects.add(new Subject(5, "Alle"));
         subjects.addAll(studentModel.getSubjects());
         subjectFilterCombobox.setItems(subjects);
+        subjectFilterCombobox.getSelectionModel().select(0);
     }
 
     /**
